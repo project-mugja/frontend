@@ -15,8 +15,9 @@ function MapBox({
                 style={{height, width}}
                 level={level}
             >
-                {markerData?.map(data => 
-                        <MapMarker 
+                {markerData?.map((data, index) => 
+                        <MapMarker
+                            key={index} 
                             position={{
                                 lat:data.locationData.lat,
                                 lng:data.locationData.lng
