@@ -1,10 +1,11 @@
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SamplePage from "./routes/mapUsingPage";
 
 function Router() {
     return(
         <BrowserRouter>
             <Routes>
-
+                <Route path="/" element={<SamplePage/>}/>
             </Routes>
         </BrowserRouter>
     )
