@@ -1,6 +1,12 @@
+import Router from "./Router";
+import { ReactQueryDevtools } from "react-query/devtools"
+
 function App() {
   return (
-    null
+    <>
+      <Router/>
+      <ReactQueryDevtools/>
+    </>
   );
 }
 
