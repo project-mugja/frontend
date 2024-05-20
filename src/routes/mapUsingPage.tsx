@@ -12,8 +12,25 @@ const MapCard = styled.div`
 `
 
 function SamplePage(){
-    const locationData:IMapProps["locationData"] = { lat:33.450701, lng: 126.570667, level:3}
+    
+    /**
+     * 샘플 데이터.
+     */
+    const locationData:IMapProps["locationData"] = { lat:33.450701, lng: 126.570667, level:3} 
+    const sampleMapData:IMapProps["mapData"] = [{
+        locationData:{
+            lat:35,
+            lng:127
+        },
+        MarkerComponent: 
+            <MapCard>
+                임시데이터
+            </MapCard>
+    }]
     const mapSize:IMapProps["mapSize"] = { height:"400px", width:"500px"}
+
+
+    
     const [isMap, setIsMap] = useState(false);
     useEffect(()=>{
         const script = document.createElement('script');
@@ -27,19 +44,6 @@ function SamplePage(){
             document.head.removeChild(script);
         }
     },[])
-
-    const sampleMapData:IMapProps["mapData"] = [{
-        locationData:{
-            lat:35,
-            lng:127
-        },
-        MarkerComponent: 
-            <MapCard>
-                임시데이터
-            </MapCard>
-    }]
-
-
     return(
         <>
             {isMap? 
