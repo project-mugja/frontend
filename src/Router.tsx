@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Map from "./components/Map"
 import SamplePage from "./routes/mapUsingPage";
 
 function Router() {
