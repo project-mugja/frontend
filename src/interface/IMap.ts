@@ -8,7 +8,7 @@ export interface IMapProps {
         height:string;
         width:string;
     },
-    mapData?:{
+    markerData?:{
         locationData:ILocationData, 
         MarkerComponent:JSX.Element
     }[];

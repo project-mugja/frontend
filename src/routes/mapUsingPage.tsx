@@ -14,10 +14,11 @@ const MapCard = styled.div`
 function SamplePage(){
     
     /**
-     * 샘플 데이터.
+     * 샘플 데이터----------------------------------
      */
     const locationData:IMapProps["locationData"] = { lat:33.450701, lng: 126.570667, level:3} 
-    const sampleMapData:IMapProps["mapData"] = [{
+    const mapSize:IMapProps["mapSize"] = { height:"400px", width:"500px"}
+    const sampleMapData:IMapProps["markerData"] = [{
         locationData:{
             lat:35,
             lng:127
@@ -27,10 +28,9 @@ function SamplePage(){
                 임시데이터
             </MapCard>
     }]
-    const mapSize:IMapProps["mapSize"] = { height:"400px", width:"500px"}
+    //-----------------------------------------------
 
 
-    
     const [isMap, setIsMap] = useState(false);
     useEffect(()=>{
         const script = document.createElement('script');
@@ -47,7 +47,7 @@ function SamplePage(){
     return(
         <>
             {isMap? 
-                <MapBox locationData={locationData} mapSize={mapSize} mapData={sampleMapData}/>
+                <MapBox locationData={locationData} mapSize={mapSize} markerData={sampleMapData}/>
                 :
                 <h3>Loading...</h3>
             }

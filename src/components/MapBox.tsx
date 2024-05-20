@@ -6,7 +6,7 @@ import {Map, MapMarker} from "react-kakao-maps-sdk";
 function MapBox({
     locationData:{lat, lng, level}, 
     mapSize:{height, width},
-    mapData
+    markerData
 }:IMapProps){
     return(
         <>
@@ -15,7 +15,7 @@ function MapBox({
                 style={{height, width}}
                 level={level}
             >
-                {mapData?.map(data => 
+                {markerData?.map(data => 
                         <MapMarker 
                             position={{
                                 lat:data.locationData.lat,
