@@ -5,7 +5,8 @@ export const defaultTheme:DefaultTheme = {
     btnColor: "#1565FF",
     textBlue: "#42B2FF",
     textWhite: "white",
-    textGray: "#6D6D6D"
+    textGray: "#6D6D6D",
+    yellowColor: "#FFD600",
 }
 
 export const Container = styled.div`

@@ -5,6 +5,7 @@ declare module 'styled-components' {
         btnColor: string,
         textBlue: string,
         textWhite: string,
-        textGray: string
+        textGray: string,
+        yellowColor: string
     }
 }
