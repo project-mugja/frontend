@@ -2,8 +2,10 @@ import styled, { DefaultTheme } from "styled-components";
 
 export const defaultTheme:DefaultTheme = {
     innerColor: "#D9D9D9",
-    btnColor: "#42B2FF",
-    textBlue: "#1565FF"
+    btnColor: "#1565FF",
+    textBlue: "#42B2FF",
+    textWhite: "white",
+    textGray: "#6D6D6D"
 }
 
 export const Container = styled.div`

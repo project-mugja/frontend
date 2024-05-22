@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SamplePage from "./routes/mapUsingPage";
 import DetailPage from "./routes/detail-page";
+import ReviewFrom from "./components/ReviewForm";
 
 function Router() {
     return(
@@ -8,6 +9,7 @@ function Router() {
             <Routes>
                 <Route path="/host/1" element={<DetailPage/>} />
                 <Route path="/" element={<SamplePage/>}/>
+                <Route path="/temp/reviewform" element={<ReviewFrom/>}/>
             </Routes>
         </BrowserRouter>
     )
