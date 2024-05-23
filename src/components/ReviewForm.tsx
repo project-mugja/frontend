@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Btn } from "./components";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IReviewFormProps } from "../interface/IReview";
 import { required } from "yargs";
@@ -69,7 +69,7 @@ const ImgLine = styled.div`
     flex-direction: column;
     justify-content: flex-start;
 
-    &>input{
+    &>Button{
         display: flex;
         border: none;
         border-radius: 5px;
@@ -118,8 +118,14 @@ const HidenInput = styled.input`
     display: none;
 `
 function ReviewForm({memId,hostId}:IReviewFormProps){
-    const { register, handleSubmit } = useForm<IReviewForm>();
+    const imgRef = useRef<HTMLInputElement | null>(null);
+    const { register } = useForm<IReviewForm>();
     const [score, setScore] = useState(10);
+    const onFile = (event:React.MouseEvent<HTMLButtonElement>) => {
+        if(imgRef.current){
+            imgRef.current.click();
+        }
+    }
     return(
         <FormContainer action="">
             <div>
@@ -145,11 +151,13 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
                 </TitleLine>
                 <SubmitBtn>글쓰기</SubmitBtn>
             </div>
-            <ContentBox {...register("content")}>
-                {"내용"}
+            <ContentBox {...register("content",{maxLength:100})}>
+                {}
             </ContentBox>
             <ImgLine>
-                <input type="file"/>
+                <button onClick={onFile}>
+                    <Plus/>
+                </button>
             </ImgLine>
             <HidenInput 
                 value={memId}
@@ -162,6 +170,11 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
             <HidenInput
                 value={score}
                 {...register("score", {required:true})}
+            />
+            <HidenInput
+                type="file"
+                name="image"
+                ref={imgRef}
             />
         </FormContainer>
     )
