@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { Btn } from "./components";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { IReviewFormProps } from "../interface/IReview";
-import { required } from "yargs";
+import { IReviewForm, IReviewFormProps } from "../interface/IReview";
+import styles from "../module/Button.module.css"
+
 
 
 const FormContainer = styled.form`
@@ -83,18 +84,17 @@ const ImgLine = styled.div`
             width: 23px;
         }
     }
+    &>img{
+        display: flex;
+        border: none;
+        border-radius: 5px;
+        height: 40px;
+        width: 40px;
+    }
 `
 interface IStar{
     color:string;
     onClick:React.MouseEventHandler<SVGSVGElement>;
-}
-interface IReviewForm{
-    rvId?:number,
-    memId:number,
-    hostId:number,
-    content?:string,
-    score:number,
-    image?:File
 }
 const Star = ({onClick, color}:IStar) => {
     return(
@@ -118,16 +118,38 @@ const HidenInput = styled.input`
     display: none;
 `
 function ReviewForm({memId,hostId}:IReviewFormProps){
-    const imgRef = useRef<HTMLInputElement | null>(null);
-    const { register } = useForm<IReviewForm>();
+    const imgRef:any = useRef(null);
+    const [imageFile, setImageFile] = useState<File>();
+    const [imgPath, setImgPath] = useState("");
+    const [isUploaded, setIsUploaded] = useState(false);
+    const { register,handleSubmit } = useForm<IReviewForm>();
     const [score, setScore] = useState(10);
     const onFile = (event:React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
         if(imgRef.current){
             imgRef.current.click();
         }
     }
+    const onUpload = () => {
+        console.log("onUpload")
+        if(imgRef.current && imgRef.current.files){
+            const img = imgRef.current.files[0];
+            setImageFile(img);
+
+            //미리보기
+            const reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = () => {
+                setImgPath(reader.result as string);
+            }
+        }
+        setIsUploaded(true)
+    }
+    const onValid = (data:any) => {
+        console.log(data)
+    }
     return(
-        <FormContainer action="">
+        <FormContainer action="" onSubmit={handleSubmit(onValid)}>
             <div>
                 <TitleLine>
                     <span>{"호텔이름1"}</span>
@@ -155,9 +177,13 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
                 {}
             </ContentBox>
             <ImgLine>
-                <button onClick={onFile}>
-                    <Plus/>
-                </button>
+                {isUploaded? 
+                    <img src={imgPath} alt="" sizes=""/>
+                    :
+                    <button onClick={onFile}>
+                        <Plus/>
+                    </button>
+                }
             </ImgLine>
             <HidenInput 
                 value={memId}
@@ -172,8 +198,10 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
                 {...register("score", {required:true})}
             />
             <HidenInput
+                onChange={onUpload}
                 type="file"
                 name="image"
+                accept=".png, .jpeg, .jpg"
                 ref={imgRef}
             />
         </FormContainer>
