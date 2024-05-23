@@ -3,7 +3,8 @@ import { Btn } from "./components";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IReviewForm, IReviewFormProps } from "../interface/IReview";
-import styles from "../module/Button.module.css"
+import { useMutation } from "react-query";
+import { writeReview } from "../api";
 
 
 
@@ -64,6 +65,7 @@ const ContentBox = styled.textarea`
     }
 `
 const ImgLine = styled.div`
+    position: relative;
     width: 90%;
     grid-row: 3/4;
     display: flex;
@@ -91,6 +93,16 @@ const ImgLine = styled.div`
         height: 40px;
         width: 40px;
     }
+    &>svg{
+        position: absolute;
+        left: 30px;
+        bottom:30px;
+        width: 7px;
+        height: 7px;
+        border-radius: 2px;
+        background-color: ${props=>props.theme.innerColor};
+        padding: 2px;
+    }
 `
 interface IStar{
     color:string;
@@ -114,15 +126,36 @@ const Plus = () => {
         </svg>
     )
 }
+interface IX{
+    onClick:React.MouseEventHandler<SVGSVGElement>;
+}
+const X = ({onClick}:IX) => {
+    return(
+        <svg 
+            onClick={onClick} 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 384 512"
+        >
+            <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
+        </svg>
+    )
+}
 const HidenInput = styled.input`
     display: none;
 `
 function ReviewForm({memId,hostId}:IReviewFormProps){
+    const {
+        mutate,
+        isLoading
+    } = useMutation((data:IReviewForm) => writeReview(hostId,data),{
+        onSuccess:() => {
+            //네비게이트
+        }
+    })
     const imgRef:any = useRef(null);
-    const [imageFile, setImageFile] = useState<File>();
     const [imgPath, setImgPath] = useState("");
     const [isUploaded, setIsUploaded] = useState(false);
-    const { register,handleSubmit } = useForm<IReviewForm>();
+    const { register,handleSubmit,setValue } = useForm<IReviewForm>();
     const [score, setScore] = useState(10);
     const onFile = (event:React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -131,10 +164,9 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
         }
     }
     const onUpload = () => {
-        console.log("onUpload")
         if(imgRef.current && imgRef.current.files){
             const img = imgRef.current.files[0];
-            setImageFile(img);
+            setValue("image",img);
 
             //미리보기
             const reader = new FileReader();
@@ -145,11 +177,11 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
         }
         setIsUploaded(true)
     }
-    const onValid = (data:any) => {
-        console.log(data)
+    const onValid = (data:IReviewForm) => {
+        mutate(data);
     }
     return(
-        <FormContainer action="" onSubmit={handleSubmit(onValid)}>
+        <FormContainer action={`http://localhost:8090/host/${hostId}/`} method="post" onSubmit={handleSubmit(onValid)}>
             <div>
                 <TitleLine>
                     <span>{"호텔이름1"}</span>
@@ -171,14 +203,20 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
                         }
                     </ScoreLine>
                 </TitleLine>
-                <SubmitBtn>글쓰기</SubmitBtn>
+                <SubmitBtn onClick={() => setValue("score",score)}>글쓰기</SubmitBtn>
             </div>
             <ContentBox {...register("content",{maxLength:100})}>
                 {}
             </ContentBox>
             <ImgLine>
                 {isUploaded? 
-                    <img src={imgPath} alt="" sizes=""/>
+                    <>
+                        <img src={imgPath} alt=""/>
+                        <X onClick={()=>{
+                            setValue("image",undefined);
+                            setIsUploaded(false);
+                        }}/>
+                    </>
                     :
                     <button onClick={onFile}>
                         <Plus/>
@@ -194,13 +232,13 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
                 {...register("hostId", {required:true})}
             />
             <HidenInput
-                value={score}
+                defaultValue={score}
                 {...register("score", {required:true})}
             />
             <HidenInput
+                {...register("image")}
                 onChange={onUpload}
                 type="file"
-                name="image"
                 accept=".png, .jpeg, .jpg"
                 ref={imgRef}
             />
