@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IRoomProps } from "../interface/IRoom";
+import { IRoomProps } from "../interface";
 
 const Container = styled.div`
     display: grid;

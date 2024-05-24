@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IWishProps } from "../interface/IWish";
+import { IWishProps } from "../interface";
 import { useState } from "react";
 
 const Container = styled.div`
