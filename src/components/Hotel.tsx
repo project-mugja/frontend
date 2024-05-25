@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { IMapProps } from "../interface/IMap";
+import { IMapProps } from "../interface";
 import MapBox from "./MapBox";
 import SmallReview from "./SmallReview";
 

@@ -1,4 +1,4 @@
-import { IReviewForm } from "./interface/IReview";
+import { IReviewForm } from "./interface";
 
 const REVIEW_URL = `http://localhost:8090/host`;
 

@@ -3,7 +3,7 @@ import { IMyPageSideBarProps } from "../interface"
 import { useState } from "react"
 import { useQuery } from "react-query"
 import { useRecoilValue } from "recoil"
-import { isFavPage } from "../atom"
+import { favPage } from "../atom"
 
 const Wrapper = styled.div`
     display: flex;
@@ -41,7 +41,7 @@ const FavToggle = ({isToggled}:IFT) => {
 }
 
 function MyPageSideBar(){
-    const isFavPage = useRecoilValue(isFavPage);
+    const isFavPage = useRecoilValue(favPage);
     //찜목록
     //useQuery로 카테고리 검색 실행하는 로직 필요
     const [favCat, setFavCat] = useState(1);

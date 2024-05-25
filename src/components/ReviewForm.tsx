@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Btn } from "./components";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { IReviewForm, IReviewFormProps } from "../interface/IReview";
+import { IReviewForm, IReviewFormProps } from "../interface";
 import { useMutation } from "react-query";
 import { writeReview } from "../api";
 
@@ -12,7 +12,7 @@ const FormContainer = styled.form`
 
     display: grid;
     grid: 3fr 7fr 70px/1fr;
-    aspect-ratio: 13/9;
+    aspect-ratio: 13/9; 
     width: 500px;
     place-items: center;
     align-items: center;

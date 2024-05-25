@@ -1,5 +1,5 @@
 
-import { IMapProps } from "../interface/IMap";
+import { IMapProps } from "../interface";
 import {Map, MapMarker} from "react-kakao-maps-sdk";
 
 
