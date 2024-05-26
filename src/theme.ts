@@ -11,5 +11,7 @@ export const defaultTheme:DefaultTheme = {
 
 export const Container = styled.div`
     height: 100vh;
-    width: 80vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 `;
