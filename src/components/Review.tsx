@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { IReview } from "../interface"
 import { useEffect, useState } from "react"
+import { formatDateString } from "../util"
 
 const ReviewBox = styled.div`
     height: 200px;
@@ -15,7 +16,7 @@ const ReviewBox = styled.div`
 const NickName = styled.div`
     grid-row: 1/2;
     grid-column: 1/2;
-    font-size: 36;
+    font-size: 20px;
     font-weight: 600;
     padding-left: 15px;
     padding-top: 15px;
@@ -29,6 +30,7 @@ const Content = styled.div`
     grid-row: 2/3;
     grid-column: 1/3;
     padding: 0 15px;
+    font-size: 18px;
 `
 const Date = styled.div`
     grid-row: 3/4;
@@ -36,7 +38,8 @@ const Date = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 15px;
+    color: gray;
 `
 interface IStar{
     color:string;
@@ -52,6 +55,7 @@ const Star = ({color}:IStar) => {
     )
 }
 function Review(review:IReview){
+    const date = formatDateString(review.writeDate)
     const [score,setScore] = useState(0);
     useEffect(()=>{
         setScore(review.score)
@@ -75,7 +79,7 @@ function Review(review:IReview){
                 }
             </StarBox>
             <Content>{review.content}</Content>
-            <Date>{review.writeDate}</Date>
+            <Date>{date}</Date>
         </ReviewBox>
         </>
     )

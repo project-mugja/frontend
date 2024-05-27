@@ -8,5 +8,6 @@ declare module 'styled-components' {
         textGray: string,
         yellowColor: string,
         innerBlue:string,
+        heartColor:string;
     }
 }

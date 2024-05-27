@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import { getHost, getReviews, getRooms } from "../api";
 import { useParams } from "react-router-dom";
 import { IHost, IReviewPage, IRoom } from "../interface";
+import { useState } from "react";
 
 const RoomWrapper = styled.div`
     display: flex;
@@ -55,25 +56,61 @@ const ReviewWrapper = styled.div`
     align-items: center;
     flex-direction: column;
 `
+const PagingBox = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+` 
+interface IPage{
+    index:number;
+    page:number;
+    onClick:React.MouseEventHandler;
+    children?:React.ReactNode;
+}
+const Paging = styled.span`
+    margin: 30px 20px 20px 20px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13px;
+    background-color: silver;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg{
+        width: 8px;
+        fill: white;
+    }
+`
 function DetailPage(){
     const { hostId:hId } = useParams()
     const hostId = hId? parseInt(hId) : 0;
-    const { 
-        isLoading:loadingHost, 
-        data:host
-    } = useQuery<IHost>("hostData",() => getHost(hostId));
+
+    const { isLoading:loadingHost, data:host} = useQuery<IHost>("hostData",() => getHost(hostId));
     const { isLoading:loadingRoom, data:rooms } = useQuery<IRoom[]>("roomsData", () => getRooms(hostId));
-    const { isLoading:loadingReview, data:reviews } = useQuery<IReviewPage>("reviewPage", () => getReviews(hostId,1))
-    console.log(reviews?.content)
+    
+    const [thisPage, setThisPage ] = useState(1);
+    const [pages, setPages] = useState(0)
+    
+    const { isLoading:loadingReview, data:reviews } = useQuery<IReviewPage>(
+        ["reviewPage",hostId,thisPage], 
+        () => getReviews(hostId,thisPage),
+        {keepPreviousData:true}
+    );
+    
+    console.log("this Page",thisPage);
+    console.log("pages ",pages)
     return(
         <>
             <Container>
                 <HoteImg src={host?.hostImgList[0].ImgPath} alt=""/>
-                {loadingHost? <Loader/> : !host? <Loader/> : <Hotel data={host} reviews={reviews?.content}/>}
+                    {loadingHost? <Loader/> : !host? <Loader/> : <Hotel data={host} reviews={reviews?.content}/>}
                 <RoomWrapper>
-                {loadingHost? <Loader/> : !host? <Loader/> : 
-                    rooms?.map(room => <Room key={room.roomId} room={room}/>)
-                }
+                    {loadingHost? <Loader/> : !host? <Loader/> : 
+                        rooms?.map(room => <Room key={room.roomId} room={room}/>)
+                    }
                 </RoomWrapper>
                 <Introduction>
                     <IntroTitle>숙소 소개</IntroTitle>
@@ -83,10 +120,50 @@ function DetailPage(){
                 </Introduction>
                 <ReviewWrapper>
                     <IntroTitle>숙소 리뷰</IntroTitle>
-                {loadingHost? <Loader/> : !host? <Loader/> :
-                    reviews?.content.map(review => <Review key={review.rvId} {...review}/>)
-                }
+                    {loadingHost? <Loader/> : !host? <Loader/> :
+                        reviews?.content.map(review => <Review key={review.rvId} {...review}/>)
+                    }
+                    <PagingBox>
+                        <Paging onClick={pages !== 0?
+                            () => {
+                                setPages(prev => prev - 5);
+                                setThisPage(pages - 4);
+                            }
+                            :
+                            () => {}
+                        }>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+                        </Paging>
+                            {loadingReview? <Loader/> : !reviews? <Loader/> :
+                                Array.from({length:reviews.totalPages>pages+5? 5 : reviews.totalPages%5},(_,i)=>i ).map(index => {
+                                    return (
+                                        <Paging 
+                                            key={index}
+                                            style={{
+                                                "backgroundColor": `${index+1+pages === thisPage ?  "#1565FF" : "#F5F8FF"}`,
+                                                "color": `${index+1+pages === thisPage? "white" : "black"}`,
+                                            }}
+                                            onClick={()=>{
+                                                setThisPage(index+1+pages);
+                                            }}
+                                        >
+                                            {index+1+pages}
+                                        </Paging>)
+                                })
+                            }
+                        <Paging onClick={ reviews && reviews.totalPages>pages+5?
+                            () => {
+                                setPages(prev => prev + 5);
+                                setThisPage(pages + 6);
+                            }
+                            :
+                            () => {}
+                        }>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+                        </Paging>
+                    </PagingBox>
                 </ReviewWrapper>
+
             </Container>
         </>
     )

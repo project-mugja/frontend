@@ -12,11 +12,11 @@ const MapCard = styled.div`
     border-radius: 10px;
 `
 const HotelContainer = styled.div`
-    margin: 15px;
     width: 100%;
     height: auto;
     display: grid;
-    grid: 164.75px 163.75px/1fr 1fr 327.5px;
+    justify-content: center;
+    grid: 164.75px 163.75px/1fr 1fr 325px;
 `
 const Content = styled.div`
     position: relative;
@@ -42,10 +42,13 @@ const MapContainer = styled.div`
     border-radius: 15px;
     overflow: hidden;
     border: 1px solid gray;
+    aspect-ratio: 1/1;
 `
 const Reviews = styled.div`
     grid-row: 2/3;
     grid-column: 1/3;
+    display: flex;
+    justify-content: space-evenly;
 `
 const Score = styled.div`
     background-color: ${props => props.theme.innerColor};
@@ -76,24 +79,7 @@ const LikeBtn = styled.div`
         margin-left: 4px;
     }
 `
-interface IHeart{
-    onClick:React.MouseEventHandler<SVGSVGElement>;
-    isLiked:boolean;
-}
-const Heart = ({onClick, isLiked}:IHeart) => {
-    const Svg = styled.svg`
-        fill: ${props => isLiked? props.theme.innerColor : props.theme.btnColor};
-    `
-    return(
-        <Svg
-            onClick={onClick} 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 512 512"
-        >
-                <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
-        </Svg> 
-    )
-}
+
 const Star = () => {
     return(
         <svg 
@@ -104,14 +90,11 @@ const Star = () => {
     )
 }
 function Hotel({data, reviews}:IHostProp){
-    /**
-     * 샘플 데이터----------------------------------
-     */
     const locationData:IMapProps["locationData"] = { 
         lat:data.lat, 
         lng: data.lng, 
         level:3} 
-    const sampleMapData:IMapProps["markerData"] = [{
+    const markerData:IMapProps["markerData"] = [{
         locationData:{
             lat:data.lat,
             lng:data.lng
@@ -121,7 +104,6 @@ function Hotel({data, reviews}:IHostProp){
                 임시데이터
             </MapCard>
     }]
-    //-----------------------------------------------
     const [isLiked, setLiked] = useState(false);
     const [isMap, setIsMap] = useState(false);
     useEffect(()=>{
@@ -136,7 +118,6 @@ function Hotel({data, reviews}:IHostProp){
             document.head.removeChild(script);
         }
     },[])
-    console.log(reviews)
     return(
         <HotelContainer>
             <Content>
@@ -148,11 +129,15 @@ function Hotel({data, reviews}:IHostProp){
                 </div>
                 <LikeBtn>
                     숙소 찜하기
-                    {isLiked? 
-                    <Heart onClick={()=>setLiked(false)} isLiked/> 
-                    : 
-                    <Heart onClick={()=>setLiked(true)} isLiked/>
-                    }
+                    <svg
+                        width={"10px"}
+                        onClick={() => setLiked(prev => !prev)} 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 512 512"
+                        fill={isLiked? "#ff4752" : "gray"}
+                    >
+                            <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+                    </svg> 
                 </LikeBtn>
             </Content>
             <Reviews>
@@ -170,7 +155,7 @@ function Hotel({data, reviews}:IHostProp){
                             height:"100%",
                             width:"100%"
                         }} 
-                        markerData={sampleMapData}
+                        markerData={markerData}
                     />
                     :
                     <h3>Loading...</h3>

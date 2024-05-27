@@ -8,4 +8,5 @@ export const defaultTheme:DefaultTheme = {
     textGray: "#6D6D6D",
     yellowColor: "#FFD600",
     innerBlue: "#F5F8FF",
+    heartColor: "#FF4752"
 }

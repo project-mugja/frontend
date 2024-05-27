@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { IReview } from "../interface";
+import { formatDateString } from "../util";
 
 const Container = styled.div`
     background-color: ${props => props.theme.innerColor};
-    width: 50%;
+    width: 47%;
     height: 100%;
     border-radius: 18px;
     display: flex;
@@ -32,11 +33,12 @@ const Container = styled.div`
 `
 
 function SmallReview(review:IReview){
+    const date = formatDateString(review.writeDate);
     return(
         <Container>
             <div>{"닉네임"}</div>
             <div>{review.content}</div>
-            <div>{review.writeDate}</div>
+            <div>{date}</div>
         </Container>
     )
 }

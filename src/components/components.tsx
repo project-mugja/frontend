@@ -16,17 +16,17 @@ export const Btn = styled.button`
     color: ${props => props.theme.textWhite};
 `
 
+const Load = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: auto;
+    span{
+        font-size: 25px;
+        font-weight: bold;
+    }
+`
 export const Loader = () => {
-    const Load = styled.div`
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex: auto;
-        span{
-            font-size: 25px;
-            font-weight: bold;
-        }
-    `
     return(
         <Load>
             <span>Loading...</span>
