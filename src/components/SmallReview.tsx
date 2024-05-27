@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import { IReview } from "../interface";
 
 const Container = styled.div`
     background-color: ${props => props.theme.innerColor};
     width: 50%;
     height: 100%;
     border-radius: 18px;
-    border: 1px solid black;    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,12 +31,12 @@ const Container = styled.div`
     }
 `
 
-function SmallReview(){
+function SmallReview(review:IReview){
     return(
         <Container>
             <div>{"닉네임"}</div>
-            <div>{"내용asdfasdfasdfasdfasdfaasfdasdfasdfasfasdfassdffasdfasdfasd"}</div>
-            <div>{"2024.05.19"}</div>
+            <div>{review.content}</div>
+            <div>{review.writeDate}</div>
         </Container>
     )
 }

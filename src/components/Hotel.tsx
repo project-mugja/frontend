@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { IMapProps } from "../interface";
+import { IHost, IHostProp, IMapProps, IReview } from "../interface";
 import MapBox from "./MapBox";
 import SmallReview from "./SmallReview";
 
@@ -14,7 +14,7 @@ const MapCard = styled.div`
 const HotelContainer = styled.div`
     margin: 15px;
     width: 100%;
-    height: 400px;
+    height: auto;
     display: grid;
     grid: 164.75px 163.75px/1fr 1fr 327.5px;
 `
@@ -41,6 +41,7 @@ const MapContainer = styled.div`
     grid-column: 3/4;
     border-radius: 15px;
     overflow: hidden;
+    border: 1px solid gray;
 `
 const Reviews = styled.div`
     grid-row: 2/3;
@@ -102,15 +103,18 @@ const Star = () => {
         </svg>
     )
 }
-function Hotel(){
+function Hotel({data, reviews}:IHostProp){
     /**
      * 샘플 데이터----------------------------------
      */
-    const locationData:IMapProps["locationData"] = { lat:33.450701, lng: 126.570667, level:3} 
+    const locationData:IMapProps["locationData"] = { 
+        lat:data.lat, 
+        lng: data.lng, 
+        level:3} 
     const sampleMapData:IMapProps["markerData"] = [{
         locationData:{
-            lat:35,
-            lng:127
+            lat:data.lat,
+            lng:data.lng
         },
         MarkerComponent: 
             <MapCard>
@@ -132,14 +136,15 @@ function Hotel(){
             document.head.removeChild(script);
         }
     },[])
+    console.log(reviews)
     return(
         <HotelContainer>
             <Content>
-                <div>{"호텔/리조트"}</div>
-                <div>{"호텔이름"}</div>
-                <div>{"위치"}</div>
+                <div>{data.hostIntro}</div>
+                <div>{data.hostName}</div>
+                <div>{data.hostAdress}</div>
                 <div>
-                    <Score><Star/>{"점수"}</Score>
+                    <Score><Star/>{data.avgScore}</Score>
                 </div>
                 <LikeBtn>
                     숙소 찜하기
@@ -151,7 +156,11 @@ function Hotel(){
                 </LikeBtn>
             </Content>
             <Reviews>
-                {<SmallReview/>}
+                {reviews ? 
+                    reviews?.map(review => <SmallReview key={review.rvId} {...review}/>)
+                    :
+                    <h3>Loading...</h3>
+                }
             </Reviews>
             <MapContainer>
                 {isMap? 

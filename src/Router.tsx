@@ -7,7 +7,7 @@ function Router() {
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/host/1" element={<DetailPage/>} />
+                <Route path="/host/:hostId" element={<DetailPage/>} />
                 <Route path="/mypage/:memId" element={<MyPage/>}/>
                 <Route path="/temp/reviewform" element={<ReviewFrom memId={1} hostId={1}/>}/>
             </Routes>

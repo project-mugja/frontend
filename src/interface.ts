@@ -1,11 +1,20 @@
+export interface IHostProp{
+    data:IHost,
+    reviews?:IReview[]
+}
 export interface IHost {
     hostId:number;
     avgScore:number;
     hostName:string;
     hostAdress:string;
     hostIntro?:string;
-    hostApi:string;
-    hostImgs:string[];
+    lat:number;
+    lng:number;
+    hostImgList:IHostImg[];
+}
+export interface IHostImg {
+    hostImgId:number;
+    ImgPath:string;
 }
 
 export interface IMapProps {
@@ -44,14 +53,7 @@ export interface IReviewForm{
 }
 
 export interface IRoomProps {
-    room:{
-        roomId:string;
-        hostId:string;
-        capacity:number;
-        price:number;
-        name:string;
-        status:boolean;
-    }
+    room:IRoom;
 }
 
 export interface IWishProps {
@@ -64,4 +66,74 @@ export interface IWishProps {
 
 export interface IMyPageSideBarProps {
     isFavPage:boolean;
+}
+
+export interface IRoomPage {
+    content:IRoom[];
+    pageable: IPageable;
+    totalPages:number;
+    totalElements:number;
+    last:boolean;
+    size:number;
+    number:number;
+    sort:{
+        sorted:boolean;
+        unsorted:boolean;
+        empty:boolean;
+    };
+    first:boolean;
+    numberOfElements:number;
+    empty:boolean
+}
+export interface IRoom {
+    roomId:number;
+    host:IHost;
+    capacity:number;
+    price:number;
+    name:string;
+    status:boolean;
+    roomImgList:IRoomImg[];
+}
+export interface IRoomImg {
+    roomImgId:number;
+    roomImgPath:string;
+}
+export interface IPageable {
+    pageNumber:number;
+    pageSize:number;
+    sort:{
+        sorted:boolean;
+        unsorted:boolean;
+        empty:boolean;
+    };
+    offset:number;
+    paged:boolean;
+    unpaged:false;
+}
+export interface IReviewPage{
+    content: IReview[];
+    pageable: IPageable;
+    totalPages:number;
+    totalElements:number;
+    last:boolean;
+    size:number;
+    number:number;
+    sort:{
+        sorted:boolean;
+        unsorted:boolean;
+        empty:boolean;
+    };
+    first:boolean;
+    numberOfElements:number;
+    empty:boolean
+}
+export interface IReview{
+    rvId:number;
+    memId:number;
+    hostId:number;
+    content?:string;
+    score:number;
+    writeDate:string;
+    imgPath:string;
+    image?:Object;
 }

@@ -28,9 +28,10 @@ const Heart = ({onClick}:IHeart) => {
 function Wish({wish}:IWishProps){
     const avgScore = wish.host.avgScore;
     const [isWish,setIsWish] = useState(true);
+    const Image = wish.host.hostImgList
     return(
         <Container>
-            <Img src={wish.host.hostImgs[0]}/>
+            <Img src={Image[0].ImgPath}/>
             <InfoBox>
                 <div>{wish.host.hostName}</div>
                 <div>

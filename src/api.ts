@@ -1,6 +1,6 @@
 import { IReviewForm } from "./interface";
 
-const REVIEW_URL = `http://localhost:8090/host`;
+const BASE_URL = `http://localhost:8090`;
 
 export async function writeReview(hostId:number,data:IReviewForm) {
     const formData = new FormData();
@@ -13,7 +13,7 @@ export async function writeReview(hostId:number,data:IReviewForm) {
     if(data.image){
         formData.append("image",data.image);
     }
-    const response = await fetch(`${REVIEW_URL}/${hostId}/review/`,{
+    const response = await fetch(`${BASE_URL}/host/${hostId}/review/`,{
         method:"POST",
         body: formData,
     })
@@ -22,4 +22,19 @@ export async function writeReview(hostId:number,data:IReviewForm) {
     }
     console.log(response)
     return response.json();
+}
+
+export async function getHost(hostId:number){
+    return fetch(`${BASE_URL}/host/${hostId}`)
+            .then(response => response.json());
+}
+
+export async function getRooms(hostId:number) {
+    return fetch(`${BASE_URL}/host/${hostId}/rooms/`)
+            .then(res => res.json());
+}
+
+export async function getReviews(hostId:number, pageNum:number) {
+    return fetch(`${BASE_URL}/host/${hostId}/review/${pageNum}`)
+            .then(res => res.json());
 }
