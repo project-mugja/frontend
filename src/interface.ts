@@ -1,0 +1,139 @@
+export interface IHostProp{
+    data:IHost,
+    reviews?:IReview[]
+}
+export interface IHost {
+    hostId:number;
+    avgScore:number;
+    hostName:string;
+    hostAdress:string;
+    hostIntro?:string;
+    lat:number;
+    lng:number;
+    hostImgList:IHostImg[];
+}
+export interface IHostImg {
+    hostImgId:number;
+    ImgPath:string;
+}
+
+export interface IMapProps {
+    locationData:{
+        lat:number; //위도
+        lng:number; //경도
+        level:number; //지도 확대 레벨
+    },
+    mapSize:{ //지도 크기
+        height:string;
+        width:string;
+    },
+    markerData?:{
+        locationData:ILocationData, 
+        MarkerComponent:JSX.Element
+    }[];
+}
+
+export interface ILocationData {
+    lat:number; //위도
+    lng:number; //경도
+}
+
+export interface IReviewFormProps {
+    memId:number,
+    hostId:number,
+}
+
+export interface IReviewForm{
+    rvId?:number,
+    memId:number,
+    hostId:number,
+    content?:string,
+    score:number,
+    image?:File
+}
+
+export interface IRoomProps {
+    room:IRoom;
+}
+
+export interface IWishProps {
+    wish:{
+        wishId?:number;
+        memId:number;
+        host:IHost;
+    }
+}
+
+export interface IMyPageSideBarProps {
+    isFavPage:boolean;
+}
+
+export interface IRoomPage {
+    content:IRoom[];
+    pageable: IPageable;
+    totalPages:number;
+    totalElements:number;
+    last:boolean;
+    size:number;
+    number:number;
+    sort:{
+        sorted:boolean;
+        unsorted:boolean;
+        empty:boolean;
+    };
+    first:boolean;
+    numberOfElements:number;
+    empty:boolean
+}
+export interface IRoom {
+    roomId:number;
+    host:IHost;
+    capacity:number;
+    price:number;
+    name:string;
+    status:boolean;
+    roomImgList:IRoomImg[];
+}
+export interface IRoomImg {
+    roomImgId:number;
+    roomImgPath:string;
+}
+export interface IPageable {
+    pageNumber:number;
+    pageSize:number;
+    sort:{
+        sorted:boolean;
+        unsorted:boolean;
+        empty:boolean;
+    };
+    offset:number;
+    paged:boolean;
+    unpaged:false;
+}
+export interface IReviewPage{
+    content: IReview[];
+    pageable: IPageable;
+    totalPages:number;
+    totalElements:number;
+    last:boolean;
+    size:number;
+    number:number;
+    sort:{
+        sorted:boolean;
+        unsorted:boolean;
+        empty:boolean;
+    };
+    first:boolean;
+    numberOfElements:number;
+    empty:boolean
+}
+export interface IReview{
+    rvId:number;
+    memId:number;
+    hostId:number;
+    content?:string;
+    score:number;
+    writeDate:string;
+    imgPath:string;
+    image?:Object;
+}
