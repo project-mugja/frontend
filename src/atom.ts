@@ -9,3 +9,8 @@ export const login = atom({
     key:"isLogin",
     default:false,
 })
+
+export const favCategory = atom({
+    key:"category",
+    default:1
+})
