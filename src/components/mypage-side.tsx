@@ -31,14 +31,10 @@ const MpOption = styled.div`
 interface IFT{
     isToggled:boolean;
 }
-const FavToggle = ({isToggled}:IFT) => {
-    const Circle = styled.span`
-        display: inline-block;
-        border: 1px solid ${props => props.theme.innerColor};
-        background-color: ${isToggled? props => props.theme.btnColor : "white"};
-    `
-    return(<Circle></Circle>)
-}
+const Circle = styled.span`
+    display: inline-block;
+    border: 1px solid ${props => props.theme.innerColor};
+`
 
 function MyPageSideBar(){
     const isFavPage = useRecoilValue(favPage);
@@ -67,19 +63,24 @@ function MyPageSideBar(){
                 <FavTitle>숙소 유형</FavTitle>
                 <FavOptions>
                     <div onClick={()=>onToggle(1)}>
-                        <FavToggle isToggled={1 === favCat}/><span> 전체 </span>
+                        {1 === favCat? <Circle color="btnColor"/> : <Circle color="white"/>}
+                        <span> 전체 </span>
                     </div>
                     <div onClick={()=>onToggle(2)}>
-                        <FavToggle isToggled={2 === favCat}/><span> 모텔 </span>
+                        {2 === favCat? <Circle color="btnColor"/> : <Circle color="white"/>}
+                        <span> 모텔 </span>
                     </div>
                     <div onClick={()=>onToggle(3)}>
-                        <FavToggle isToggled={3 === favCat}/><span> 호텔·리조트 </span>
+                        {3 === favCat? <Circle color="btnColor"/> : <Circle color="white"/>}
+                        <span> 호텔·리조트 </span>
                     </div>
                     <div onClick={()=>onToggle(4)}>
-                        <FavToggle isToggled={4 === favCat}/><span> 펜션 </span>
+                        {4 === favCat? <Circle color="btnColor"/> : <Circle color="white"/>}
+                        <span> 펜션 </span>
                     </div>
                     <div onClick={()=>onToggle(5)}>
-                        <FavToggle isToggled={5 === favCat}/><span> 홈&빌라 </span>
+                        {5 === favCat? <Circle color="btnColor"/> : <Circle color="white"/>}
+                        <span> 홈&빌라 </span>
                     </div>
                 </FavOptions>
              </> 

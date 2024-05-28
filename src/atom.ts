@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export const favPage = atom({
     key:"isFav",
-    default:false,
+    default:true,
 });
 
 export const login = atom({
