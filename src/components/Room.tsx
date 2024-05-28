@@ -98,7 +98,7 @@ function Room(room:IRoomProps){
                         </div>
                         <div>
                             <div>{room?.room.price} 원</div>
-                            <ReserveBtn>숙박예약</ReserveBtn>
+                            <ReserveBtn className="clickable">숙박예약</ReserveBtn>
                         </div>
                     </InfoBox>
                 </InfoCard>

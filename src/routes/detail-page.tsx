@@ -89,7 +89,7 @@ function DetailPage(){
     const hostId = hId? parseInt(hId) : 0;
 
     const { isLoading:loadingHost, data:host} = useQuery<IHost>("hostData",() => getHost(hostId));
-    const { isLoading:loadingRoom, data:rooms } = useQuery<IRoom[]>("roomsData", () => getRooms(hostId));
+    const { data:rooms } = useQuery<IRoom[]>("roomsData", () => getRooms(hostId));
     
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0)
@@ -99,9 +99,6 @@ function DetailPage(){
         () => getReviews(hostId,thisPage),
         {keepPreviousData:true}
     );
-    
-    console.log("this Page",thisPage);
-    console.log("pages ",pages)
     return(
         <>
             <Container>
@@ -124,7 +121,7 @@ function DetailPage(){
                         reviews?.content.map(review => <Review key={review.rvId} {...review}/>)
                     }
                     <PagingBox>
-                        <Paging onClick={pages !== 0?
+                        <Paging className="clickable" onClick={pages !== 0?
                             () => {
                                 setPages(prev => prev - 5);
                                 setThisPage(pages - 4);
@@ -139,6 +136,7 @@ function DetailPage(){
                                     return (
                                         <Paging 
                                             key={index}
+                                            className="clickable"
                                             style={{
                                                 "backgroundColor": `${index+1+pages === thisPage ?  "#1565FF" : "#F5F8FF"}`,
                                                 "color": `${index+1+pages === thisPage? "white" : "black"}`,
@@ -151,7 +149,9 @@ function DetailPage(){
                                         </Paging>)
                                 })
                             }
-                        <Paging onClick={ reviews && reviews.totalPages>pages+5?
+                        <Paging
+                            className="clickable" 
+                            onClick={ reviews && reviews.totalPages>pages+5?
                             () => {
                                 setPages(prev => prev + 5);
                                 setThisPage(pages + 6);

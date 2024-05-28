@@ -41,8 +41,8 @@ function Header(){
     return(
         <Wrapper>
             <Container>
-                <Logo/>
-                <Login onClick={onClick}>
+                <Logo className="clickable"/>
+                <Login onClick={onClick} className="clickable">
                     {isLogin? 
                     <div>{"닉네임"}</div> 
                     : 

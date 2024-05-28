@@ -44,13 +44,15 @@ export async function getFavs(pageNo:number) {
     return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{credentials:"include"})
         .then(res => res.json()).catch(error => console.log(error));
 }
-
+export async function isFavFn(hostId:number) {
+    return fetch(`${BASE_URL}/mypage/wish/${hostId}/`,{credentials:"include"})
+        .then(res => res.json()).catch(error => console.log(error));
+}
 export async function addFav(hostId:number) {
     return fetch(`${BASE_URL}/mypage/wish/${hostId}`,{
         method:"POST",
         credentials:"include"
     })
-    .then(res => res.json()).catch(error => console.log(error));
 }
 
 export async function delFav(hostId:number) {
@@ -58,5 +60,4 @@ export async function delFav(hostId:number) {
         method:"DELETE",
         credentials:"include"
     })
-    .then(res => res.json()).catch(error => console.log(error));
 }
