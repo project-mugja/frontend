@@ -109,15 +109,6 @@ function SearchPageSideBar(){
                 <span> 홈&빌라 </span>
             </div>
         </SearchSideOptions>
-        <SearchSideTitle><span> 가격 </span></SearchSideTitle>
-        <Box>
-            <MultiRangeSlider
-                min={0}
-                max={1000}
-                onChange={({ min, max }:IMinMax) => {}}
-                />
-            <div/>
-        </Box>
     </>
     )
 }

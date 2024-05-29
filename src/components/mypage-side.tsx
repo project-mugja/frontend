@@ -1,124 +1,70 @@
 import styled from "styled-components"
-import { IMyPageSideBarProps } from "../interface"
-import { useState } from "react"
-import { useQuery } from "react-query"
-import { useRecoilState, useRecoilValue } from "recoil"
-import { favCategory, favPage } from "../atom"
+import { useRecoilState } from "recoil"
+import {  myPageSelector } from "../atom"
 
 const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-`
-const FavTitle = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     width: 100%;
-    margin: 10px 0 10px 0;
-    span{
-        font-size: 20px;
-        font-weight: bold;
-    }
-`
-const FavOptions = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    &>div{
-        margin: 16px;
-        display: flex;
-        align-items: center;
-        span{
-            margin-right: 10px;
-            text-align: center;
-            font-size: 18px;
-        }
-    }
 `
 const MpTitle = styled.div`
-    width: 100%;
+    width: 70%;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
+    span{
+        font-size: 30px;
+        font-weight: bold;
+    }
 `
 const MpOption = styled.div`
-    width: 100%;
+    width: 70%;
+    border-bottom: 1px solid gainsboro;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    &>span{
+        font-size: 23px;
+        color: ${prop => prop.color};
+    }
+    &>svg{
+        width: 15px;
+        position: absolute;
+        right: 10px;
+        fill: ${prop => prop.color}
+    }
 `
 
-const Circle = styled.span`
-    display: inline-block;
-    border: 1px solid gainsboro;
-    width: 16px;
-    height: 16px;
-    border-radius: 10px;
-    background-color: ${props => props.color};
-`
 
 function MyPageSideBar(){
-    const isFavPage = useRecoilValue(favPage);
-    //찜목록
-    //useQuery로 카테고리 검색 실행하는 로직 필요
-    const [category, setCategory] = useRecoilState(favCategory);
-    const onToggle = (index:number) => {
-        setCategory(index);
-    }
-
-
-    //마이페이지
-    const onMod = () => {
-        
-    }
-    const onBook = () => {
-
-    }
-    const onFav = () => {
-
-    }
+    const [ option, setOption ] = useRecoilState(myPageSelector);
     return(
         <Wrapper>
-            {isFavPage?
-             <>
-                <FavTitle><span>필터</span></FavTitle>
-                <FavTitle><span>숙소 유형</span></FavTitle>
-                <FavOptions>
-                    <div onClick={()=>onToggle(1)}>
-                        {1 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                        <span> 전체 </span>
-                    </div>
-                    <div onClick={()=>onToggle(2)}>
-                        {2 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                        <span> 모텔 </span>
-                    </div>
-                    <div onClick={()=>onToggle(3)}>
-                        {3 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                        <span> 호텔·리조트 </span>
-                    </div>
-                    <div onClick={()=>onToggle(4)}>
-                        {4 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                        <span> 펜션 </span>
-                    </div>
-                    <div onClick={()=>onToggle(5)}>
-                        {5 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                        <span> 홈&빌라 </span>
-                    </div>
-                </FavOptions>
-             </> 
-             : 
-             <>
-                <MpTitle>마이페이지</MpTitle>
-                <MpOption onClick={onMod}>
-
-                </MpOption>
-                <MpOption onClick={onBook}>
-
-                </MpOption>
-                <MpOption onClick={onFav}>
-                    찜 목록
-                </MpOption>
-             </>
-            }
+            <MpTitle>
+                <span>마이페이지</span>
+            </MpTitle>
+            <MpOption onClick={()=>setOption(1)} color={option === 1? "#1565FF" : "black"}>
+                <span>내 정보 관리</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                </svg>
+            </MpOption>
+            <MpOption onClick={()=>setOption(2)} color={option === 2? "#1565FF" : "black"}>
+                <span color={option === 2? "#1565FF" : "black"}>예약</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                </svg>
+            </MpOption>
+            <MpOption onClick={()=>setOption(3)} color={option === 3? "#1565FF" : "black"}>
+                <span color={option === 3? "#1565FF" : "black"}>찜 목록</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                </svg>
+            </MpOption>
         </Wrapper>
     )
 }

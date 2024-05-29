@@ -1,10 +1,9 @@
 import { atom } from "recoil";
 
-export const favPage = atom({
-    key:"isFav",
-    default:true,
-});
-
+export const myPageSelector = atom({
+    key: "option",
+    default: 1
+})
 export const login = atom({
     key:"isLogin",
     default:false,

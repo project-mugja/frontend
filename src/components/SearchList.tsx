@@ -1,12 +1,12 @@
-import { useQuery } from "react-query"
-import { delFav, getFavs } from "../api"
-import { Loader } from "./components"
-import { IWishList } from "../interface"
-import Wish from "./Wish"
-import { styled } from "styled-components"
-import { useState } from "react"
-import { useRecoilValue } from "recoil"
-import { favCategory } from "../atom"
+import { useState } from "react";
+import { Loader } from "./components";
+import { useQuery } from "react-query";
+import { useRecoilValue } from "recoil";
+import { styled } from "styled-components";
+import { getFavs, delFav } from "../api";
+import { favCategory } from "../atom";
+import { IWishList } from "../interface";
+import Wish from "./Wish";
 
 const PagingBox = styled.div`
     display: flex;
@@ -42,12 +42,14 @@ const Title = styled.div`
     }
 `
 
-function WishList(){
+
+function SearchList(){
+    const catNum = useRecoilValue(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
     const {isLoading, data, refetch} = useQuery<IWishList>(
-        ["wishlist", thisPage],
-        () => getFavs(thisPage),
+        ["wishlist", thisPage, catNum],
+        () => getFavs(catNum),
     )
     const handleDelete = async (hostId:number) => {
         try{
@@ -125,4 +127,4 @@ function WishList(){
     )
 }
 
-export default WishList;        
+export default SearchList;
