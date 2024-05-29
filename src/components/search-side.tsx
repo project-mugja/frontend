@@ -67,8 +67,8 @@ const Box = styled.div`
 `
 function SearchPageSideBar(){
     const [category, setCategory] = useRecoilState(favCategory);
-    const catToggleHandler = (index:number) => {
-        setCategory(index);
+    const catToggleHandler = (cat:string) => {
+        setCategory(cat);
     }
     const validToggleHandler = () => {
 
@@ -88,24 +88,24 @@ function SearchPageSideBar(){
         </Box>
         <SearchSideTitle><span>숙소 유형</span></SearchSideTitle>
         <SearchSideOptions>
-            <div onClick={()=>catToggleHandler(1)}>
-                {1 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+            <div onClick={()=>catToggleHandler("all")}>
+                {"all" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
                 <span> 전체 </span>
             </div>
-            <div onClick={()=>catToggleHandler(2)}>
-                {2 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+            <div onClick={()=>catToggleHandler("")}>
+                {"motel" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
                 <span> 모텔 </span>
             </div>
-            <div onClick={()=>catToggleHandler(3)}>
-                {3 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+            <div onClick={()=>catToggleHandler("")}>
+                {"hotel" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
                 <span> 호텔·리조트 </span>
             </div>
-            <div onClick={()=>catToggleHandler(4)}>
-                {4 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+            <div onClick={()=>catToggleHandler("")}>
+                {"pension" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
                 <span> 펜션 </span>
             </div>
-            <div onClick={()=>catToggleHandler(5)}>
-                {5 === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+            <div onClick={()=>catToggleHandler("")}>
+                {"home" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
                 <span> 홈&빌라 </span>
             </div>
         </SearchSideOptions>

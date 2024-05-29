@@ -62,12 +62,7 @@ export async function delFav(hostId:number) {
     })
 }
 
-export async function search(cat:number, pageNo:number) {
-    const categoy:string =  cat == 1? "all" :
-                            cat == 2? "motel" :
-                            cat == 3? "hotel" :
-                            cat == 4? "house" :
-                            cat == 5? "home" : "";
+export async function doSearch(cat:string, pageNo:number) {
     return fetch(`${BASE_URL}/host/category`,{credentials:"include"})
             .then(res => res.json()).catch(error => console.log(error));
 }

@@ -11,5 +11,15 @@ export const login = atom({
 
 export const favCategory = atom({
     key:"category",
-    default:1
+    default:"all"
+})
+
+export const searchText = atom({
+    key: "searchQuery",
+    default: "",
+})
+
+export const searchPage = atom({
+    key: "isSearchPage",
+    default:false
 })
