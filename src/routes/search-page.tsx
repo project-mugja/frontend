@@ -13,9 +13,9 @@ export type SearchPageProps = {
 function SearchPage(){
     const { category, search } = useParams<SearchPageProps>();
     const setSearchPage = useSetRecoilState(searchPage);
-    useEffect(()=>{
-        setSearchPage(true);
-    },[])
+
+    setSearchPage(true);
+    
     return(
         <ListPage className="listPage">
             <SideBarWrapper>

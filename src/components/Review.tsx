@@ -59,7 +59,7 @@ function Review(review:IReview){
     const [score,setScore] = useState(0);
     useEffect(()=>{
         setScore(review.score)
-    },[review])
+    },[review.score])
     return (
         <>
         <ReviewBox>
