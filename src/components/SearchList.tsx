@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Loader } from "./components";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
@@ -45,7 +45,7 @@ const Title = styled.div`
 
 
 function SearchList({category, search}:SearchPageProps){
-    const [ cat, setCat] = useRecoilState(favCategory);
+    const [ cat ] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
     const {isLoading, data, refetch} = useQuery<IWishList>(
