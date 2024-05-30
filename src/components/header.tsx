@@ -1,11 +1,11 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { login, searchPage } from "../atom";
+import logo from '../image/logo_square.jpg';
 
-const Logo = styled.div`
-    height: 44px;
+const Logo = styled.img`
+    height: 60px;
     width: 110px;
-    background-color: black;
 `
 const Login = styled.div`
     height: 40px;
@@ -56,7 +56,7 @@ function Header(){
     return(
         <Wrapper>
             <Container>
-                <Logo className="clickable"/>
+                <Logo className="clickable" src={logo}/>
                 {isSearchPage? 
                     <SearchBox>
                         <div><span>검색 : {}</span></div>
