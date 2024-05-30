@@ -57,9 +57,9 @@ function SearchList({category, search}:SearchPageProps){
             await delFav(hostId);
             refetch();
         } catch (error){
-            console.log("fail")
+            console.log("faill")
         }
-    }
+    }   
     return(
         <>
             <Title>
