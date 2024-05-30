@@ -1,7 +1,7 @@
 
 import { IReviewForm } from "./interface";
 
-const BASE_URL = `http://localhost:8090`;
+const BASE_URL = `${process.env.REACT_APP_SERVER_API}`;
 
 export async function writeReview(hostId:number,data:IReviewForm) {
     const formData = new FormData();
