@@ -3,10 +3,9 @@ import { Loader } from "./components";
 import { useQuery } from "react-query";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
-import { getFavs, delFav, doSearch } from "../api";
+import { delFav, doSearch } from "../api";
 import { favCategory } from "../atom";
 import { IWishList } from "../interface";
-import Wish from "./Wish";
 import { SearchPageProps } from "../routes/search-page";
 import SearchResult from "./SearchResult";
 

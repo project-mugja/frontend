@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 import { favCategory } from "../atom";
 import { useRecoilState } from "recoil";
-import MultiRangeSlider, { IMinMax } from "./MultiRangeSlider";
 
 const SearchSideTitle = styled.div`
     display: flex;
