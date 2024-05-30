@@ -67,7 +67,7 @@ const Star = () => {
         </svg>
     )
 }
-function Wish({wish, onClick}:IWishProps){
+function SearchResult({wish, onClick}:IWishProps){
     const avgScore = wish.host.avgScore;
     const [isWish,setIsWish] = useState(true);
     const Image = wish.host.hostImgList
@@ -100,4 +100,4 @@ function Wish({wish, onClick}:IWishProps){
     )
 }
 
-export default Wish;
+export default SearchResult;

@@ -1,102 +1,70 @@
 import styled from "styled-components"
-import { IMyPageSideBarProps } from "../interface"
-import { useState } from "react"
-import { useQuery } from "react-query"
-import { useRecoilValue } from "recoil"
-import { favPage } from "../atom"
+import { useRecoilState } from "recoil"
+import {  myPageSelector } from "../atom"
 
 const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-`
-const FavTitle = styled.div`
-    
-`
-const FavOptions = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 100%;
 `
 const MpTitle = styled.div`
-    width: 100%;
+    width: 70%;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
+    span{
+        font-size: 30px;
+        font-weight: bold;
+    }
 `
 const MpOption = styled.div`
-    width: 100%;
+    width: 70%;
+    border-bottom: 1px solid gainsboro;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    &>span{
+        font-size: 23px;
+        color: ${prop => prop.color};
+    }
+    &>svg{
+        width: 15px;
+        position: absolute;
+        right: 10px;
+        fill: ${prop => prop.color}
+    }
 `
-interface IFT{
-    isToggled:boolean;
-}
-const FavToggle = ({isToggled}:IFT) => {
-    const Circle = styled.span`
-        display: inline-block;
-        border: 1px solid ${props => props.theme.innerColor};
-        background-color: ${isToggled? props => props.theme.btnColor : "white"};
-    `
-    return(<Circle></Circle>)
-}
+
 
 function MyPageSideBar(){
-    const isFavPage = useRecoilValue(favPage);
-    //찜목록
-    //useQuery로 카테고리 검색 실행하는 로직 필요
-    const [favCat, setFavCat] = useState(1);
-    const onToggle = (index:number) => {
-        setFavCat(index);
-    }
-
-    //마이페이지
-    const onMod = () => {
-        
-    }
-    const onBook = () => {
-
-    }
-    const onFav = () => {
-
-    }
+    const [ option, setOption ] = useRecoilState(myPageSelector);
     return(
         <Wrapper>
-            {isFavPage?
-             <>
-                <FavTitle>필터</FavTitle>
-                <FavTitle>숙소 유형</FavTitle>
-                <FavOptions>
-                    <div onClick={()=>onToggle(1)}>
-                        <FavToggle isToggled={1 === favCat}/><span> 전체 </span>
-                    </div>
-                    <div onClick={()=>onToggle(2)}>
-                        <FavToggle isToggled={2 === favCat}/><span> 모텔 </span>
-                    </div>
-                    <div onClick={()=>onToggle(3)}>
-                        <FavToggle isToggled={3 === favCat}/><span> 호텔·리조트 </span>
-                    </div>
-                    <div onClick={()=>onToggle(4)}>
-                        <FavToggle isToggled={4 === favCat}/><span> 펜션 </span>
-                    </div>
-                    <div onClick={()=>onToggle(5)}>
-                        <FavToggle isToggled={5 === favCat}/><span> 홈&빌라 </span>
-                    </div>
-                </FavOptions>
-             </> 
-             : 
-             <>
-                <MpTitle>마이페이지</MpTitle>
-                <MpOption onClick={onMod}>
-
-                </MpOption>
-                <MpOption onClick={onBook}>
-
-                </MpOption>
-                <MpOption onClick={onFav}>
-                    찜 목록
-                </MpOption>
-             </>
-            }
+            <MpTitle>
+                <span>마이페이지</span>
+            </MpTitle>
+            <MpOption className="clickable" onClick={()=>setOption(1)} color={option === 1? "#1565FF" : "black"}>
+                <span>내 정보 관리</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                </svg>
+            </MpOption>
+            <MpOption className="clickable" onClick={()=>setOption(2)} color={option === 2? "#1565FF" : "black"}>
+                <span color={option === 2? "#1565FF" : "black"}>예약</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                </svg>
+            </MpOption>
+            <MpOption className="clickable" onClick={()=>setOption(3)} color={option === 3? "#1565FF" : "black"}>
+                <span color={option === 3? "#1565FF" : "black"}>찜 목록</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                </svg>
+            </MpOption>
         </Wrapper>
     )
 }

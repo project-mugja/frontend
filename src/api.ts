@@ -1,7 +1,7 @@
 
 import { IReviewForm } from "./interface";
 
-const BASE_URL = `http://localhost:8090`;
+const BASE_URL = `${process.env.REACT_APP_SERVER_API}`;
 
 export async function writeReview(hostId:number,data:IReviewForm) {
     const formData = new FormData();
@@ -50,7 +50,7 @@ export async function isFavFn(hostId:number) {
 }
 export async function addFav(hostId:number) {
     return fetch(`${BASE_URL}/mypage/wish/${hostId}`,{
-        method:"POST",
+            method:"POST",
         credentials:"include"
     })
 }
@@ -60,4 +60,9 @@ export async function delFav(hostId:number) {
         method:"DELETE",
         credentials:"include"
     })
+}
+
+export async function doSearch(cat:string, pageNo:number) {
+    return fetch(`${BASE_URL}/host/category`,{credentials:"include"})
+            .then(res => res.json()).catch(error => console.log(error));
 }

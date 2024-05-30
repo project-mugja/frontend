@@ -61,9 +61,32 @@ export interface IWishProps {
         wishId?:number;
         memId:number;
         host:IHost;
-    }
+    },
+    onClick:React.MouseEventHandler,
 }
+export interface IWish {
+    wishId:number;
+    memId:number;
+    host:IHost;
+}
+export interface IWishList{
+    content: IWish[];
+    pageable: IPageable;
+    last: true,
+    totalElements: number;
+    totalPages: number;
+    first: boolean;
+    numberOfElements: number;
+    size: number;
+    number: number;
+    sort: {
+        empty: boolean;
+        sorted: boolean;
+        unsorted: boolean;
+    },
+    empty: boolean;
 
+}
 export interface IMyPageSideBarProps {
     isFavPage:boolean;
 }

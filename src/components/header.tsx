@@ -1,11 +1,11 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { login } from "../atom";
+import { login, searchPage } from "../atom";
+import logo from '../image/logo_square.jpg';
 
-const Logo = styled.div`
-    height: 44px;
+const Logo = styled.img`
+    height: 60px;
     width: 110px;
-    background-color: black;
 `
 const Login = styled.div`
     height: 40px;
@@ -33,15 +33,36 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
 `
+const SearchBox = styled.div`
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div{
+        background-color: ${props => props.theme.innerColor};
+        height: 100%;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+`
 function Header(){
     const [isLogin] = useRecoilState(login)
+    const isSearchPage = useRecoilValue(searchPage);
     const onClick = () => {
         //로그인 페이지로 이동
     }
     return(
         <Wrapper>
             <Container>
-                <Logo className="clickable"/>
+                <Logo className="clickable" src={logo}/>
+                {isSearchPage? 
+                    <SearchBox>
+                        <div><span>검색 : {}</span></div>
+                        <div><span>체크인 : {}</span></div>
+                    </SearchBox> 
+                : null}
                 <Login onClick={onClick} className="clickable">
                     {isLogin? 
                     <div>{"닉네임"}</div> 
