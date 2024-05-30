@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Loader } from "./components";
 import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { delFav, doSearch } from "../api";
 import { favCategory } from "../atom";
@@ -60,9 +60,6 @@ function SearchList({category, search}:SearchPageProps){
             console.log("fail")
         }
     }
-    useEffect(()=>{
-        setCat(cat);
-    },[])
     return(
         <>
             <Title>
