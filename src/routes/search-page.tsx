@@ -4,7 +4,6 @@ import { ListPage, ListWrapper, SideBarWrapper } from "../components/components"
 import SearchPageSideBar from "../components/search-side";
 import { useSetRecoilState } from "recoil";
 import { searchPage } from "../atom";
-import { useEffect } from "react";
 
 export type SearchPageProps = {
     category:string;
