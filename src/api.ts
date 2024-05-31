@@ -47,11 +47,13 @@ export async function getReviews(hostId:number, pageNum:number) {
 }
 
 export async function getFavs(pageNo:number) {
+    console.log(token);
     return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{
         headers:{'Authorization': `Bearer ${token}`},
         credentials:"include"})
         .then(res => res.json()).catch(error => console.log(error));
 }
+
 export async function isFavFn(hostId:number) {
     return fetch(`${BASE_URL}/mypage/wish/${hostId}/`,{credentials:"include"})
         .then(res => res.json()).catch(error => console.log(error));
