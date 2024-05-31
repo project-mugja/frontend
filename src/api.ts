@@ -4,7 +4,9 @@ import { getCookie } from "./util";
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}`;
 
 const token = () => {
-    return getCookie("token");
+    const value = getCookie("token");
+    console.log(value);
+    return value;
 }
 
 export async function writeReview(hostId:number,data:IReviewForm) {
