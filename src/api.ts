@@ -48,6 +48,7 @@ export async function getReviews(hostId:number, pageNum:number) {
 }
 
 export async function getFavs(pageNo:number) {
+    console.log(token);
     return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{
         headers:{'Authorization': `Bearer ${token}`},    
         credentials:"include"})
