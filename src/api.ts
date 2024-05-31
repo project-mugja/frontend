@@ -1,7 +1,7 @@
 import { IReviewForm } from "./interface";
 import { getCookie } from "./util";
 
-const BASE_URL = `${process.env.REACT_APP_SERVER_API}`;
+const BASE_URL = `${process.env.REACT_APP_SERVER_API}/api`;
 
 const token = () => {
     const value = getCookie("token");
