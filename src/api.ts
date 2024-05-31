@@ -1,7 +1,13 @@
 
 import { IReviewForm } from "./interface";
+import { getCookie } from "./util";
 
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}/api`;
+const token = () => {
+    const jwt = getCookie("token");
+    console.group(jwt);
+    return jwt;
+}
 
 export async function writeReview(hostId:number,data:IReviewForm) {
     const formData = new FormData();
@@ -41,7 +47,9 @@ export async function getReviews(hostId:number, pageNum:number) {
 }
 
 export async function getFavs(pageNo:number) {
-    return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{credentials:"include"})
+    return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{
+        headers:{'Authorization': `Bearer ${token}`},
+        credentials:"include"})
         .then(res => res.json()).catch(error => console.log(error));
 }
 export async function isFavFn(hostId:number) {
