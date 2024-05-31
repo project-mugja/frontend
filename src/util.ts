@@ -10,3 +10,10 @@ export function formatDateString(input: string): string {
     // yyyy.mm.dd 형식으로 변환
     return `${year}.${month}.${day}`;
   }
+
+  export function getCookie(name:string) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) 
+    return parts.pop()?.split(';').shift();
+  }

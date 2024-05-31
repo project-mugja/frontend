@@ -1,7 +1,11 @@
-
 import { IReviewForm } from "./interface";
+import { getCookie } from "./util";
 
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}`;
+
+const token = () => {
+    return getCookie("token");
+}
 
 export async function writeReview(hostId:number,data:IReviewForm) {
     const formData = new FormData();
@@ -16,6 +20,7 @@ export async function writeReview(hostId:number,data:IReviewForm) {
     }
     const response = await fetch(`${BASE_URL}/host/${hostId}/review/`,{
         method:"POST",
+        headers:{'Authorization': `Bearer ${token}`},
         body: formData,
         credentials:"include"
     })
@@ -26,7 +31,9 @@ export async function writeReview(hostId:number,data:IReviewForm) {
 }
 
 export async function getHost(hostId:number){
-    return fetch(`${BASE_URL}/host/${hostId}`)
+    return fetch(`${BASE_URL}/host/${hostId}`,{
+        headers:{'Authorization': `Bearer ${token}`}
+    })
             .then(response => response.json()).catch(error => console.log(error));
 }
 
@@ -41,7 +48,9 @@ export async function getReviews(hostId:number, pageNum:number) {
 }
 
 export async function getFavs(pageNo:number) {
-    return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{credentials:"include"})
+    return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{
+        headers:{'Authorization': `Bearer ${token}`},    
+        credentials:"include"})
         .then(res => res.json()).catch(error => console.log(error));
 }
 export async function isFavFn(hostId:number) {
