@@ -145,7 +145,8 @@ const HidenInput = styled.input`
 `
 function ReviewForm({memId,hostId}:IReviewFormProps){
     const {
-        mutate
+        mutate,
+        isLoading
     } = useMutation((data:IReviewForm) => writeReview(hostId,data),{
         onSuccess:() => {
             //네비게이트

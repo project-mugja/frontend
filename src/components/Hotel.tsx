@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { IHostProp, IMapProps } from "../interface";
+import { IHost, IHostProp, IMapProps, IReview } from "../interface";
 import MapBox from "./MapBox";
 import SmallReview from "./SmallReview";
 import { useQuery } from "react-query";
