@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IWishProps } from "../interface";
-import { useState } from "react";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -69,7 +69,7 @@ const Star = () => {
 }
 function SearchResult({wish, onClick}:IWishProps){
     const avgScore = wish.host.avgScore;
-    const [isWish,setIsWish] = useState(true);
+    // const [isWish,setIsWish] = useState(true);
     const Image = wish.host.hostImgList
     const navigate = useNavigate();
     const goToHost = (hostId:number) => {

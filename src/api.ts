@@ -41,10 +41,10 @@ export async function getReviews(hostId:number, pageNum:number) {
             .then(res => res.json()).catch(error => console.log(error));
 }
 
-export async function getFavs(pageNo:number) {
+export async function getFavs(pageNo:number, token:string) {
     console.log(getCookie("token"));
     return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{
-        headers:{'Authorization': `Bearer ${getCookie("token")}`},
+        headers:{'Authorization': `Bearer ${token}`},
         credentials:"include"})
         .then(res => res.json()).catch(error => console.log(error));
 }

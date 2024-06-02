@@ -6,7 +6,7 @@ import Header from "./components/header";
 import { useEffect } from "react";
 
 function App() {
-useEffect(()=>{
+  useEffect(()=>{
   console.log("try")
   window.addEventListener("message", (event) => {
     console.log("eventlistener")
@@ -17,7 +17,7 @@ useEffect(()=>{
         localStorage.setItem("token", token);
       }
   });
-},[])
+  },[])
 
   return (
     <>

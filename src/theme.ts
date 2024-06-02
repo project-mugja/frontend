@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from "styled-components";
+import { DefaultTheme } from "styled-components";
 
 export const defaultTheme:DefaultTheme = {
     innerColor: "#F5F5F5",

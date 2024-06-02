@@ -6,7 +6,7 @@ import Wish from "./Wish"
 import { styled } from "styled-components"
 import { useState } from "react"
 import { useRecoilValue } from "recoil"
-import { favCategory } from "../atom"
+import { jwtToken } from "../atom"
 
 const PagingBox = styled.div`
     display: flex;
@@ -45,9 +45,10 @@ const Title = styled.div`
 function WishList(){
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
+    const token = useRecoilValue(jwtToken);
     const {isLoading, data, refetch} = useQuery<IWishList>(
         ["wishlist", thisPage],
-        () => getFavs(thisPage),
+        () => getFavs(thisPage, token),
     )
     const handleDelete = async (hostId:number) => {
         try{

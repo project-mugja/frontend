@@ -15,7 +15,7 @@ function SearchPage(){
     const setSearchPage = useSetRecoilState(searchPage);
     useEffect(()=>{
         setSearchPage(true);
-    },[])
+    },[setSearchPage])
     return(
         <ListPage className="listPage">
             <SideBarWrapper>
