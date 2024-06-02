@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { getFavs, delFav, doSearch } from "../api";
-import { favCategory } from "../atom";
+import { favCategory, jwtToken } from "../atom";
 import { IWishList } from "../interface";
 import Wish from "./Wish";
 import { SearchPageProps } from "../routes/search-page";
@@ -46,6 +46,7 @@ const Title = styled.div`
 
 
 function SearchList({category, search}:SearchPageProps){
+    const token = useRecoilValue(jwtToken);
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
@@ -55,7 +56,7 @@ function SearchList({category, search}:SearchPageProps){
     )
     const handleDelete = async (hostId:number) => {
         try{
-            await delFav(hostId);
+            await delFav(hostId,token);
             refetch();
         } catch (error){
             console.log("fail")
