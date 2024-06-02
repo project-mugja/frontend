@@ -28,7 +28,7 @@ function MyPage(){
                 <MyPageSideBar/>
             </SideBarWrapper>
             <ListWrapper className="listWrapper">
-                {myPageOption === 1? <MemberInfo/> : null}
+                {myPageOption === 1? <MemberInfo token={token}/> : null}
                 {myPageOption === 2? null : null}
                 {myPageOption === 3? <WishList/> : null}
             </ListWrapper>

@@ -87,3 +87,20 @@ export async function doSearch(cat:string, pageNo:number) {
     return fetch(`${BASE_URL}/host/category`,{credentials:"include"})
             .then(res => res.json()).catch(error => console.log(error));
 }
+
+export async function validatePassword(password:string,token:string) {
+    return fetch(``,{
+                headers:{'Authorization': `Bearer ${token}`},
+                credentials:"include"
+            })
+            .then(res => res.json()).catch(error => console.log(error));
+}
+
+export async function modifyMemInfo(params:any, token:string) {
+    return fetch(`${BASE_URL}/`,{
+                headers:{'Authorization': `Bearer ${token}`},
+                method: "PUT",
+                credentials:"include"
+            })
+            .then(res => res.json()).catch(error => console.log(error));
+}
