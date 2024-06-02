@@ -7,9 +7,13 @@ import { useEffect } from "react";
 
 function App() {
 useEffect(()=>{
+  console.log("try")
   window.addEventListener("message", (event) => {
+    console.log("eventlistener")
     if (event.origin === `${process.env.REACT_APP_SERVER_API}`) {
+        console.log("getting token")
         const { token } = event.data;
+        console.log("token : ",token)
         localStorage.setItem("token", token);
       }
   });
