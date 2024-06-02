@@ -95,7 +95,7 @@ const Star = () => {
     )
 }
 function Hotel({data, reviews}:IHostProp){
-    const tokekn = useRecoilValue(jwtToken)
+    const token = useRecoilValue(jwtToken)
     const locationData:IMapProps["locationData"] = { 
         lat:data.lat, 
         lng: data.lng, 
@@ -128,7 +128,8 @@ function Hotel({data, reviews}:IHostProp){
         }
     },[])
     const onFavClick = () => {
-        isFav? delFav(data.hostId,tokekn).then(()=>setIsLiked(false)) : addFav(data.hostId,tokekn).then(()=>setIsLiked(true));
+        console.log("on fav click : ",token)
+        isFav? delFav(data.hostId,token).then(()=>setIsLiked(false)) : addFav(data.hostId,tokekn).then(()=>setIsLiked(true));
     }
     return(
         <HotelContainer>

@@ -52,6 +52,7 @@ function WishList(){
     )
     const handleDelete = async (hostId:number) => {
         try{
+            console.log(token)
             await delFav(hostId,token);
             refetch();
         } catch (error){
