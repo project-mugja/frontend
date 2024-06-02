@@ -41,11 +41,12 @@ const Title = styled.div`
         margin-right: 10px;
     }
 `
-
-function WishList(){
+interface WishListProps{
+    token:string;
+}
+function WishList({token}:WishListProps){
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
-    const token = useRecoilValue(jwtToken);
     const {isLoading, data, refetch} = useQuery<IWishList>(
         ["wishlist", thisPage],
         () => getFavs(thisPage, token),
