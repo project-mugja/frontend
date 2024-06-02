@@ -8,10 +8,10 @@ function Router() {
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/host/:hostId" element={<DetailPage/>} />
-                <Route path="/search/:category/:search" element={<SearchPage/>}/>
-                <Route path="/mypage" element={<MyPage/>}/>
-                <Route path="/temp/reviewform" element={<ReviewFrom memId={1} hostId={1}/>}/>
+                <Route path="/host/:hostId/:jwt" element={<DetailPage/>} />
+                <Route path="/search/:category/:search/:jwt" element={<SearchPage/>}/>
+                <Route path="/mypage/:jwt" element={<MyPage/>}/>
+                <Route path="/temp/reviewform/:jwt" element={<ReviewFrom memId={1} hostId={1}/>}/>
             </Routes>
         </BrowserRouter>
     )
