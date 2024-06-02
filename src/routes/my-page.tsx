@@ -15,6 +15,8 @@ function MyPage(){
 
     useEffect(()=>{
         setToken(jwt? jwt : "");
+        console.log(jwt);
+        localStorage.setItem("token", jwt? jwt : "");
     },[jwt, setToken]);
 
     useEffect(()=>{
