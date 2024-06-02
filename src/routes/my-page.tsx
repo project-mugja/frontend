@@ -12,12 +12,11 @@ function MyPage(){
 
     const [ token, setToken ] = useRecoilState(jwtToken);
     const {jwt} = useParams();
-
     useEffect(()=>{
-        setToken(jwt? jwt : "");
+        setToken(jwt? jwt : token.length>0 ? token : "");
         console.log(jwt);
         localStorage.setItem("token", jwt? jwt : "");
-    },[jwt, setToken]);
+    },[jwt, setToken, token]);
 
     useEffect(()=>{
         console.log("token : ",token);

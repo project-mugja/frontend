@@ -1,10 +1,9 @@
 
 import { IReviewForm } from "./interface";
-import { getCookie } from "./util";
 
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}/api`;
 
-export async function writeReview(hostId:number,data:IReviewForm) {
+export async function writeReview(hostId:number,data:IReviewForm,token:string) {
     const formData = new FormData();
     formData.append("memId",data.hostId.toString());
     formData.append("hostId",hostId.toString());
@@ -16,6 +15,7 @@ export async function writeReview(hostId:number,data:IReviewForm) {
         formData.append("image",data.image);
     }
     const response = await fetch(`${BASE_URL}/host/${hostId}/review/`,{
+        headers:{'Authorization': `Bearer ${token}`},
         method:"POST",
         body: formData,
         credentials:"include"
@@ -26,8 +26,11 @@ export async function writeReview(hostId:number,data:IReviewForm) {
     return response.json().catch(error => console.log(error));
 }
 
-export async function getHost(hostId:number){
-    return fetch(`${BASE_URL}/host/${hostId}`)
+export async function getHost(hostId:number,token:string){
+    return fetch(`${BASE_URL}/host/${hostId}`,{
+        headers:{'Authorization': `Bearer ${token}`},
+        credentials:"include"
+    })
             .then(response => response.json()).catch(error => console.log(error));
 }
 
@@ -49,19 +52,23 @@ export async function getFavs(pageNo:number, token:string) {
         .then(res => res.json()).catch(error => console.log(error));
 }
 
-export async function isFavFn(hostId:number) {
-    return fetch(`${BASE_URL}/mypage/wish/${hostId}/`,{credentials:"include"})
+export async function isFavFn(hostId:number, token:string) {
+    return fetch(`${BASE_URL}/mypage/wish/${hostId}/`,{
+        headers:{'Authorization': `Bearer ${token}`},
+        credentials:"include"})
         .then(res => res.json()).catch(error => console.log(error));
 }
-export async function addFav(hostId:number) {
+export async function addFav(hostId:number, token:string) {
     return fetch(`${BASE_URL}/mypage/wish/${hostId}`,{
-            method:"POST",
+        headers:{'Authorization': `Bearer ${token}`},
+        method:"POST",
         credentials:"include"
     })
 }
 
-export async function delFav(hostId:number) {
+export async function delFav(hostId:number, token:string) {
     return fetch(`${BASE_URL}/mypage/wish/${hostId}`,{
+        headers:{'Authorization': `Bearer ${token}`},
         method:"DELETE",
         credentials:"include"
     })

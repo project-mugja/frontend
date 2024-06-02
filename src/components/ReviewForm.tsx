@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { IReviewForm, IReviewFormProps } from "../interface";
 import { useMutation } from "react-query";
 import { writeReview } from "../api";
+import { useRecoilValue } from "recoil";
+import { jwtToken } from "../atom";
 
 
 
@@ -144,10 +146,10 @@ const HidenInput = styled.input`
     display: none;
 `
 function ReviewForm({memId,hostId}:IReviewFormProps){
+    const token = useRecoilValue(jwtToken);
     const {
-        mutate,
-        isLoading
-    } = useMutation((data:IReviewForm) => writeReview(hostId,data),{
+        mutate
+    } = useMutation((data:IReviewForm) => writeReview(hostId,data,token),{
         onSuccess:() => {
             //네비게이트
         }

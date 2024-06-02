@@ -24,7 +24,7 @@ export const searchPage = atom({
     default:false
 })
 
-export const jwtToken = atom({
+export const jwtToken = atom<string>({
     key: "token",
     default: ""
 })

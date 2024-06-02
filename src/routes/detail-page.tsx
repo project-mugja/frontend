@@ -7,7 +7,9 @@ import { useQuery } from "react-query";
 import { getHost, getReviews, getRooms } from "../api";
 import { useParams } from "react-router-dom";
 import { IHost, IReviewPage, IRoom } from "../interface";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { jwtToken } from "../atom";
 
 const RoomWrapper = styled.div`
     display: flex;
@@ -85,10 +87,19 @@ const Paging = styled.span`
     }
 `
 function DetailPage(){
+
+    const [ token, setToken ] = useRecoilState<string>(jwtToken);
+    const {jwt} = useParams();
+    useEffect(()=>{
+        setToken(jwt? jwt : token.length>0 ? token : "");
+        console.log(jwt);
+        localStorage.setItem("token", jwt? jwt : "");
+    },[jwt, setToken, token]);
+
     const { hostId:hId } = useParams()
     const hostId = hId? parseInt(hId) : 0;
 
-    const { isLoading:loadingHost, data:host} = useQuery<IHost>("hostData",() => getHost(hostId));
+    const { isLoading:loadingHost, data:host} = useQuery<IHost>("hostData",() => getHost(hostId, token));
     const { data:rooms } = useQuery<IRoom[]>("roomsData", () => getRooms(hostId));
     
     const [thisPage, setThisPage ] = useState(1);
