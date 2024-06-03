@@ -64,6 +64,7 @@ export async function getFavs(pageNo:number, token:string) {
 export async function isFavFn(hostId:number, token:string) {
     console.log("is fav")
     return fetch(`${BASE_URL}/mypage/wish/${hostId}/`,{
+        method:"GET",
         headers:{'Authorization': `Bearer ${token}`},
         credentials:"include",
         cache: 'no-store'
