@@ -113,7 +113,7 @@ function Hotel({data, reviews}:IHostProp){
     const [isMap, setIsMap] = useState(false);
     const [isLiked, setIsLiked] = useState(false)
     const {data:isFav} = useQuery(["fav",data.hostId, isLiked],() => isFavFn(data.hostId,token),{
-        onSuccess:(data:boolean) => setIsLiked(data),
+        onSuccess:(data:boolean) => {setIsLiked(data); console.log(isFav);},
     })
     useEffect(()=>{
         const script = document.createElement('script');
@@ -133,7 +133,6 @@ function Hotel({data, reviews}:IHostProp){
             delFav(data.hostId,storedToken? storedToken : "").then(()=>setIsLiked(false)) 
             : 
             addFav(data.hostId,storedToken? storedToken : "").then(()=>setIsLiked(true));
-        console.log("data : ",data)
     }
     return(
         <HotelContainer>
