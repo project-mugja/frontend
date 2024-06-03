@@ -9,10 +9,12 @@ import { useEffect } from "react";
 export type SearchPageProps = {
     category:string;
     search:string;
+    token:string;
 }
 function SearchPage(){
-    // const storedToken = localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
+    const token = storedToken? storedToken : jwt? jwt : "";
     useEffect(()=>{
         if(jwt){
             localStorage.setItem("token", jwt);
@@ -30,7 +32,7 @@ function SearchPage(){
                 <SearchPageSideBar/>
             </SideBarWrapper>
             <ListWrapper className="listWrapper">
-                <SearchList category={category? category : "all"} search={search? search : ""}/>
+                <SearchList category={category? category : "all"} search={search? search : ""} token={token}/>
             </ListWrapper>
         </ListPage>
     )

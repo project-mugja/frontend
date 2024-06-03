@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { delFav, doSearch } from "../api";
-import { favCategory, jwtToken } from "../atom";
+import { favCategory } from "../atom";
 import { IWishList } from "../interface";
 import { SearchPageProps } from "../routes/search-page";
 import SearchResult from "./SearchResult";
@@ -44,8 +44,7 @@ const Title = styled.div`
 `
 
 
-function SearchList({category, search}:SearchPageProps){
-    const token = useRecoilValue(jwtToken);
+function SearchList({category, search, token}:SearchPageProps){
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
