@@ -26,5 +26,5 @@ export const searchPage = atom({
 
 export const jwtToken = atom<string>({
     key: "token",
-    default: localStorage.getItem("token")?
+    default: undefined
 })

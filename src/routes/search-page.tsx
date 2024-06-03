@@ -16,12 +16,10 @@ function SearchPage(){
     const {jwt} = useParams();
     useEffect(()=>{
         if(jwt){
-            if(jwt !== localStorage.getItem("token")){
-                setToken(jwt);
-                localStorage.setItem("token", jwt);
-            }
+            setToken(jwt);
+            localStorage.setItem("token", jwt);
         }
-    },[jwt, setToken, token]);
+    },[jwt, setToken]);
 
     const { category, search } = useParams<SearchPageProps>();
     const setSearchPage = useSetRecoilState(searchPage);

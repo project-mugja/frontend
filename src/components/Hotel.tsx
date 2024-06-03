@@ -5,8 +5,6 @@ import MapBox from "./MapBox";
 import SmallReview from "./SmallReview";
 import { useQuery } from "react-query";
 import { addFav, delFav, isFavFn } from "../api";
-import { useRecoilValue } from "recoil";
-import { jwtToken } from "../atom";
 
 const MapCard = styled.div`
     background-color: white;
@@ -94,9 +92,7 @@ const Star = () => {
         </svg>
     )
 }
-function Hotel({data, reviews}:IHostProp){
-    const token = useRecoilValue(jwtToken);
-    const storedToken = localStorage.getItem("token");
+function Hotel({data, reviews, token}:IHostProp){
     const locationData:IMapProps["locationData"] = { 
         lat:data.lat, 
         lng: data.lng, 
@@ -113,7 +109,7 @@ function Hotel({data, reviews}:IHostProp){
     }]
     const [isMap, setIsMap] = useState(false);
     const [isLiked, setIsLiked] = useState(false)
-    const {data:isFav} = useQuery(["fav",data.hostId, isLiked],() => isFavFn(data.hostId,storedToken? storedToken : token),{
+    const {data:isFav} = useQuery(["fav",data.hostId, isLiked],() => isFavFn(data.hostId,token),{
         onSuccess:(data:boolean) => setIsLiked(data),
     })
     useEffect(()=>{
@@ -130,9 +126,9 @@ function Hotel({data, reviews}:IHostProp){
     },[])
     const onFavClick = () => {
         isFav? 
-            delFav(data.hostId,storedToken? storedToken : token).then(()=>setIsLiked(false)) 
+            delFav(data.hostId,token).then(()=>setIsLiked(false)) 
             : 
-            addFav(data.hostId,storedToken? storedToken : token).then(()=>setIsLiked(true));
+            addFav(data.hostId,token).then(()=>setIsLiked(true));
     }
     return(
         <HotelContainer>

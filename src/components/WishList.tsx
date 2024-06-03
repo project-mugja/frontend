@@ -5,8 +5,6 @@ import { IWishList } from "../interface"
 import Wish from "./Wish"
 import { styled } from "styled-components"
 import { useState } from "react"
-import { useRecoilValue } from "recoil"
-import { jwtToken } from "../atom"
 
 const PagingBox = styled.div`
     display: flex;

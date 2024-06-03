@@ -86,12 +86,10 @@ function DetailPage(){
     const {jwt} = useParams();
     useEffect(()=>{
         if(jwt){
-            if(jwt !== localStorage.getItem("token")){
-                setToken(jwt);
-                localStorage.setItem("token", jwt);
-            }
+            setToken(jwt);
+            localStorage.setItem("token", jwt);
         }
-    },[jwt, setToken, token]);
+    },[jwt, setToken]);
 
     const { hostId:hId } = useParams()
     const hostId = hId? parseInt(hId) : 0;
@@ -111,7 +109,7 @@ function DetailPage(){
         <>
             <Container>
                 <HoteImg src={host?.hostImgList[0].ImgPath} alt=""/>
-                    {loadingHost? <Loader/> : !host? <Loader/> : <Hotel data={host} reviews={reviews?.content}/>}
+                    {loadingHost? <Loader/> : !host? <Loader/> : <Hotel data={host} reviews={reviews?.content} token={jwt? jwt : token}/>}
                 <RoomWrapper>
                     {loadingHost? <Loader/> : !host? <Loader/> : 
                         rooms?.map(room => <Room key={room.roomId} room={room}/>)

@@ -15,21 +15,19 @@ function MyPage(){
     const {jwt} = useParams();
     useEffect(()=>{
         if(jwt){
-            if(jwt !== localStorage.getItem("token")){
-                setToken(jwt);
-                localStorage.setItem("token", jwt);
-            }
+            setToken(jwt);
+            localStorage.setItem("token", jwt);
         }
-    },[jwt, setToken, token]);
+    },[jwt, setToken]);
     return(
         <ListPage className="listPage">
             <SideBarWrapper>
                 <MyPageSideBar/>
             </SideBarWrapper>
             <ListWrapper className="listWrapper">
-                {myPageOption === 1? <MemberInfo token={token}/> : null}
-                {myPageOption === 2? <BookList token={token}/> : null}
-                {myPageOption === 3? <WishList token={token}/> : null}
+                {myPageOption === 1? <MemberInfo token={jwt? jwt : token}/> : null}
+                {myPageOption === 2? <BookList token={jwt? jwt : token}/> : null}
+                {myPageOption === 3? <WishList token={jwt? jwt : token}/> : null}
             </ListWrapper>
         </ListPage>
     )

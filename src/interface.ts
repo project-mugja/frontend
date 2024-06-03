@@ -1,6 +1,7 @@
 export interface IHostProp{
     data:IHost,
-    reviews?:IReview[]
+    reviews?:IReview[],
+    token:string
 }
 export interface IHost {
     hostId:number;
