@@ -1,5 +1,5 @@
 
-import { IReviewForm } from "./interface";
+import { IBook, IReviewForm } from "./interface";
 
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}/api`;
 
@@ -92,6 +92,7 @@ export async function validatePassword(password:string,token:string) {
     const formData = new FormData();
     formData.append("password", password);
     return fetch(``,{
+                method:"POST",
                 headers:{'Authorization': `Bearer ${token}`},
                 credentials:"include",
                 body:formData
@@ -127,6 +128,19 @@ export async function getBookList(token:string) {
     return fetch(`${BASE_URL}/`,{
         headers:{'Authorization': `Bearer ${token}`},
         method: "GET",
+        credentials:"include"
+    })
+    .then(res => res.json()).catch(error => console.log(error));
+}
+
+export async function reserveRoom(token:string, book:IBook){
+    const formData = new FormData();
+    formData.append("hostId",book.hostId+"");
+    formData.append("roomId",book.roomId+"");
+    formData.append("price",book.price+"");
+    return fetch(`${BASE_URL}/`,{
+        headers:{'Authorization': `Bearer ${token}`},
+        method: "POST",
         credentials:"include"
     })
     .then(res => res.json()).catch(error => console.log(error));

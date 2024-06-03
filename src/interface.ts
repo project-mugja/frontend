@@ -162,3 +162,9 @@ export interface IReview{
     imgPath:string;
     image?:Object;
 }
+
+export interface IBook{
+    hostId:number;
+    roomId:number;
+    price:number;
+}

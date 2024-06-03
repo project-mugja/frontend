@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { IRoom, IRoomProps } from "../interface";
 import { Btn } from "./components";
 import { useQuery } from "react-query";
-import { getRooms } from "../api";
+import { getRooms, reserveRoom } from "../api";
 
 const Container = styled.div`
     display: flex;
@@ -83,7 +83,16 @@ const Star = ()=>{
         </svg>
     )
 }
-function Room(room:IRoomProps){
+function Room(room:IRoomProps, token:string|undefined){
+    const handleReserve = () => {
+        if (token){
+            reserveRoom(token,{
+                roomId:room.room.roomId,
+                hostId:room.room.host.hostId,
+                price:room.room.price
+            })
+        }
+    }
     return(
         <>
             <Container>
@@ -98,7 +107,7 @@ function Room(room:IRoomProps){
                         </div>
                         <div>
                             <div>{room?.room.price} 원</div>
-                            <ReserveBtn className="clickable">숙박예약</ReserveBtn>
+                            <ReserveBtn className="clickable" onClick={handleReserve}>숙박예약</ReserveBtn>
                         </div>
                     </InfoBox>
                 </InfoCard>
