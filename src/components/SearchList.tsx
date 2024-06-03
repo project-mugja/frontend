@@ -55,16 +55,14 @@ function SearchList({category, search, token}:SearchPageProps){
     )
     const handleDelete = async (hostId:number) => {
         try{
-            delFav(hostId,token);
-            setListener(!listener);
+            delFav(hostId,token).then(()=>setListener(!listener));
         } catch (error){
             console.log("fail")
         }
     }
     const handleAdd = async (hostId:number) => {
         try{
-            addFav(hostId,token);
-            setListener(!listener);
+            addFav(hostId,token).then(()=>setListener(!listener));
             console.log("fail")
         } catch (error){
             console.log("fail")
