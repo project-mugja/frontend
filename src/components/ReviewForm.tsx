@@ -74,46 +74,46 @@ const ContentBox = styled.textarea`
         outline: none;
     }
 `
-const ImgLine = styled.div`
-    position: relative;
-    width: 90%;
-    grid-row: 3/4;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+// const ImgLine = styled.div`
+//     position: relative;
+//     width: 90%;
+//     grid-row: 3/4;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: flex-start;
 
-    &>Button{
-        display: flex;
-        border: none;
-        border-radius: 5px;
-        background-color: ${props => props.theme.innerColor};
-        height: 40px;
-        width: 40px;
-        justify-content: center;
-        align-items: center;
-        &>svg{
-            fill: dimgrey;
-            width: 23px;
-        }
-    }
-    &>img{
-        display: flex;
-        border: none;
-        border-radius: 5px;
-        height: 40px;
-        width: 40px;
-    }
-    &>svg{
-        position: absolute;
-        left: 30px;
-        bottom:30px;
-        width: 7px;
-        height: 7px;
-        border-radius: 2px;
-        background-color: ${props=>props.theme.innerColor};
-        padding: 2px;
-    }
-`
+//     &>Button{
+//         display: flex;
+//         border: none;
+//         border-radius: 5px;
+//         background-color: ${props => props.theme.innerColor};
+//         height: 40px;
+//         width: 40px;
+//         justify-content: center;
+//         align-items: center;
+//         &>svg{
+//             fill: dimgrey;
+//             width: 23px;
+//         }
+//     }
+//     &>img{
+//         display: flex;
+//         border: none;
+//         border-radius: 5px;
+//         height: 40px;
+//         width: 40px;
+//     }
+//     &>svg{
+//         position: absolute;
+//         left: 30px;
+//         bottom:30px;
+//         width: 7px;
+//         height: 7px;
+//         border-radius: 2px;
+//         background-color: ${props=>props.theme.innerColor};
+//         padding: 2px;
+//     }
+// `
 interface IStar{
     color:string;
     onClick:React.MouseEventHandler<SVGSVGElement>;
@@ -129,27 +129,27 @@ const Star = ({onClick, color}:IStar) => {
         </svg>
     )
 }
-const Plus = () => {
-    return(
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
-        </svg>
-    )
-}
-interface IX{
-    onClick:React.MouseEventHandler<SVGSVGElement>;
-}
-const X = ({onClick}:IX) => {
-    return(
-        <svg 
-            onClick={onClick} 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 384 512"
-        >
-            <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
-        </svg>
-    )
-}
+// const Plus = () => {
+//     return(
+//         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+//             <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+//         </svg>
+//     )
+// }
+// interface IX{
+//     onClick:React.MouseEventHandler<SVGSVGElement>;
+// }
+// const X = ({onClick}:IX) => {
+//     return(
+//         <svg 
+//             onClick={onClick} 
+//             xmlns="http://www.w3.org/2000/svg" 
+//             viewBox="0 0 384 512"
+//         >
+//             <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
+//         </svg>
+//     )
+// }
 const HidenInput = styled.input`
     display: none;
 `
@@ -177,12 +177,12 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
     // const [isUploaded, setIsUploaded] = useState(false);
     const { register,handleSubmit,setValue } = useForm<IReviewForm>();
     const [score, setScore] = useState(10);
-    const onFile = (event:React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        if(imgRef.current){
-            imgRef.current.click();
-        }
-    }
+    // const onFile = (event:React.MouseEvent<HTMLButtonElement>) => {
+    //     event.preventDefault();
+    //     if(imgRef.current){
+    //         imgRef.current.click();
+    //     }
+    // }
     // const onUpload = () => {
     //     if(imgRef.current && imgRef.current.files){
     //         const img = imgRef.current.files[0];
