@@ -53,7 +53,7 @@ function BookList({token}:BookListProps){
             <Title>
                 <span>예약 내역</span>
             </Title>
-            <Book/>
+            <Book token={token}/>
             {isLoading? 
             <Loader/> 
             : 

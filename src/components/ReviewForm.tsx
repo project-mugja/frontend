@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { Btn } from "./components";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IReviewForm, IReviewFormProps } from "../interface";
 import { useMutation } from "react-query";
 import { writeReview } from "../api";
 import { useRecoilValue } from "recoil";
-import { jwtToken } from "../atom";
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -165,8 +164,7 @@ const CloseModalBtn = styled.button`
         width: 20px;
     }
 `
-function ReviewForm({memId,hostId,showModal,closeModal}:IReviewFormProps){
-    const token = useRecoilValue(jwtToken);
+function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
     const {
         mutate
     } = useMutation((data:IReviewForm) => writeReview(hostId,data,token),{

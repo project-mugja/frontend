@@ -97,7 +97,10 @@ const MoreBox = styled.div`
         width: 8px;
     }
 `
-function Book(){
+interface BookProp{
+    token:string
+}
+function Book({token}:BookProp){
     const [onMouse, setOnMouse] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const openModal = () => {
@@ -138,7 +141,7 @@ function Book(){
             :
             null
             }
-            <ReviewForm memId={1} hostId={1} showModal={showModal} closeModal={closeModal}/>
+            <ReviewForm memId={1} hostId={1} showModal={showModal} closeModal={closeModal} token={token}/>
         </Container>
     )
 }

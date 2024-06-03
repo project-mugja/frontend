@@ -44,6 +44,7 @@ export interface IReviewFormProps {
     hostId:number,
     showModal:boolean,
     closeModal:React.MouseEventHandler
+    token:string
 }
 
 export interface IReviewForm{
