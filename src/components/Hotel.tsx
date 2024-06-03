@@ -125,10 +125,13 @@ function Hotel({data, reviews, token}:IHostProp){
         }
     },[])
     const onFavClick = () => {
-        isLiked? 
-            delFav(data.hostId,token).then(()=>setIsLiked(false)) 
-            : 
-            addFav(data.hostId,token).then(()=>setIsLiked(true));
+        if(isLiked){
+            delFav(data.hostId,token);
+            setIsLiked(false);
+        }else{
+            addFav(data.hostId,token);
+            setIsLiked(true);
+        }
     }
     return(
         <HotelContainer>
