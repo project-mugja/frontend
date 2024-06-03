@@ -76,12 +76,12 @@ function SearchResult({search, token }:ISearchProps){
     const goToHost = (hostId:number) => {
         navigate(`/host/${hostId}`)
     }
-    const handleDelete = async () => {
-        await delFav(search.hostId,token);
+    const handleDelete = () => {
+        delFav(search.hostId,token);
         setIsLiked(false);
     }
-    const handleAdd = async () => {
-        await addFav(search.hostId,token);
+    const handleAdd = () => {
+        addFav(search.hostId,token);
         setIsLiked(true);
     }
     return(
