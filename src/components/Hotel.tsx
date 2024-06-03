@@ -95,7 +95,8 @@ const Star = () => {
     )
 }
 function Hotel({data, reviews}:IHostProp){
-    const token = useRecoilValue(jwtToken)
+    const token = useRecoilValue(jwtToken);
+    const storedToken = localStorage.getItem("token");
     const locationData:IMapProps["locationData"] = { 
         lat:data.lat, 
         lng: data.lng, 
@@ -112,7 +113,7 @@ function Hotel({data, reviews}:IHostProp){
     }]
     const [isMap, setIsMap] = useState(false);
     const [isLiked, setIsLiked] = useState(false)
-    const {data:isFav} = useQuery(["fav",data.hostId, isLiked],() => isFavFn(data.hostId,token),{
+    const {data:isFav} = useQuery(["fav",data.hostId, isLiked],() => isFavFn(data.hostId,storedToken? storedToken : token),{
         onSuccess:(data:boolean) => setIsLiked(data),
     })
     useEffect(()=>{
@@ -128,8 +129,6 @@ function Hotel({data, reviews}:IHostProp){
         }
     },[])
     const onFavClick = () => {
-        const storedToken = localStorage.getItem("token");
-        console.log("stored token : ",storedToken);
         isFav? 
             delFav(data.hostId,storedToken? storedToken : token).then(()=>setIsLiked(false)) 
             : 
