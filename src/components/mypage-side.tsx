@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useRecoilState } from "recoil"
 import {  myPageSelector } from "../atom"
-import { Link, useLocation, useParams } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 const Wrapper = styled.div`
     display: flex;
@@ -47,7 +47,13 @@ function MyPageSideBar(){
     const pathname = location.pathname;
     const parts = pathname.split('/');
     const param = parts[parts.length - 1]; // 경로에서 마지막 부분을 가져옴
-    setOption(param);
+    if(param === "info"){
+        setOption(1);
+    }else if(param === "booklist"){
+        setOption(2);
+    }else if(param === "wishlist"){
+        setOption(3);
+    }
     return(
         <Wrapper>
             <MpTitle>
