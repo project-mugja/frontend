@@ -67,7 +67,7 @@ function SearchList({category, search, token}:SearchPageProps){
             <Loader/> 
             : 
             <>
-                {data?.content.map(async search => 
+                {data?.content.map(search => 
                     <SearchResult 
                         key={search.hostId} 
                         search={search} 
