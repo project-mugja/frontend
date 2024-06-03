@@ -84,21 +84,22 @@ export async function addFav(hostId:number, token:string) {
 
 export async function delFav(hostId:number, token:string) {
     console.log("del fav")
-    return fetch(`${BASE_URL}/mypage/wish/${hostId}`,{
+    const response = await fetch(`${BASE_URL}/mypage/wish/${hostId}`,{
         headers:{'Authorization': `Bearer ${token}`},
         method:"DELETE",
         credentials:"include"
         ,cache: 'no-store'
-    }).then(res => res.json());
+    });
+    return response.json();
 }
 
 export async function doSearch(cat:string, pageNo:number,search:string,token:string) {
     console.log("do search")
-    return fetch(`${BASE_URL}/host/category/${cat}/${pageNo}/${search}`,{
+    const response = fetch(`${BASE_URL}/host/category/${cat}/${pageNo}/${search}`,{
         headers:{'Authorization': `Bearer ${token}`},
         credentials:"include"
     })
-            .then(res => res.json()).catch(error => console.log(error));
+    return (await response).json();
 }
 
 export async function validatePassword(password:string,token:string) {
