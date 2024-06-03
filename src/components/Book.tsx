@@ -2,6 +2,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import ReviewForm from "./ReviewForm";
 import { BookProp } from "../interface";
+import { formDate } from "../util";
 
 const Container = styled.div`
     display: flex;
@@ -111,16 +112,17 @@ function Book({token,book}:BookProp){
     return(
         <Container>
             <StateBox color="white">
-                <span>예약중</span>
+                <span>{}</span>
             </StateBox>
             <Img src={""} onClick={()=>{}} className="clickable"/>
             <InfoBox onClick={()=>{}} className="clickable">
                 <div>
-                    <span>{"방 이름"}</span>
-                    <span>{"999,999원"}</span>
+                    <span>{book.roomName}</span>
+                    <span>{book.payPrice}원</span>
                 </div>
                 <div>
-                    <span>{"2024년 06월 27일"}</span>
+                    <span>체크인 : {book.checkInDate? formDate(book.checkInDate) : ""}</span>
+                    <span>체크아웃 : {book.checkOutDate? formDate(book.checkOutDate) : ""}</span>
                 </div>
             </InfoBox>
             <MoreBox onMouseEnter={()=>setOnMouse(true)}>
