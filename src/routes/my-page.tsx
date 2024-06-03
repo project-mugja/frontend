@@ -26,7 +26,7 @@ function MyPage(){
             </SideBarWrapper>
             <ListWrapper className="listWrapper">
                 {myPageOption === 1? <MemberInfo token={jwt? jwt : token}/> : null}
-                {myPageOption === 2? <BookList token={jwt? jwt : token}/> : null}
+                {/* {myPageOption === 2? <BookList token={jwt? jwt : token}/> : null} */}
                 {myPageOption === 3? <WishList token={jwt? jwt : token}/> : null}
             </ListWrapper>
         </ListPage>
