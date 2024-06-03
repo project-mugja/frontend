@@ -50,7 +50,7 @@ function SearchList({category, search, token}:SearchPageProps){
     const [pages, setPages] = useState(0);
     const {isLoading, data, refetch} = useQuery<ISearchPage>(
         ["searchList", thisPage, cat],
-        () => doSearch(cat,thisPage,search),
+        () => doSearch(cat,thisPage,search,token),
     )
     const handleDelete = async (hostId:number) => {
         try{

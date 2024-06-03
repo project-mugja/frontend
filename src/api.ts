@@ -92,9 +92,12 @@ export async function delFav(hostId:number, token:string) {
     }).then(res => res.json());
 }
 
-export async function doSearch(cat:string, pageNo:number,search:string) {
+export async function doSearch(cat:string, pageNo:number,search:string,token:string) {
     console.log("do search")
-    return fetch(`${BASE_URL}/host/category/${cat}/${pageNo}/${search}`,{credentials:"include"})
+    return fetch(`${BASE_URL}/host/category/${cat}/${pageNo}/${search}`,{
+        headers:{'Authorization': `Bearer ${token}`},
+        credentials:"include"
+    })
             .then(res => res.json()).catch(error => console.log(error));
 }
 
