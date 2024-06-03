@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useRecoilState } from "recoil"
 import {  myPageSelector } from "../atom"
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 
 const Wrapper = styled.div`
     display: flex;
