@@ -45,23 +45,27 @@ const Title = styled.div`
 
 
 function SearchList({category, search, token}:SearchPageProps){
+    const [listener, setListener] = useState(false);
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
-    const {isLoading, data, refetch} = useQuery<ISearchPage>(
-        ["searchList", thisPage, cat],
+    const {isLoading, data } = useQuery<ISearchPage>(
+        ["searchList", thisPage, cat, listener],
         () => doSearch(cat,thisPage,search,token),
     )
     const handleDelete = async (hostId:number) => {
         try{
-            delFav(hostId,token).then(()=>refetch());
+            delFav(hostId,token);
+            setListener(!listener);
         } catch (error){
             console.log("fail")
         }
     }
     const handleAdd = async (hostId:number) => {
         try{
-            addFav(hostId,token).then(()=>refetch());
+            addFav(hostId,token);
+            setListener(!listener);
+            console.log("fail")
         } catch (error){
             console.log("fail")
         }
