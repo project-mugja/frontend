@@ -14,6 +14,7 @@ function SearchPage(){
 
     const [ token, setToken ] = useRecoilState(jwtToken);
     const {jwt} = useParams();
+    console.log(token)
     useEffect(()=>{
         if(jwt){
             setToken(jwt);
