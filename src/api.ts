@@ -91,7 +91,7 @@ export async function doSearch(cat:string, pageNo:number) {
 export async function validatePassword(password:string,token:string) {
     const formData = new FormData();
     formData.append("password", password);
-    return fetch(``,{
+    return fetch(`${BASE_URL}/member/mypwdChk`,{
                 method:"POST",
                 headers:{'Authorization': `Bearer ${token}`},
                 credentials:"include",
@@ -104,7 +104,7 @@ export async function validatePassword(password:string,token:string) {
             });
 }
 export async function getMemInfo(token:string) {
-    return fetch(`${BASE_URL}/email`,{
+    return fetch(`${BASE_URL}/member/email`,{
         headers:{'Authorization': `Bearer ${token}`},
         method: "GET",
         credentials:"include"
