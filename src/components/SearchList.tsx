@@ -49,21 +49,22 @@ function SearchList({category, search, token}:SearchPageProps){
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
-    const {isLoading, data } = useQuery<ISearchPage>(
+    const {isLoading, data, refetch } = useQuery<ISearchPage>(
         ["searchList", thisPage, cat, listener],
         () => doSearch(cat,thisPage,search,token),
     )
     const handleDelete = async (hostId:number) => {
         try{
-            delFav(hostId,token).then(()=>setListener(!listener));
+            await delFav(hostId,token);
+            await refetch();
         } catch (error){
             console.log("fail")
         }
     }
     const handleAdd = async (hostId:number) => {
         try{
-            addFav(hostId,token).then(()=>setListener(!listener));
-            console.log("fail")
+            await addFav(hostId,token);
+            await refetch();
         } catch (error){
             console.log("fail")
         }
