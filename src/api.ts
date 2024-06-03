@@ -100,6 +100,7 @@ export async function validatePassword(password:string,token:string) {
             .then(res => res.json())
             .catch(error => {
                 console.log(error);
+                alert("비밀번호를 확인해주세요.");
                 return {isValid:false};
             });
 }

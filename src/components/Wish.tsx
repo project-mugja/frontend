@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { IWishProps } from "../interface";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -72,7 +71,7 @@ function Wish({wish, onClick}:IWishProps){
     const Image = wish.host.hostImgList
     const navigate = useNavigate();
     const goToHost = (hostId:number) => {
-        navigate(`/host/${hostId}`)
+        navigate(`/host/${hostId}/ `)
     }
     return(
         <Container>
