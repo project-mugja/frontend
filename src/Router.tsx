@@ -12,8 +12,14 @@ function Router() {
                 <Route path="/search/:category/:search/:jwt" element={<SearchPage/>}/>
                 <Route path="/search/:category/:search" element={<SearchPage/>}/>
                 
-                <Route path="/mypage/:jwt" element={<MyPage/>}/>
-                <Route path="/mypage" element={<MyPage/>}/>
+                <Route path="/mypage/wishlist" element={<MyPage selector="wishlist"/>}/>
+                <Route path="/mypage/wishlist/:jwt" element={<MyPage selector="wishlist"/>}/>
+
+                <Route path="/mypage/info" element={<MyPage selector="info"/>}/>
+                <Route path="/mypage/info/:jwt" element={<MyPage selector="info"/>}/>
+
+                <Route path="/mypage/booklist" element={<MyPage selector="booklist"/>}/>
+                <Route path="/mypage/booklist/:jwt" element={<MyPage selector="booklist"/>}/>
             </Routes>
         </BrowserRouter>
     )

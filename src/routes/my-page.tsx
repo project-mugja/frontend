@@ -1,16 +1,14 @@
-import { useRecoilValue } from "recoil";
 import WishList from "../components/WishList";
 import { ListPage, ListWrapper, SideBarWrapper } from "../components/components";
 import MyPageSideBar from "../components/mypage-side";
-import { myPageSelector } from "../atom";
 import MemberInfo from "../components/MemberInfo";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import BookList from "../components/BookList";
 
-function MyPage(){
-    const myPageOption = useRecoilValue(myPageSelector);
-
+interface MyPageProps{
+    selector:string;
+}
+function MyPage({selector}:MyPageProps){    
     const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
     const token = storedToken? storedToken : jwt? jwt : "";
@@ -25,9 +23,9 @@ function MyPage(){
                 <MyPageSideBar/>
             </SideBarWrapper>
             <ListWrapper className="listWrapper">
-                {myPageOption === 1? <MemberInfo token={jwt? jwt : token}/> : null}
-                {/* {myPageOption === 2? <BookList token={jwt? jwt : token}/> : null} */}
-                {myPageOption === 3? <WishList token={jwt? jwt : token}/> : null}
+                {selector === "info"? <MemberInfo token={jwt? jwt : token}/> : null}
+                {/* {selector === "booklist"? <BookList token={jwt? jwt : token}/> : null} */}
+                {selector === "wishlist"? <WishList token={jwt? jwt : token}/> : null}
             </ListWrapper>
         </ListPage>
     )

@@ -47,6 +47,7 @@ function BookList({token}:BookListProps){
         ["booklist", thisPage],
         () => getBookList(token),
     )
+    console.log(data);
     return(
         <>
             <Title>
