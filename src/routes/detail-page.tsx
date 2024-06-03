@@ -8,8 +8,6 @@ import { getHost, getReviews, getRooms } from "../api";
 import { useParams } from "react-router-dom";
 import { IHost, IReviewPage, IRoom } from "../interface";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { jwtToken } from "../atom";
 
 const RoomWrapper = styled.div`
     display: flex;
@@ -82,14 +80,14 @@ const Paging = styled.span`
 `
 function DetailPage(){
 
-    const [ token, setToken ] = useRecoilState<string>(jwtToken);
+    const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
+    const token = storedToken? storedToken : jwt? jwt : "";
     useEffect(()=>{
         if(jwt){
-            setToken(jwt);
             localStorage.setItem("token", jwt);
         }
-    },[jwt, setToken]);
+    },[jwt]);
 
     const { hostId:hId } = useParams()
     const hostId = hId? parseInt(hId) : 0;

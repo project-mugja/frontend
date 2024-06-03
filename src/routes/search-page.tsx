@@ -3,7 +3,7 @@ import SearchList from "../components/SearchList";
 import { ListPage, ListWrapper, SideBarWrapper } from "../components/components";
 import SearchPageSideBar from "../components/search-side";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { jwtToken, searchPage } from "../atom";
+import { searchPage } from "../atom";
 import { useEffect } from "react";
 
 export type SearchPageProps = {
@@ -11,16 +11,13 @@ export type SearchPageProps = {
     search:string;
 }
 function SearchPage(){
-
-    const [ token, setToken ] = useRecoilState(jwtToken);
+    const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
-    console.log(token)
     useEffect(()=>{
         if(jwt){
-            setToken(jwt);
             localStorage.setItem("token", jwt);
         }
-    },[jwt, setToken]);
+    },[jwt]);
 
     const { category, search } = useParams<SearchPageProps>();
     const setSearchPage = useSetRecoilState(searchPage);

@@ -139,7 +139,7 @@ function Hotel({data, reviews, token}:IHostProp){
                 <div>
                     <Score><Star/>{data.avgScore}</Score>
                 </div>
-                {token? 
+                {token.length > 0 ? 
                     <LikeBtn>
                         숙소 찜하기
                         <svg

@@ -1,8 +1,8 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import WishList from "../components/WishList";
 import { ListPage, ListWrapper, SideBarWrapper } from "../components/components";
 import MyPageSideBar from "../components/mypage-side";
-import { jwtToken, myPageSelector } from "../atom";
+import { myPageSelector } from "../atom";
 import MemberInfo from "../components/MemberInfo";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -11,14 +11,14 @@ import BookList from "../components/BookList";
 function MyPage(){
     const myPageOption = useRecoilValue(myPageSelector);
 
-    const [ token, setToken ] = useRecoilState(jwtToken);
+    const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
+    const token = storedToken? storedToken : jwt? jwt : "";
     useEffect(()=>{
         if(jwt){
-            setToken(jwt);
             localStorage.setItem("token", jwt);
         }
-    },[jwt, setToken]);
+    },[jwt]);
     return(
         <ListPage className="listPage">
             <SideBarWrapper>
