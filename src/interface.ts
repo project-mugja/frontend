@@ -170,14 +170,14 @@ export interface BookListProps{
     token:string;
 }
 export interface IBook{
-    bookId:number;
+    bookId?:number;
     hostId:number;
     roomId:number;
     payPrice:number;
-    checkInDate:Date;
-    checkOutDate:Date;
-    roomName:string;
-    hostName:string;
+    checkInDate?:Date;
+    checkOutDate?:Date;
+    roomName?:string;
+    hostName?:string;
 }
 export interface IBookPage{
     content:IBook[];

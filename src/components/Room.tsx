@@ -89,7 +89,7 @@ function Room(room:IRoomProps, token:string|undefined){
             reserveRoom(token,{
                 roomId:room.room.roomId,
                 hostId:room.room.host.hostId,
-                price:room.room.price
+                payPrice:room.room.price,
             })
         }
     }
