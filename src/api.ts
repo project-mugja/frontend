@@ -115,7 +115,7 @@ export async function getMemInfo(token:string) {
 export async function modifyMemInfo(password:string, token:string) {
     const formData = new FormData();
     formData.append("password",password);
-    return fetch(`${BASE_URL}/mypwdChg`,{
+    return fetch(`${BASE_URL}/member/mypwdChg`,{
                 headers:{'Authorization': `Bearer ${token}`},
                 method: "PUT",
                 body: formData,

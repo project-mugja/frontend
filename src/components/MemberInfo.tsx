@@ -96,7 +96,7 @@ interface IMemInfo{
 function MemberInfo({token}:IMemberInfoProps){
     //비밀번호 확인
     const {register, handleSubmit} = useForm<ValidateForm>();
-    const [isValid, setIsValid] = useState(true);
+    const [isValid, setIsValid] = useState(false);
     const onValid = async (data:ValidateForm) => {
         const response = await validatePassword(data.password,token);
         setIsValid(response.isValid);
