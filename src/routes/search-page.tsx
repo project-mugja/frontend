@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import SearchList from "../components/SearchList";
 import { ListPage, ListWrapper, SideBarWrapper } from "../components/components";
 import SearchPageSideBar from "../components/search-side";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { searchPage } from "../atom";
 import { useEffect } from "react";
 
@@ -11,7 +11,7 @@ export type SearchPageProps = {
     search:string;
 }
 function SearchPage(){
-    const storedToken = localStorage.getItem("token");
+    // const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
     useEffect(()=>{
         if(jwt){
