@@ -85,11 +85,10 @@ function DetailPage(){
     const [ token, setToken ] = useRecoilState<string>(jwtToken);
     const {jwt} = useParams();
     useEffect(()=>{
-        if(jwt !== "page" && jwt){
+        if(!localStorage.getItem("token") && jwt){
             setToken(jwt);
             localStorage.setItem("token", jwt);
         }
-        console.log(jwt);
     },[jwt, setToken, token]);
 
     const { hostId:hId } = useParams()

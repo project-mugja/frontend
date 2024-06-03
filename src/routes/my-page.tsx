@@ -14,11 +14,10 @@ function MyPage(){
     const [ token, setToken ] = useRecoilState(jwtToken);
     const {jwt} = useParams();
     useEffect(()=>{
-        if(jwt !== "page" && jwt){
+        if(!localStorage.getItem("token") && jwt){
             setToken(jwt);
             localStorage.setItem("token", jwt);
         }
-        console.log(jwt);
     },[jwt, setToken, token]);
 
     useEffect(()=>{

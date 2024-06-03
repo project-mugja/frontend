@@ -3,7 +3,6 @@ import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools"
 import { defaultTheme } from "./theme";
 import Header from "./components/header";
-import { useEffect } from "react";
 
 function App() {
   return (
