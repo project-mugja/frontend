@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useRecoilState } from "recoil"
 import {  myPageSelector } from "../atom"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 const Wrapper = styled.div`
     display: flex;
@@ -43,8 +43,11 @@ const MpOption = styled.div`
 
 function MyPageSideBar(){
     const [ option, setOption ] = useRecoilState(myPageSelector);
-
-    
+    const location = useLocation();
+    const pathname = location.pathname;
+    const parts = pathname.split('/');
+    const param = parts[parts.length - 1]; // 경로에서 마지막 부분을 가져옴
+    setOption(param);
     return(
         <Wrapper>
             <MpTitle>
@@ -52,7 +55,7 @@ function MyPageSideBar(){
             </MpTitle>
             <Link to={`/mypage/info`} className="clickable" onClick={()=>setOption(1)}>
                 <MpOption color={option === 1? "#1565FF" : "black"}>
-                    <span>내 정보 관리</span>
+                    <span color={option === 2? "#1565FF" : "black"}>내 정보 관리</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                         <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
                     </svg>
