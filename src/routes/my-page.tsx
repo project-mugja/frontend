@@ -14,16 +14,13 @@ function MyPage(){
     const [ token, setToken ] = useRecoilState(jwtToken);
     const {jwt} = useParams();
     useEffect(()=>{
-        if(!localStorage.getItem("token") && jwt){
-            setToken(jwt);
-            localStorage.setItem("token", jwt);
+        if(jwt){
+            if(jwt !== localStorage.getItem("token")){
+                setToken(jwt);
+                localStorage.setItem("token", jwt);
+            }
         }
     },[jwt, setToken, token]);
-
-    useEffect(()=>{
-        console.log("token : ",token);
-    },[token]);
-
     return(
         <ListPage className="listPage">
             <SideBarWrapper>
