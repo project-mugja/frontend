@@ -104,7 +104,7 @@ function SearchResult({search, token }:ISearchProps){
                                 handleAdd()
                             }
                         }} 
-                        fill={search.fav? "#ff4752" : "gray"}
+                        fill={isLiked? "#ff4752" : "gray"}
                         xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 512 512"
                         width="20px"
