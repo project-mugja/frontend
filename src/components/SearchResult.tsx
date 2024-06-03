@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IWishProps } from "../interface";
+import { ISearchProps } from "../interface";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -66,18 +66,18 @@ const Star = () => {
         </svg>
     )
 }
-function SearchResult({wish, onClick}:IWishProps){
-    const avgScore = wish.host.avgScore;
-    const Image = wish.host.hostImgList
+function SearchResult({search, onClick}:ISearchProps){
+    const avgScore = search.avgScore;
+    const Image = search.hostImgList;
     const navigate = useNavigate();
     const goToHost = (hostId:number) => {
         navigate(`/host/${hostId}`)
     }
     return(
         <Container>
-            <Img src={Image[0].ImgPath} onClick={()=>goToHost(wish.host.hostId)} className="clickable"/>
-            <InfoBox onClick={()=>goToHost(wish.host.hostId)} className="clickable">
-                <div>{wish.host.hostName}</div>
+            <Img src={Image[0].ImgPath} onClick={()=>goToHost(search.hostId)} className="clickable"/>
+            <InfoBox onClick={()=>goToHost(search.hostId)} className="clickable">
+                <div>{search.hostName}</div>
                 <div>
                     <Score><Star/>{avgScore}</Score>
                 </div>

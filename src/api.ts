@@ -92,9 +92,9 @@ export async function delFav(hostId:number, token:string) {
     }).then(res => res.json());
 }
 
-export async function doSearch(cat:string, pageNo:number) {
+export async function doSearch(cat:string, pageNo:number,search:string) {
     console.log("do search")
-    return fetch(`${BASE_URL}/host/category`,{credentials:"include"})
+    return fetch(`${BASE_URL}/host/category${cat}/${pageNo}/${search}`,{credentials:"include"})
             .then(res => res.json()).catch(error => console.log(error));
 }
 
@@ -152,7 +152,7 @@ export async function reserveRoom(token:string, book:IBook){
     const formData = new FormData();
     formData.append("hostId",book.hostId+"");
     formData.append("roomId",book.roomId+"");
-    formData.append("price",book.price+"");
+    formData.append("price",book.payPrice+"");
     return fetch(`${BASE_URL}/`,{
         headers:{'Authorization': `Bearer ${token}`},
         method: "POST",

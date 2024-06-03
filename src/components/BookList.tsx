@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { getBookList } from "../api";
 import Book from "./Book";
+import { BookListProps, IBookPage } from "../interface";
 
 const PagingBox = styled.div`
     display: flex;
@@ -38,13 +39,11 @@ const Title = styled.div`
         margin-right: 10px;
     }
 `
-interface BookListProps{
-    token:string;
-}
+
 function BookList({token}:BookListProps){
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
-    const {isLoading, data, refetch} = useQuery(
+    const {isLoading, data } = useQuery<IBookPage>(
         ["booklist", thisPage],
         () => getBookList(token),
     )
@@ -53,14 +52,13 @@ function BookList({token}:BookListProps){
             <Title>
                 <span>예약 내역</span>
             </Title>
-            <Book token={token}/>
             {isLoading? 
             <Loader/> 
             : 
             <>
-                {/* {data?.content.map(host => 
-                    <Book/>
-                )} */}
+                {data?.content.map((book) => 
+                    <Book key={book.bookId} book={book} token={token}/>
+                )}
                 <PagingBox>
                     <Paging className="clickable" onClick={pages !== 0?
                         () => {

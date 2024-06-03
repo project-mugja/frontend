@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import ReviewForm from "./ReviewForm";
+import { BookProp } from "../interface";
 
 const Container = styled.div`
     display: flex;
@@ -97,10 +98,8 @@ const MoreBox = styled.div`
         width: 8px;
     }
 `
-interface BookProp{
-    token:string
-}
-function Book({token}:BookProp){
+
+function Book({token,book}:BookProp){
     const [onMouse, setOnMouse] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const openModal = () => {

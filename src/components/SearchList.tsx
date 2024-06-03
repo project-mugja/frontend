@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Loader } from "./components";
 import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { delFav, doSearch } from "../api";
 import { favCategory } from "../atom";
-import { IWishList } from "../interface";
+import { ISearchPage } from "../interface";
 import { SearchPageProps } from "../routes/search-page";
 import SearchResult from "./SearchResult";
 
@@ -48,9 +48,9 @@ function SearchList({category, search, token}:SearchPageProps){
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
-    const {isLoading, data, refetch} = useQuery<IWishList>(
-        ["wishlist", thisPage, cat],
-        () => doSearch(cat,thisPage),
+    const {isLoading, data, refetch} = useQuery<ISearchPage>(
+        ["searchList", thisPage, cat],
+        () => doSearch(cat,thisPage,search),
     )
     const handleDelete = async (hostId:number) => {
         try{
@@ -61,8 +61,8 @@ function SearchList({category, search, token}:SearchPageProps){
         }
     }
     useEffect(()=>{
-        setCat(cat);
-    },[])
+        setCat(category);
+    },[category, setCat])
     return(
         <>
             <Title>
@@ -72,9 +72,9 @@ function SearchList({category, search, token}:SearchPageProps){
             <Loader/> 
             : 
             <>
-                {data?.content.map(host => 
-                    <SearchResult key={host.host.hostId} wish={host} onClick={() => {
-                        handleDelete(host.host.hostId);
+                {data?.content.map(search => 
+                    <SearchResult key={search.hostId} search={search} onClick={() => {
+                        handleDelete(search.hostId);
                     }}/>
                 )}
                 <PagingBox>

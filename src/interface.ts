@@ -16,6 +16,7 @@ export interface IHost {
 export interface IHostImg {
     hostImgId:number;
     ImgPath:string;
+    ImgDir?:string;
 }
 
 export interface IMapProps {
@@ -65,7 +66,7 @@ export interface IWishProps {
         wishId?:number;
         memId:number;
         host:IHost;
-    },
+    },  
     onClick:React.MouseEventHandler,
 }
 export interface IWish {
@@ -165,8 +166,69 @@ export interface IReview{
     image?:Object;
 }
 
+export interface BookListProps{
+    token:string;
+}
 export interface IBook{
+    bookId:number;
     hostId:number;
     roomId:number;
+    payPrice:number;
+    checkInDate:Date;
+    checkOutDate:Date;
+    roomName:string;
+    hostName:string;
+}
+export interface IBookPage{
+    content:IBook[];
+    pageable: IPageable;
+    totalPages:number;
+    totalElements:number;
+    last:boolean;
+    size:number;
+    number:number;
+    sort:{
+        sorted:boolean;
+        unsorted:boolean;
+        empty:boolean;
+    };
+    first:boolean;
+    numberOfElements:number;
+    empty:boolean
+}
+export interface BookProp{
+    token:string;
+    book:IBook;
+}
+
+export interface ISearch{
+    hostId:number;
+    avgScore:number;
+    hostName:string;
+    hostAddress:string;
+    hostImgList:IHostImg[];
+    category:string;
     price:number;
+    fav:boolean;
+}
+export interface ISearchPage{
+    content:ISearch[];
+    pageable: IPageable;
+    totalPages:number;
+    totalElements:number;
+    last:boolean;
+    size:number;
+    number:number;
+    sort:{
+        sorted:boolean;
+        unsorted:boolean;
+        empty:boolean;
+    };
+    first:boolean;
+    numberOfElements:number;
+    empty:boolean
+}
+export interface ISearchProps {
+    search:ISearch;
+    onClick:React.MouseEventHandler,
 }
