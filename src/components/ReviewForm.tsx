@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { IReviewForm, IReviewFormProps } from "../interface";
 import { useMutation } from "react-query";
 import { writeReview } from "../api";
-import { useRecoilValue } from "recoil";
+// import { useRecoilValue } from "recoil";
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -173,7 +173,7 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
         }
     })
     const imgRef:any = useRef(null);
-    const [imgPath, setImgPath] = useState("");
+    // const [imgPath, setImgPath] = useState("");
     const [isUploaded, setIsUploaded] = useState(false);
     const { register,handleSubmit,setValue } = useForm<IReviewForm>();
     const [score, setScore] = useState(10);
@@ -183,20 +183,20 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
             imgRef.current.click();
         }
     }
-    const onUpload = () => {
-        if(imgRef.current && imgRef.current.files){
-            const img = imgRef.current.files[0];
-            setValue("image",img);
+    // const onUpload = () => {
+    //     if(imgRef.current && imgRef.current.files){
+    //         const img = imgRef.current.files[0];
+    //         setValue("image",img);
 
-            //미리보기
-            const reader = new FileReader();
-            reader.readAsDataURL(img);
-            reader.onload = () => {
-                setImgPath(reader.result as string);
-            }
-        }
-        setIsUploaded(true)
-    }
+    //         //미리보기
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(img);
+    //         reader.onload = () => {
+    //             setImgPath(reader.result as string);
+    //         }
+    //     }
+    //     setIsUploaded(true)
+    // }
     const onValid = (data:IReviewForm) => {
         mutate(data);
     }
@@ -240,7 +240,7 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
                 <ContentBox {...register("content",{maxLength:100})}>
                     {}
                 </ContentBox>
-                <ImgLine>
+                {/* <ImgLine>
                     {isUploaded? 
                         <>
                             <img src={imgPath} alt=""/>
@@ -254,7 +254,7 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
                             <Plus/>
                         </button>
                     }
-                </ImgLine>
+                </ImgLine> */}
                 <HidenInput 
                     value={memId}
                     {...register("memId", {required:true})
@@ -267,13 +267,13 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
                     defaultValue={score}
                     {...register("score", {required:true})}
                 />
-                <HidenInput
+                {/* <HidenInput
                     {...register("image")}
                     onChange={onUpload}
                     type="file"
                     accept=".png, .jpeg, .jpg"
                     ref={imgRef}
-                />
+                /> */}
             </FormContainer>
         </ModalBackground>
     )
