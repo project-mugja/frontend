@@ -73,7 +73,7 @@ function SearchList({category, search, token}:SearchPageProps){
             : 
             <>
                 {data?.content.map(search => 
-                    <SearchResult key={search.hostId} search={search} onClick={() => {
+                    <SearchResult key={search.hostId} search={search} token={token} onClick={() => {
                         handleDelete(search.hostId);
                     }}/>
                 )}

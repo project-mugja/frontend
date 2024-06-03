@@ -231,4 +231,5 @@ export interface ISearchPage{
 export interface ISearchProps {
     search:ISearch;
     onClick:React.MouseEventHandler,
+    token:string
 }
