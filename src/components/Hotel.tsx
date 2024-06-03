@@ -128,12 +128,12 @@ function Hotel({data, reviews}:IHostProp){
         }
     },[])
     const onFavClick = () => {
-        console.log("on fav click : ",token)
         const storedToken = localStorage.getItem("token");
         isFav? 
             delFav(data.hostId,storedToken? storedToken : "").then(()=>setIsLiked(false)) 
             : 
             addFav(data.hostId,storedToken? storedToken : "").then(()=>setIsLiked(true));
+        console.log("data : ",data)
     }
     return(
         <HotelContainer>

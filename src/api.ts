@@ -77,7 +77,7 @@ export async function addFav(hostId:number, token:string) {
         method:"POST",
         credentials:"include",
         cache: 'no-store'
-    })
+    }).then(res => res.json());
 }
 
 export async function delFav(hostId:number, token:string) {
@@ -87,7 +87,7 @@ export async function delFav(hostId:number, token:string) {
         method:"DELETE",
         credentials:"include"
         ,cache: 'no-store'
-    })
+    }).then(res => res.json());
 }
 
 export async function doSearch(cat:string, pageNo:number) {
