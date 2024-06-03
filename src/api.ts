@@ -1,4 +1,5 @@
 
+import { constSelector } from "recoil";
 import { IBook, IReviewForm } from "./interface";
 
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}/api`;
@@ -63,6 +64,7 @@ export async function getFavs(pageNo:number, token:string) {
 
 export async function isFavFn(hostId:number, token:string) {
     console.log("is fav")
+    console.log("int api : ",token)
     return fetch(`${BASE_URL}/mypage/wish/${hostId}/`,{
         method:"GET",
         headers:{'Authorization': `Bearer ${token}`},
