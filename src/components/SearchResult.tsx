@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { ISearchProps } from "../interface";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { addFav, delFav } from "../api";
 
 const Container = styled.div`
     display: flex;
@@ -66,12 +68,21 @@ const Star = () => {
         </svg>
     )
 }
-function SearchResult({search, onClick, token}:ISearchProps){
+function SearchResult({search, token }:ISearchProps){
+    const [isLiked, setIsLiked] = useState(search.fav)
     const avgScore = search.avgScore;
     const Image = search.hostImgList;
     const navigate = useNavigate();
     const goToHost = (hostId:number) => {
         navigate(`/host/${hostId}`)
+    }
+    const handleDelete = async () => {
+        await delFav(search.hostId,token);
+        setIsLiked(false);
+    }
+    const handleAdd = async () => {
+        await addFav(search.hostId,token);
+        setIsLiked(true);
     }
     return(
         <Container>
@@ -86,7 +97,13 @@ function SearchResult({search, onClick, token}:ISearchProps){
                 <LikeBox>
                     <svg
                         className="clickable"
-                        onClick={onClick} 
+                        onClick={()=>{
+                            if(isLiked){
+                                handleDelete()
+                            }else{
+                                handleAdd()
+                            }
+                        }} 
                         fill={search.fav? "#ff4752" : "gray"}
                         xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 512 512"

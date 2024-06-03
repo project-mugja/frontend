@@ -3,7 +3,7 @@ import { Loader } from "./components";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { addFav, delFav, doSearch } from "../api";
+import { doSearch } from "../api";
 import { favCategory } from "../atom";
 import { ISearchPage } from "../interface";
 import { SearchPageProps } from "../routes/search-page";
@@ -45,31 +45,15 @@ const Title = styled.div`
 
 
 function SearchList({category, search, token}:SearchPageProps){
-    const [listener] = useState(false);
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
-    const {isLoading, data, refetch } = useQuery<ISearchPage>(
-        ["searchList", thisPage, cat, listener],
+    const {isLoading, data } = useQuery<ISearchPage>(
+        ["searchList", thisPage, cat],
         () => doSearch(cat,thisPage,search,token),
         {onSuccess:()=>console.log("refetch")}
     )
-    const handleDelete = async (hostId:number) => {
-        try{
-            await delFav(hostId,token);
-            await refetch();
-        } catch (error){
-            console.log("fail")
-        }
-    }
-    const handleAdd = async (hostId:number) => {
-        try{
-            await addFav(hostId,token);
-            await refetch();
-        } catch (error){
-            console.log("fail")
-        }
-    }
+
     useEffect(()=>{
         setCat(category);
     },[category, setCat])
@@ -83,14 +67,12 @@ function SearchList({category, search, token}:SearchPageProps){
             <Loader/> 
             : 
             <>
-                {data?.content.map(search => 
-                    <SearchResult key={search.hostId} search={search} token={token} onClick={() => {
-                        if(search.fav){
-                            handleDelete(search.hostId);
-                        }else{
-                            handleAdd(search.hostId);
-                        }
-                    }}/>
+                {data?.content.map(async search => 
+                    <SearchResult 
+                        key={search.hostId} 
+                        search={search} 
+                        token={token}
+                    />
                 )}
                 <PagingBox>
                     <Paging className="clickable" onClick={pages !== 0?
