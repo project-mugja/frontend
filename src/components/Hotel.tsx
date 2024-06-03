@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { IHost, IHostProp, IMapProps, IReview } from "../interface";
+import { IHostProp, IMapProps} from "../interface";
 import MapBox from "./MapBox";
 import SmallReview from "./SmallReview";
 import { useQuery } from "react-query";
@@ -128,8 +128,11 @@ function Hotel({data, reviews}:IHostProp){
         }
     },[])
     const onFavClick = () => {
-        console.log("on fav click : ",token)
-        isFav? delFav(data.hostId,token).then(()=>setIsLiked(false)) : addFav(data.hostId,token).then(()=>setIsLiked(true));
+        const storedToken = localStorage.getItem("token");
+        isFav? 
+            delFav(data.hostId,storedToken? storedToken : token).then(()=>setIsLiked(false)) 
+            : 
+            addFav(data.hostId,storedToken? storedToken : token).then(()=>setIsLiked(true));
     }
     return(
         <HotelContainer>
