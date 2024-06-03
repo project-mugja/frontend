@@ -174,7 +174,7 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
     })
     const imgRef:any = useRef(null);
     // const [imgPath, setImgPath] = useState("");
-    const [isUploaded, setIsUploaded] = useState(false);
+    // const [isUploaded, setIsUploaded] = useState(false);
     const { register,handleSubmit,setValue } = useForm<IReviewForm>();
     const [score, setScore] = useState(10);
     const onFile = (event:React.MouseEvent<HTMLButtonElement>) => {
