@@ -85,7 +85,7 @@ function DetailPage(){
     const [ token, setToken ] = useRecoilState<string>(jwtToken);
     const {jwt} = useParams();
     useEffect(()=>{
-        setToken(jwt? jwt : token.length>0 ? token : "");
+        setToken(token === "page" ? token : jwt? jwt : "");
         console.log(jwt);
         localStorage.setItem("token", jwt? jwt : "");
     },[jwt, setToken, token]);
