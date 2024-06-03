@@ -3,7 +3,7 @@ import { Loader } from "./components";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { delFav, doSearch } from "../api";
+import { addFav, delFav, doSearch } from "../api";
 import { favCategory } from "../atom";
 import { ISearchPage } from "../interface";
 import { SearchPageProps } from "../routes/search-page";
@@ -60,6 +60,14 @@ function SearchList({category, search, token}:SearchPageProps){
             console.log("fail")
         }
     }
+    const handleAdd = async (hostId:number) => {
+        try{
+            await addFav(hostId,token);
+            refetch();
+        } catch (error){
+            console.log("fail")
+        }
+    }
     useEffect(()=>{
         setCat(category);
     },[category, setCat])
@@ -75,7 +83,11 @@ function SearchList({category, search, token}:SearchPageProps){
             <>
                 {data?.content.map(search => 
                     <SearchResult key={search.hostId} search={search} token={token} onClick={() => {
-                        handleDelete(search.hostId);
+                        if(search.fav){
+                            handleDelete(search.hostId);
+                        }else{
+                            handleAdd(search.hostId);
+                        }
                     }}/>
                 )}
                 <PagingBox>
