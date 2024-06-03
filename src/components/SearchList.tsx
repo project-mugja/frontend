@@ -52,11 +52,12 @@ function SearchList({category, search, token}:SearchPageProps){
     const {isLoading, data, refetch } = useQuery<ISearchPage>(
         ["searchList", thisPage, cat, listener],
         () => doSearch(cat,thisPage,search,token),
+        {onSuccess:()=>console.log("refetch")}
     )
     const handleDelete = async (hostId:number) => {
         try{
             await delFav(hostId,token);
-            await refetch();
+            refetch();
         } catch (error){
             console.log("fail")
         }
@@ -64,7 +65,7 @@ function SearchList({category, search, token}:SearchPageProps){
     const handleAdd = async (hostId:number) => {
         try{
             await addFav(hostId,token);
-            await refetch();
+            refetch();
         } catch (error){
             console.log("fail")
         }
