@@ -94,7 +94,7 @@ export async function delFav(hostId:number, token:string) {
 
 export async function doSearch(cat:string, pageNo:number,search:string) {
     console.log("do search")
-    return fetch(`${BASE_URL}/host/category${cat}/${pageNo}/${search}`,{credentials:"include"})
+    return fetch(`${BASE_URL}/host/category/${cat}/${pageNo}/${search}`,{credentials:"include"})
             .then(res => res.json()).catch(error => console.log(error));
 }
 
