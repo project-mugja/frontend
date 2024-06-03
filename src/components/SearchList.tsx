@@ -66,7 +66,7 @@ function SearchList({category, search, token}:SearchPageProps){
     return(
         <>
             <Title>
-                {isLoading? <Loader/> : <span>{data?.totalElements}</span>}
+                {isLoading? <Loader/> : <span>검색 결과 : {data?.totalElements} 개</span>}
             </Title>
             {isLoading? 
             <Loader/> 
