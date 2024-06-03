@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { styled } from "styled-components";
 import { Btn } from "./components";
 import { useState } from "react";
-import { modifyMemInfo, validatePassword } from "../api";
-import { useMutation } from "react-query";
+import { getMemInfo, modifyMemInfo, validatePassword } from "../api";
+import { useMutation, useQuery } from "react-query";
 
 const Title = styled.div`
     margin-top: 10px;
@@ -29,10 +29,10 @@ const Container = styled.form`
     }
     &>div{
         width: 100%;
+        margin-top: 3vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 8vh 0 20px 0;
         span{
             width: 80%;
             display: block;
@@ -54,6 +54,7 @@ const SubmitBtn = styled(Btn)`
     height: 30px;
     border: none;
     border-radius: 8px;
+    margin-top: 30px;
 `
 const Input = styled.input`
     background-color: ${prop => prop.theme.innerBlue};
@@ -75,6 +76,7 @@ const Input2 = styled.input`
     border: none;
     border-radius: 8px;
     padding: 0 10px 0 10px;
+    text-align: center;
     &:focus{
         outline-color: ${props => props.theme.btnColor};
     }
@@ -86,18 +88,24 @@ interface IMemberInfoProps{
     token:string
 }
 interface ModifyForm{
-
+    password:string;
+}
+interface IMemInfo{
+    email:string
 }
 function MemberInfo({token}:IMemberInfoProps){
+    //비밀번호 확인
     const {register, handleSubmit} = useForm<ValidateForm>();
     const [isValid, setIsValid] = useState(true);
     const onValid = async (data:ValidateForm) => {
         const response = await validatePassword(data.password,token);
-        typeof response === "boolean" ? setIsValid(true) : setIsValid(false);
+        setIsValid(response.isValid);
     }
 
-    const { register:modify, handleSubmit:handleModify } = useForm();
-    const { mutate } = useMutation((data:ModifyForm) => modifyMemInfo(data, token),{
+    //회원정보수정
+    const { register:modify, handleSubmit:handleModify } = useForm<ModifyForm>();
+    const { data } = useQuery<IMemInfo>("memInfo", ()=>getMemInfo(token))
+    const { mutate } = useMutation((data:ModifyForm) => modifyMemInfo(data.password, token),{
         onSuccess:() => {
             alert("수정 완료");
         },
@@ -117,12 +125,14 @@ function MemberInfo({token}:IMemberInfoProps){
             <Container method="put" onSubmit={handleModify(onValidMod)}>
                 <div>
                     <div>
-                        <span>닉네임</span>
-                        <Input2 type="text" {...modify}/>
+                        <span>이메일</span>
+                        <Input2 type="text" disabled value={data?.email}/>
                     </div>
+                </div>
+                <div>
                     <div>
-                        <span>닉네임</span>
-                        <Input2 type="text" {...modify}/>
+                        <span>비밀번호</span>
+                        <Input2 type="password" {...modify("password")} placeholder="********"/>
                     </div>
                 </div>
 

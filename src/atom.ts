@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export const myPageSelector = atom({
     key: "option",
-    default: 1
+    default: 2
 })
 export const login = atom({
     key:"isLogin",

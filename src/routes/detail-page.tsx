@@ -64,12 +64,6 @@ const PagingBox = styled.div`
     align-items: center;
     width: 100%;
 ` 
-interface IPage{
-    index:number;
-    page:number;
-    onClick:React.MouseEventHandler;
-    children?:React.ReactNode;
-}
 const Paging = styled.span`
     margin: 30px 20px 20px 20px;
     height: 20px;

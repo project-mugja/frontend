@@ -69,7 +69,6 @@ const Star = () => {
 }
 function Wish({wish, onClick}:IWishProps){
     const avgScore = wish.host.avgScore;
-    const [isWish,setIsWish] = useState(true);
     const Image = wish.host.hostImgList
     const navigate = useNavigate();
     const goToHost = (hostId:number) => {

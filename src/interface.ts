@@ -41,6 +41,8 @@ export interface ILocationData {
 export interface IReviewFormProps {
     memId:number,
     hostId:number,
+    showModal:boolean,
+    closeModal:React.MouseEventHandler
 }
 
 export interface IReviewForm{

@@ -69,7 +69,7 @@ export async function addFav(hostId:number, token:string) {
     return fetch(`${BASE_URL}/mypage/wish/${hostId}`,{
         headers:{'Authorization': `Bearer ${token}`},
         method:"POST",
-        credentials:"include"
+        credentials:"include" 
     })
 }
 
@@ -89,18 +89,45 @@ export async function doSearch(cat:string, pageNo:number) {
 }
 
 export async function validatePassword(password:string,token:string) {
+    const formData = new FormData();
+    formData.append("password", password);
     return fetch(``,{
                 headers:{'Authorization': `Bearer ${token}`},
+                credentials:"include",
+                body:formData
+            })
+            .then(res => res.json())
+            .catch(error => {
+                console.log(error);
+                return {isValid:false};
+            });
+}
+export async function getMemInfo(token:string) {
+    return fetch(`${BASE_URL}/email`,{
+        headers:{'Authorization': `Bearer ${token}`},
+        method: "GET",
+        credentials:"include"
+    })
+    .then(res => res.json()).catch(error => console.log(error));
+}
+
+export async function modifyMemInfo(password:string, token:string) {
+    const formData = new FormData();
+    formData.append("password",password);
+    return fetch(`${BASE_URL}/mypwdChg`,{
+                headers:{'Authorization': `Bearer ${token}`},
+                method: "PUT",
+                body: formData,
                 credentials:"include"
             })
             .then(res => res.json()).catch(error => console.log(error));
 }
 
-export async function modifyMemInfo(params:any, token:string) {
+export async function getBookList(token:string) {
     return fetch(`${BASE_URL}/`,{
-                headers:{'Authorization': `Bearer ${token}`},
-                method: "PUT",
-                credentials:"include"
-            })
-            .then(res => res.json()).catch(error => console.log(error));
+        headers:{'Authorization': `Bearer ${token}`},
+        method: "GET",
+        credentials:"include"
+    })
+    .then(res => res.json()).catch(error => console.log(error));
 }

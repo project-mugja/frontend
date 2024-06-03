@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
-import { Loader } from "./components";
-import { useQuery } from "react-query";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
-import { delFav, doSearch } from "../api";
-import { favCategory, jwtToken } from "../atom";
-import { IWishList } from "../interface";
-import { SearchPageProps } from "../routes/search-page";
-import SearchResult from "./SearchResult";
+import { Loader } from "./components";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { getBookList } from "../api";
+import Book from "./Book";
 
 const PagingBox = styled.div`
     display: flex;
@@ -42,42 +38,29 @@ const Title = styled.div`
         margin-right: 10px;
     }
 `
-
-
-function SearchList({category, search}:SearchPageProps){
-    const token = useRecoilValue(jwtToken);
-    const [ cat, setCat] = useRecoilState(favCategory);
+interface BookListProps{
+    token:string;
+}
+function BookList({token}:BookListProps){
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
-    const {isLoading, data, refetch} = useQuery<IWishList>(
-        ["wishlist", thisPage, cat],
-        () => doSearch(cat,thisPage),
+    const {isLoading, data, refetch} = useQuery(
+        ["booklist", thisPage],
+        () => getBookList(token),
     )
-    const handleDelete = async (hostId:number) => {
-        try{
-            await delFav(hostId,token);
-            refetch();
-        } catch (error){
-            console.log("fail")
-        }
-    }
-    useEffect(()=>{
-        setCat(cat);
-    },[])
     return(
         <>
             <Title>
-                {isLoading? <Loader/> : <span>{data?.totalElements}</span>}
+                <span>예약 내역</span>
             </Title>
+            <Book/>
             {isLoading? 
             <Loader/> 
             : 
             <>
-                {data?.content.map(host => 
-                    <SearchResult key={host.host.hostId} wish={host} onClick={() => {
-                        handleDelete(host.host.hostId);
-                    }}/>
-                )}
+                {/* {data?.content.map(host => 
+                    <Book/>
+                )} */}
                 <PagingBox>
                     <Paging className="clickable" onClick={pages !== 0?
                         () => {
@@ -124,4 +107,4 @@ function SearchList({category, search}:SearchPageProps){
     )
 }
 
-export default SearchList;
+export default BookList;

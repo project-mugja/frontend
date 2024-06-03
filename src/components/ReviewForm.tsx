@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Btn } from "./components";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IReviewForm, IReviewFormProps } from "../interface";
 import { useMutation } from "react-query";
@@ -8,10 +8,20 @@ import { writeReview } from "../api";
 import { useRecoilValue } from "recoil";
 import { jwtToken } from "../atom";
 
-
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
 
 const FormContainer = styled.form`
-
     display: grid;
     grid: 3fr 7fr 70px/1fr;
     aspect-ratio: 13/9; 
@@ -20,7 +30,6 @@ const FormContainer = styled.form`
     align-items: center;
     background-color: white;
     border-radius: 10px;
-    border: 1px solid black;
     &>div{
         display: flex;
         justify-content: center;
@@ -145,7 +154,18 @@ const X = ({onClick}:IX) => {
 const HidenInput = styled.input`
     display: none;
 `
-function ReviewForm({memId,hostId}:IReviewFormProps){
+const CloseModalBtn = styled.button`
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border: none;
+    background-color: transparent;
+    svg{
+        fill: white;
+        width: 20px;
+    }
+`
+function ReviewForm({memId,hostId,showModal,closeModal}:IReviewFormProps){
     const token = useRecoilValue(jwtToken);
     const {
         mutate
@@ -182,69 +202,82 @@ function ReviewForm({memId,hostId}:IReviewFormProps){
     const onValid = (data:IReviewForm) => {
         mutate(data);
     }
+    if(!showModal) return null;
     return(
-        <FormContainer action={`http://localhost:8090/host/${hostId}/`} method="post" onSubmit={handleSubmit(onValid)}>
-            <div>
-                <TitleLine>
-                    <span>{"호텔이름1"}</span>
-                    <span>{"2022년 07월 22일"}</span>
-                    <ScoreLine>
-                        {new Array(score).fill(true).map((i,index) =>
-                            <Star 
-                                onClick={()=>setScore(index+1)}
-                                key={index} 
-                                color={"#FFD600"} 
-                            />)
-                        }
-                        {new Array(10-score).fill(false).map((i,index) =>
-                            <Star 
-                                onClick={()=>setScore(score+index+1)}
-                                key={index} 
-                                color={"#D9D9D9"} 
-                            />)
-                        }
-                    </ScoreLine>
-                </TitleLine>
-                <SubmitBtn onClick={() => setValue("score",score)}>글쓰기</SubmitBtn>
-            </div>
-            <ContentBox {...register("content",{maxLength:100})}>
-                {}
-            </ContentBox>
-            <ImgLine>
-                {isUploaded? 
-                    <>
-                        <img src={imgPath} alt=""/>
-                        <X onClick={()=>{
-                            setValue("image",undefined);
-                            setIsUploaded(false);
-                        }}/>
-                    </>
-                    :
-                    <button onClick={onFile}>
-                        <Plus/>
-                    </button>
-                }
-            </ImgLine>
-            <HidenInput 
-                value={memId}
-                {...register("memId", {required:true})
-            }/>
-            <HidenInput
-                value={hostId}
-                {...register("hostId", {required:true})}
-            />
-            <HidenInput
-                defaultValue={score}
-                {...register("score", {required:true})}
-            />
-            <HidenInput
-                {...register("image")}
-                onChange={onUpload}
-                type="file"
-                accept=".png, .jpeg, .jpg"
-                ref={imgRef}
-            />
-        </FormContainer>
+        <ModalBackground>
+            <CloseModalBtn onClick={closeModal} className="clickable">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                </svg>
+            </CloseModalBtn>
+            <FormContainer action={`http://localhost:8090/host/${hostId}/`} method="post" onSubmit={handleSubmit(onValid)}>
+                <div>
+                    <TitleLine>
+                        <span>{"호텔이름1"}</span>
+                        <span>{"2022년 07월 22일"}</span>
+                        <ScoreLine>
+                            {new Array(score).fill(true).map((i,index) =>
+                                <Star 
+                                    onClick={()=>setScore(index+1)}
+                                    key={index} 
+                                    color={"#FFD600"} 
+                                />)
+                            }
+                            {new Array(10-score).fill(false).map((i,index) =>
+                                <Star 
+                                    onClick={()=>setScore(score+index+1)}
+                                    key={index} 
+                                    color={"#D9D9D9"} 
+                                />)
+                            }
+                        </ScoreLine>
+                    </TitleLine>
+                    <SubmitBtn onClick={(event) => {
+                        setValue("score",score);
+                        closeModal(event)
+                    }}>
+                        글쓰기
+                    </SubmitBtn>
+                </div>
+                <ContentBox {...register("content",{maxLength:100})}>
+                    {}
+                </ContentBox>
+                <ImgLine>
+                    {isUploaded? 
+                        <>
+                            <img src={imgPath} alt=""/>
+                            <X onClick={()=>{
+                                setValue("image",undefined);
+                                setIsUploaded(false);
+                            }}/>
+                        </>
+                        :
+                        <button onClick={onFile}>
+                            <Plus/>
+                        </button>
+                    }
+                </ImgLine>
+                <HidenInput 
+                    value={memId}
+                    {...register("memId", {required:true})
+                }/>
+                <HidenInput
+                    value={hostId}
+                    {...register("hostId", {required:true})}
+                />
+                <HidenInput
+                    defaultValue={score}
+                    {...register("score", {required:true})}
+                />
+                <HidenInput
+                    {...register("image")}
+                    onChange={onUpload}
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                    ref={imgRef}
+                />
+            </FormContainer>
+        </ModalBackground>
     )
 }
 
