@@ -53,10 +53,10 @@ function WishList({token}:WishListProps){
         try{
             console.log(token)
             await delFav(hostId,token);
-            refetch();
         } catch (error){
             console.log("fail")
         }
+        refetch();
     }
     return(
         <>
