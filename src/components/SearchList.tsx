@@ -57,7 +57,7 @@ function SearchList({category, search, token}:SearchPageProps){
     const handleDelete = async (hostId:number) => {
         try{
             await delFav(hostId,token);
-            refetch();
+            await refetch();
         } catch (error){
             console.log("fail")
         }
@@ -65,7 +65,7 @@ function SearchList({category, search, token}:SearchPageProps){
     const handleAdd = async (hostId:number) => {
         try{
             await addFav(hostId,token);
-            refetch();
+            await refetch();
         } catch (error){
             console.log("fail")
         }
