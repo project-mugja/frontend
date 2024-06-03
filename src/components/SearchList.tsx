@@ -45,7 +45,7 @@ const Title = styled.div`
 
 
 function SearchList({category, search, token}:SearchPageProps){
-    const [listener, setListener] = useState(false);
+    const [listener] = useState(false);
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
