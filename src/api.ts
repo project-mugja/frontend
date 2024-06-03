@@ -19,7 +19,8 @@ export async function writeReview(hostId:number,data:IReviewForm,token:string) {
         headers:{'Authorization': `Bearer ${token}`},
         method:"POST",
         body: formData,
-        credentials:"include"
+        credentials:"include",
+        cache: 'no-store'
     })
     if(!response.ok){
         throw new Error("Fail")
@@ -31,7 +32,8 @@ export async function getHost(hostId:number,token:string){
     console.log("get Host")
     return fetch(`${BASE_URL}/host/${hostId}`,{
         headers:{'Authorization': `Bearer ${token}`},
-        credentials:"include"
+        credentials:"include",
+        cache: 'no-store'
     })
             .then(response => response.json()).catch(error => console.log(error));
 }
@@ -53,7 +55,9 @@ export async function getFavs(pageNo:number, token:string) {
     console.log(token);
     return fetch(`${BASE_URL}/mypage/wish/${pageNo}`,{
         headers:{'Authorization': `Bearer ${token}`},
-        credentials:"include"})
+        credentials:"include",
+        cache: 'no-store'
+    })
         .then(res => res.json()).catch(error => console.log(error));
 }
 
@@ -61,7 +65,9 @@ export async function isFavFn(hostId:number, token:string) {
     console.log("is fav")
     return fetch(`${BASE_URL}/mypage/wish/${hostId}/`,{
         headers:{'Authorization': `Bearer ${token}`},
-        credentials:"include"})
+        credentials:"include",
+        cache: 'no-store'
+    })
         .then(res => res.json()).catch(error => console.log(error));
 }
 export async function addFav(hostId:number, token:string) {
@@ -69,7 +75,8 @@ export async function addFav(hostId:number, token:string) {
     return fetch(`${BASE_URL}/mypage/wish/${hostId}`,{
         headers:{'Authorization': `Bearer ${token}`},
         method:"POST",
-        credentials:"include" 
+        credentials:"include",
+        cache: 'no-store'
     })
 }
 
@@ -79,6 +86,7 @@ export async function delFav(hostId:number, token:string) {
         headers:{'Authorization': `Bearer ${token}`},
         method:"DELETE",
         credentials:"include"
+        ,cache: 'no-store'
     })
 }
 
@@ -95,7 +103,8 @@ export async function validatePassword(password:string,token:string) {
                 method:"POST",
                 headers:{'Authorization': `Bearer ${token}`},
                 credentials:"include",
-                body:formData
+                body:formData,
+                cache: 'no-store'
             })
             .then(res => res.json())
             .catch(error => {
@@ -108,7 +117,8 @@ export async function getMemInfo(token:string) {
     return fetch(`${BASE_URL}/member/email`,{
         headers:{'Authorization': `Bearer ${token}`},
         method: "GET",
-        credentials:"include"
+        credentials:"include",
+        cache: 'no-store'
     })
     .then(res => res.json()).catch(error => console.log(error));
 }
@@ -120,7 +130,8 @@ export async function modifyMemInfo(password:string, token:string) {
                 headers:{'Authorization': `Bearer ${token}`},
                 method: "PUT",
                 body: formData,
-                credentials:"include"
+                credentials:"include",
+                cache: 'no-store'
             })
             .then(res => res.json()).catch(error => console.log(error));
 }
@@ -129,7 +140,8 @@ export async function getBookList(token:string) {
     return fetch(`${BASE_URL}/`,{
         headers:{'Authorization': `Bearer ${token}`},
         method: "GET",
-        credentials:"include"
+        credentials:"include",
+        cache: 'no-store'
     })
     .then(res => res.json()).catch(error => console.log(error));
 }
@@ -142,7 +154,8 @@ export async function reserveRoom(token:string, book:IBook){
     return fetch(`${BASE_URL}/`,{
         headers:{'Authorization': `Bearer ${token}`},
         method: "POST",
-        credentials:"include"
+        credentials:"include",
+        cache: 'no-store'
     })
     .then(res => res.json()).catch(error => console.log(error));
 }
