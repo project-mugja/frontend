@@ -71,7 +71,7 @@ function Wish({wish, onClick}:IWishProps){
     const Image = wish.host.hostImgList
     const navigate = useNavigate();
     const goToHost = (hostId:number) => {
-        navigate(`/host/${hostId}/ `)
+        navigate(`/host/${hostId}/page `)
     }
     return(
         <Container>
