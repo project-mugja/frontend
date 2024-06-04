@@ -5,6 +5,7 @@ import MemberInfo from "../components/MemberInfo";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { goToLogin } from "../util";
+import BookList from "../components/BookList";
 
 interface MyPageProps{
     selector:string;
@@ -30,7 +31,7 @@ function MyPage({selector}:MyPageProps){
             </SideBarWrapper>
             <ListWrapper className="listWrapper">
                 {selector === "info"? <MemberInfo token={jwt? jwt : token}/> : null}
-                {/* {selector === "booklist"? <BookList token={jwt? jwt : token}/> : null} */}
+                {selector === "booklist"? <BookList token={jwt? jwt : token}/> : null}
                 {selector === "wishlist"? <WishList token={jwt? jwt : token}/> : null}
             </ListWrapper>
         </ListPage>

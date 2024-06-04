@@ -46,7 +46,7 @@ function MyPageSideBar(){
     const location = useLocation();
     const pathname = location.pathname;
     const parts = pathname.split('/');
-    const param = parts[parts.length - 1]; // 경로에서 마지막 부분을 가져옴
+    const param = parts[3]; // 경로에서 마지막 부분을 가져옴
     if(param === "info"){
         setOption(1);
     }else if(param === "booklist"){
