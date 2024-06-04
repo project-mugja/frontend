@@ -41,15 +41,18 @@ function Header(){
         //로그인 페이지로 이동
         window.location.href = `${process.env.REACT_APP_SERVER_API}/mugja/login`
     }
+    const onClickLogo = () => {
+        window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/main`)
+    }
     return(
         <Wrapper>
             <Container>
-                <Logo className="clickable" src={logo}/>
+                <Logo className="clickable" src={logo} onClick={onClickLogo}/>
                 <Login  className="clickable">
                     {isLogin? 
                     <div onClick={onClick}>마이페이지</div> 
                     : 
-                    <Link style={{color:"black"}} to={`/mypage/info`}>
+                    <Link style={{color:"black"}} to={`/mypage/wishlist`}>
                         <div >로그인</div>
                     </Link>
                     }

@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { goToLogin } from "../util";
 import BookList from "../components/BookList";
+import { useSetRecoilState } from "recoil";
+import { login } from "../atom";
 
 interface MyPageProps{
     selector:string;
@@ -24,6 +26,10 @@ function MyPage({selector}:MyPageProps){
             localStorage.setItem("token", jwt);
         }
     },[jwt]);
+    const setIsLogin = useSetRecoilState(login);
+    useEffect(()=>{
+        token.length > 0 ? setIsLogin(true) : setIsLogin(false);
+    },[setIsLogin, token.length])
     return(
         <ListPage className="listPage">
             <SideBarWrapper>

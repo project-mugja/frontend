@@ -8,6 +8,8 @@ import { getHost, getReviews, getRooms } from "../api";
 import { useParams } from "react-router-dom";
 import { IHost, IReviewPage, IRoom } from "../interface";
 import { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { login } from "../atom";
 
 const RoomWrapper = styled.div`
     display: flex;
@@ -88,6 +90,10 @@ function DetailPage(){
             localStorage.setItem("token", jwt);
         }
     },[jwt]);
+    const setIsLogin = useSetRecoilState(login);
+    useEffect(()=>{
+        token.length > 0 ? setIsLogin(true) : setIsLogin(false);
+    },[setIsLogin, token.length])
 
     const { hostId:hId } = useParams()
     const hostId = hId? parseInt(hId) : 0;

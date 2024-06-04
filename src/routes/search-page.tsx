@@ -4,6 +4,8 @@ import { ListPage, ListWrapper, SideBarWrapper } from "../components/components"
 import SearchPageSideBar from "../components/search-side";
 import { useEffect } from "react";
 import { SearchPageProps } from "../interface";
+import { useSetRecoilState } from "recoil";
+import { login } from "../atom";
 
 
 function SearchPage(){
@@ -15,7 +17,10 @@ function SearchPage(){
             localStorage.setItem("token", jwt);
         }
     },[jwt]);
-
+    const setIsLogin = useSetRecoilState(login);
+    useEffect(()=>{
+        token.length > 0 ? setIsLogin(true) : setIsLogin(false);
+    },[setIsLogin, token.length])
     const { category, search } = useParams<SearchPageProps>();
     return(
         <ListPage className="listPage">
@@ -23,7 +28,7 @@ function SearchPage(){
                 <SearchPageSideBar/>
             </SideBarWrapper>
             <ListWrapper className="listWrapper">
-                <SearchList category={category? category : "all"} search={search? search : ""} token={token}/>
+                <SearchList category={category? category : "all"} search={search? search : ""} token={jwt? jwt : token}/>
             </ListWrapper>
         </ListPage>
     )
