@@ -42,18 +42,22 @@ const Title = styled.div`
     }
 `
 const SearchBox = styled.div`
-    width: 80%;
-    height: 30px;
+    width: 60%;
+    max-width: 300;
+    height: 40px;
+    position: relative;
     input{
         min-width: 500px;
         width: 100%;
         border: none;
-        height: 30px;
+        height: 40px;
         background-color: ${props => props.theme.innerColor};
         border-radius: 8px;
         padding: 0 10px 0 10px;
     }
     button{
+        position: absolute;
+        right: 20px;
         border: none;
         background-color: transparent;
         height: 25px;
