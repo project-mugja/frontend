@@ -4,6 +4,7 @@ import MyPageSideBar from "../components/mypage-side";
 import MemberInfo from "../components/MemberInfo";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { goToLogin } from "../util";
 
 interface MyPageProps{
     selector:string;
@@ -12,6 +13,11 @@ function MyPage({selector}:MyPageProps){
     const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
     const token = storedToken? storedToken : jwt? jwt : "";
+    if(!token){
+        goToLogin();
+    }else if(token.length === 0){
+        goToLogin();
+    }
     useEffect(()=>{
         if(jwt){
             localStorage.setItem("token", jwt);

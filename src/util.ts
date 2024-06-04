@@ -29,5 +29,8 @@ export function getCookie(name: string): string | null {
 }
 
 export function goToLogin(){
-  window.location.assign("로그인 url");
+  window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/login`);
+}
+export function goToMain(){
+  window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/main`);
 }

@@ -232,3 +232,9 @@ export interface ISearchProps {
     search:ISearch;
     token:string;
 }
+
+export type SearchPageProps = {
+    category:string;
+    search:string;
+    token:string;
+}

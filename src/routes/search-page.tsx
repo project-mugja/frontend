@@ -5,12 +5,9 @@ import SearchPageSideBar from "../components/search-side";
 import { useSetRecoilState } from "recoil";
 import { searchPage } from "../atom";
 import { useEffect } from "react";
+import { SearchPageProps } from "../interface";
 
-export type SearchPageProps = {
-    category:string;
-    search:string;
-    token:string;
-}
+
 function SearchPage(){
     const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();

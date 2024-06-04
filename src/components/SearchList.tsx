@@ -5,8 +5,7 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { doSearch } from "../api";
 import { favCategory } from "../atom";
-import { ISearchPage } from "../interface";
-import { SearchPageProps } from "../routes/search-page";
+import { ISearchPage, SearchPageProps } from "../interface";
 import SearchResult from "./SearchResult";
 
 const PagingBox = styled.div`
