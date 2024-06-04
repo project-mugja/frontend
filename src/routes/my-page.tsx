@@ -15,7 +15,7 @@ interface MyPageProps{
 function MyPage({selector}:MyPageProps){    
     const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
-    const token = storedToken? storedToken : jwt? jwt : "";
+    const token = storedToken !=null && storedToken.length>0 ? storedToken : jwt? jwt : "";
     if(!token){
         goToLogin();
     }else if(token.length === 0){

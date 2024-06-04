@@ -84,7 +84,7 @@ function DetailPage(){
 
     const storedToken = localStorage.getItem("token");
     const {jwt} = useParams();
-    const token = storedToken? storedToken : jwt? jwt : "";
+    const token = storedToken !=null && storedToken.length>0 ? storedToken : jwt? jwt : "";
     useEffect(()=>{
         if(jwt){
             localStorage.setItem("token", jwt);
