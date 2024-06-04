@@ -171,13 +171,18 @@ export interface BookListProps{
 }
 export interface IBook{
     bookId?:number;
+    memberId:number;
     hostId:number;
     roomId:number;
     payPrice:number;
-    checkInDate?:Date;
-    checkOutDate?:Date;
+    formattedCheckInDate?:string;
+    formattedCheckOutDate?:string;
+    payDate:string
     roomName?:string;
-    hostName?:string;
+    hostName:string;
+    guestName:string;
+    guestContect:string;
+    formattedBookStatus:string;
 }
 export interface IBookPage{
     content:IBook[];

@@ -143,8 +143,8 @@ export async function modifyMemInfo(password:string, token:string) {
             .then(res => res.json()).catch(error => console.log(error));
 }
 
-export async function getBookList(token:string) {
-    return fetch(`${BASE_URL}/`,{
+export async function getBookList(token:string,pageNo:number) {
+    return fetch(`${BASE_URL}/booking/${pageNo}`,{
         headers:{'Authorization': `Bearer ${token}`},
         method: "GET",
         credentials:"include",

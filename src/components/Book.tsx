@@ -2,7 +2,6 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import ReviewForm from "./ReviewForm";
 import { BookProp } from "../interface";
-import { formDate } from "../util";
 
 const Container = styled.div`
     display: flex;
@@ -13,30 +12,9 @@ const Container = styled.div`
     border-bottom: 1px solid ${props => props.theme.innerColor};
     position: relative;
 `
-const StateBox = styled.div`
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: -5px;
-    top: 5px;
-    height: 25px;
-    width: 65px;
-    border-radius: 8px;
-    background-color: ${props => props.color};
-
-    border: 1px solid black;
-`
-const Img = styled.img`
-    display: block;
-    width: 30%;
-    height: 160px;
-    border-radius: 15px;
-    border: 1px solid gray;
-`
 const InfoBox =styled.div`
     display: flex;
-    width: 60%;
+    width: 70%;
     margin-right: 40px;
     position: relative;
     &>div{
@@ -47,11 +25,21 @@ const InfoBox =styled.div`
     }
     &>div:first-child{
         min-width: 100px;
-        font-size: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        &>span:first-child{
+            font-size: 20px;
+            color: gray;
+        }
+        &>span:nth-child(2){
+            font-size: 23px;
+        }
+        &>span:last-child{
+            font-size: 20px;
+            color: gray;
+        }
     }
     &>div:last-child{
         display: flex;
@@ -59,7 +47,7 @@ const InfoBox =styled.div`
         align-items: center;
         margin-left: 5%;
         span{
-            font-size: 20px;
+            font-size: 18px;
         }
     }
 `
@@ -111,18 +99,18 @@ function Book({token,book}:BookProp){
     };
     return(
         <Container>
-            <StateBox color="white">
-                <span>{}</span>
-            </StateBox>
-            <Img src={""} onClick={()=>{}} className="clickable"/>
             <InfoBox onClick={()=>{}} className="clickable">
                 <div>
+                    <span>{book.formattedBookStatus}</span>
+                    <span>{book.hostName}</span>
                     <span>{book.roomName}</span>
-                    <span>{book.payPrice}원</span>
                 </div>
                 <div>
-                    <span>체크인 : {book.checkInDate? formDate(book.checkInDate) : ""}</span>
-                    <span>체크아웃 : {book.checkOutDate? formDate(book.checkOutDate) : ""}</span>
+                    <span>체크인 : {book.formattedCheckInDate? book.formattedCheckInDate : ""}</span>
+                    <span>체크아웃 : {book.formattedCheckOutDate? book.formattedCheckOutDate : ""}</span>
+                    <span>예약자명 : {book.guestName}</span>
+                    <span>{book.payPrice}원</span>
+                    <span>결제일자 : {book.payDate}</span>
                 </div>
             </InfoBox>
             <MoreBox onMouseEnter={()=>setOnMouse(true)}>
@@ -142,7 +130,7 @@ function Book({token,book}:BookProp){
             :
             null
             }
-            <ReviewForm memId={1} hostId={1} showModal={showModal} closeModal={closeModal} token={token}/>
+            <ReviewForm memId={book.memberId} hostId={book.hostId} showModal={showModal} closeModal={closeModal} token={token}/>
         </Container>
     )
 }

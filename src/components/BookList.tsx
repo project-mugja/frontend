@@ -45,7 +45,7 @@ function BookList({token}:BookListProps){
     const [pages, setPages] = useState(0);
     const {isLoading, data } = useQuery<IBookPage>(
         ["booklist", thisPage],
-        () => getBookList(token),
+        () => getBookList(token,thisPage),
     )
     console.log(data);
     return(
