@@ -1,6 +1,6 @@
 
 import { IMapProps } from "../interface";
-import {CustomOverlayMap, Map, MapMarker} from "react-kakao-maps-sdk";
+import {Map, MapMarker} from "react-kakao-maps-sdk";
 
 
 function MapBox({
@@ -16,25 +16,15 @@ function MapBox({
                 level={level}
             >
                 {markerData?.map((data, index) => 
-                        <>
-                            <CustomOverlayMap
-                            position={{ lat: lat, lng: lng }}
-                            yAnchor={1}
-                            >
-                                <div className="customoverlay">
-                                    {data.MarkerComponent}
-                                </div>
-                            </CustomOverlayMap>
-                            <MapMarker
-                                opacity={0}
-                                key={index} 
-                                position={{
-                                    lat:data.locationData.lat,
-                                    lng:data.locationData.lng
-                                }}
-                            >
-                            </MapMarker>
-                      </>
+                        <MapMarker
+                            key={index} 
+                            position={{
+                                lat:data.locationData.lat,
+                                lng:data.locationData.lng
+                            }}
+                        >
+                            {data.MarkerComponent}
+                        </MapMarker>
                     )}
             </Map>
         </>

@@ -9,13 +9,13 @@ import { addFav, delFav, isFavFn } from "../api";
 const MapCard = styled.div`
     background-color: white;
     border: none;
-    width: 100px;
-    height: 50px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
     &>div:first-child{
         width: 100%;
         height: 25px;
-        background-color: ${props => props.theme.innerBlue};
+        background-color: ${props => props.theme.btnColor};
         display: flex;
         justify-content: center;
         align-items: center;
