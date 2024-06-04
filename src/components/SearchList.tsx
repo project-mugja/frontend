@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loader } from "./components";
-import { useQuery } from "react-query";
+import { QueryClient, useQuery, useQueryClient } from "react-query";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { doSearch } from "../api";
@@ -68,6 +68,7 @@ const SearchBox = styled.div`
 `
 
 function SearchList({category, search, token}:SearchPageProps){
+    const queryCLient = useQueryClient();
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
@@ -76,7 +77,9 @@ function SearchList({category, search, token}:SearchPageProps){
     const { isLoading, data } = useQuery<ISearchPage>(
         ["searchList", thisPage, cat, word],
         () => doSearch(cat,thisPage,keyword,token),
-        {onSuccess:()=>console.log("refetch")}
+        {onSuccess:()=>{
+            queryCLient.invalidateQueries(["searchList"])
+        }}
     )
     const onSearch = () => {
         if (keyword.length > 0){
