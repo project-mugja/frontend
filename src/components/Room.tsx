@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IRoomProps } from "../interface";
 import { Btn } from "./components";
-import { fetchImage, reserveRoom } from "../api";
+import { fetchImage } from "../api";
 import { useState } from "react";
 
 const Container = styled.div`
