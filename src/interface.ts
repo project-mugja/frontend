@@ -60,6 +60,7 @@ export interface IReviewForm{
 
 export interface IRoomProps {
     room:IRoom;
+    token?:string
 }
 
 export interface IWishProps {

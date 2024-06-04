@@ -73,7 +73,7 @@ const ReserveBtn = styled(Btn)`
     border: none;
     font-size: 20px;
 `
-function Room(room:IRoomProps, token:string|undefined){
+function Room(room:IRoomProps){
     const handleReserve = () => {
         /*
         if (token){
@@ -84,8 +84,9 @@ function Room(room:IRoomProps, token:string|undefined){
             })
         }
         */
-       if(!token){window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/login`)}
-        window.location.href = `${process.env.REACT_APP_SERVER_API}/booking/${room.room.roomId}/${room.room.host.hostId}/${room.room.price}/${token}`
+       console.log("token : "+room.token)
+       if(!room.token){window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/login`)}
+        window.location.href = `${process.env.REACT_APP_SERVER_API}/booking/${room.room.roomId}/${room.room.host.hostId}/${room.room.price}/${room.token}`
     }
     const [imageUrl, setImageUrl] = useState("");
     fetchImage("room",room.room.roomImgList[0].roomImgPath).then(url => setImageUrl(url))

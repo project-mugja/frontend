@@ -110,7 +110,7 @@ function DetailPage(){
                     {loadingHost? <Loader/> : !host? <Loader/> : <Hotel data={host} reviews={reviews?.content} token={jwt? jwt : token}/>}
                 <RoomWrapper>
                     {loadingHost? <Loader/> : !host? <Loader/> : 
-                        rooms?.map(room => <Room key={room.roomId} room={room}/>)
+                        rooms?.map(room => <Room key={room.roomId} token={jwt? jwt : token} room={room}/>)
                     }
                 </RoomWrapper>
                 <Introduction>
