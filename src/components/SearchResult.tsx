@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ISearchProps } from "../interface";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { addFav, delFav } from "../api";
+import { addFav, delFav, fetchImage } from "../api";
 
 const Container = styled.div`
     display: flex;
@@ -84,9 +84,11 @@ function SearchResult({search, token }:ISearchProps){
         addFav(search.hostId,token);
         setIsLiked(true);
     }
+    const [imageUrl, setImageUrl] = useState("");
+    fetchImage("room",Image[0].ImgPath).then(url => setImageUrl(url))
     return(
         <Container>
-            <Img src={Image[0].ImgPath} onClick={()=>goToHost(search.hostId)} className="clickable"/>
+            <Img src={imageUrl} alt="" onClick={()=>goToHost(search.hostId)} className="clickable"/>
             <InfoBox onClick={()=>goToHost(search.hostId)} className="clickable">
                 <div>{search.hostName}</div>
                 <div>

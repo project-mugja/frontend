@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { IWishProps } from "../interface";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { fetchImage } from "../api";
 
 const Container = styled.div`
     display: flex;
@@ -73,9 +75,11 @@ function Wish({wish, onClick}:IWishProps){
     const goToHost = (hostId:number) => {
         navigate(`/host/${hostId} `)
     }
+    const [imageUrl, setImageUrl] = useState("");
+    fetchImage("room",Image[0].ImgPath).then(url => setImageUrl(url))
     return(
         <Container>
-            <Img src={Image[0].ImgPath} onClick={()=>goToHost(wish.host.hostId)} className="clickable"/>
+            <Img src={imageUrl} onClick={()=>goToHost(wish.host.hostId)} className="clickable"/>
             <InfoBox onClick={()=>goToHost(wish.host.hostId)} className="clickable">
                 <div>{wish.host.hostName}</div>
                 <div>

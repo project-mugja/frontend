@@ -41,22 +41,33 @@ const Title = styled.div`
         margin-right: 10px;
     }
 `
-
+const SearchBox = styled.div`
+    
+`
 
 function SearchList({category, search, token}:SearchPageProps){
     const [ cat, setCat] = useRecoilState(favCategory);
     const [thisPage, setThisPage ] = useState(1);
     const [pages, setPages] = useState(0);
-    const {isLoading, data } = useQuery<ISearchPage>(
-        ["searchList", thisPage, cat],
-        () => doSearch(cat,thisPage,search,token),
+    const [ word, setWord] = useState(search);
+    const [keyword, setKeyword] = useState(search);
+    const { isLoading, data } = useQuery<ISearchPage>(
+        ["searchList", thisPage, cat, word],
+        () => doSearch(cat,thisPage,keyword,token),
         {onSuccess:()=>console.log("refetch")}
     )
+    const onSearch = () => {
+        if (keyword.length > 0){
+            setWord(keyword);
+        }
+    }
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+        setKeyword(event.target.value)
+    }
 
     useEffect(()=>{
         setCat(category);
     },[category, setCat])
-    console.log("data",data);
     return(
         <>
             <Title>
@@ -66,6 +77,10 @@ function SearchList({category, search, token}:SearchPageProps){
             <Loader/> 
             : 
             <>
+                <SearchBox>
+                    <input type="text" value={keyword} onChange={handleChange}/>
+                    <button onClick={onSearch}>검색</button>
+                </SearchBox>
                 {data?.content.map(search => 
                     <SearchResult 
                         key={search.hostId} 

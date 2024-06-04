@@ -15,11 +15,6 @@ export const favCategory = atom({
 })
 
 export const searchText = atom({
-    key: "searchQuery",
+    key: "searchKeyword",
     default: "",
-})
-
-export const searchPage = atom({
-    key: "isSearchPage",
-    default:false
 })
