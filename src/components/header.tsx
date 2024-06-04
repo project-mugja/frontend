@@ -50,11 +50,11 @@ function Header(){
                 <Logo className="clickable" src={logo} onClick={onClickLogo}/>
                 <Login  className="clickable">
                     {isLogin? 
-                    <div onClick={onClick}>마이페이지</div> 
-                    : 
                     <Link style={{color:"black"}} to={`/mypage/wishlist`}>
-                        <div >로그인</div>
+                        <div >마이페이지</div>
                     </Link>
+                    : 
+                    <div onClick={onClick}>로그인</div> 
                     }
                 </Login>
             </Container>
