@@ -57,7 +57,7 @@ const SearchBox = styled.div`
     }
     button{
         position: absolute;
-        top: 0px;
+        top: 10px;
         right: 0px;
         border: none;
         background-color: transparent;
