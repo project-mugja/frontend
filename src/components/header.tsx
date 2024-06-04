@@ -2,6 +2,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { login } from "../atom";
 import logo from '../image/logo_square.jpg';
+import { Link } from "react-router-dom";
 
 const Logo = styled.img`
     height: 60px;
@@ -38,16 +39,19 @@ function Header(){
     const [isLogin] = useRecoilState(login)
     const onClick = () => {
         //로그인 페이지로 이동
+        window.location.href = `${process.env.REACT_APP_SERVER_API}/mugja/login`
     }
     return(
         <Wrapper>
             <Container>
                 <Logo className="clickable" src={logo}/>
-                <Login onClick={onClick} className="clickable">
+                <Login  className="clickable">
                     {isLogin? 
-                    <div>{"닉네임"}</div> 
+                    <div onClick={onClick}>마이페이지</div> 
                     : 
-                    <div>로그인</div>
+                    <Link to={`/mypage/info`}>
+                        <div>로그인</div>
+                    </Link>
                     }
                 </Login>
             </Container>
