@@ -1,6 +1,6 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { login } from "../atom";
+import { login, myPageSelector } from "../atom";
 import logo from '../image/logo_square.jpg';
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -54,6 +54,7 @@ const LogoutBox = styled.div`
 function Header(){
     const [isLogin, setIsLogin] = useRecoilState(login);
     const [onMouse, setOnMouse] = useState(false);
+    const setMyPageOption = useSetRecoilState(myPageSelector);
     const onClick = () => {
         //로그인 페이지로 이동
         window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/login`);
@@ -65,13 +66,16 @@ function Header(){
         localStorage.setItem("token","");
         setIsLogin(false);
     }
+    const handleGoMyPage = ()=>{
+        setMyPageOption(3)
+    }
     return(
         <Wrapper>
             <Container>
                 <Logo className="clickable" src={logo} onClick={onClickLogo}/>
                 <Login  className="clickable">
                     {isLogin? 
-                        <Link style={{color:"black"}} to={`/mypage/wishlist`}>
+                        <Link style={{color:"black"}} to={`/mypage/wishlist`} onClick={handleGoMyPage}>
                             <div onMouseEnter={()=>setOnMouse(true)}>
                                 마이페이지
                                 {onMouse? 

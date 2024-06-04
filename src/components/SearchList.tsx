@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loader } from "./components";
-import { QueryClient, useQuery, useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { doSearch } from "../api";
