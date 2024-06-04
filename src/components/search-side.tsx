@@ -99,9 +99,9 @@ function SearchPageSideBar(){
                 {"hotel" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
                 <span> 호텔·리조트 </span>
             </div>
-            <div onClick={()=>catToggleHandler("pension")}>
-                {"pension" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                <span> 펜션 </span>
+            <div onClick={()=>catToggleHandler("camp")}>
+                {"camp" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+                <span> 캠프 </span>
             </div>
             <div onClick={()=>catToggleHandler("home")}>
                 {"home" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
