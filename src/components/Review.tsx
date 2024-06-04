@@ -64,8 +64,6 @@ function Review(review:IReview){
     useEffect(()=>{
         setScore(review.score)
     },[review.score])
-    console.log("email : ",data?.memEmail);
-    console.log(data);
     return (
         <>
         <ReviewBox>
