@@ -17,6 +17,7 @@ function MapBox({
             >
                 {markerData?.map((data, index) => 
                         <MapMarker
+                            opacity={0}
                             key={index} 
                             position={{
                                 lat:data.locationData.lat,
