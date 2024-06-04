@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { IRoom, IRoomProps } from "../interface";
+import { IRoomProps } from "../interface";
 import { Btn } from "./components";
-import { useQuery } from "react-query";
-import { getRooms, reserveRoom } from "../api";
+import { reserveRoom } from "../api";
 
 const Container = styled.div`
     display: flex;

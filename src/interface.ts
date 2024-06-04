@@ -184,6 +184,11 @@ export interface IBook{
     guestContect:string;
     formattedBookStatus:string;
 }
+export interface IBookingParams{
+    roomId:number,
+    hostId:number,
+    payPrice:number
+}
 export interface IBookPage{
     content:IBook[];
     pageable: IPageable;

@@ -1,5 +1,5 @@
 
-import { IBook, IReviewForm } from "./interface";
+import { IBookingParams, IReviewForm } from "./interface";
 import axios from 'axios';
 
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}/api`;
@@ -153,7 +153,7 @@ export async function getBookList(token:string,pageNo:number) {
     .then(res => res.json()).catch(error => console.log(error));
 }
 
-export async function reserveRoom(token:string, book:IBook){
+export async function reserveRoom(token:string, book:IBookingParams){
     const formData = new FormData();
     formData.append("hostId",book.hostId+"");
     formData.append("roomId",book.roomId+"");
