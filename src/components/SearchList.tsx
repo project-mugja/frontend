@@ -47,17 +47,17 @@ const SearchBox = styled.div`
     height: 40px;
     position: relative;
     input{
-        min-width: 500px;
+        max-width: 400px;
         width: 100%;
         border: none;
         height: 40px;
         background-color: ${props => props.theme.innerColor};
-        border-radius: 8px;
+        border-radius: 20px;
         padding: 0 10px 0 10px;
     }
     button{
         position: absolute;
-        right: 20px;
+        right: 0px;
         border: none;
         background-color: transparent;
         height: 25px;
