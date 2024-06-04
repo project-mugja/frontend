@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { IReview } from "../interface";
+import { IGetEmail, IReview } from "../interface";
 import { formatDateString } from "../util";
+import { useQuery } from "react-query";
+import { getEmail } from "../api";
 
 const Container = styled.div`
     background-color: ${props => props.theme.innerColor};
@@ -34,9 +36,10 @@ const Container = styled.div`
 
 function SmallReview(review:IReview){
     const date = formatDateString(review.writeDate);
+    const {data} = useQuery<IGetEmail>(["email",review.memId],()=>getEmail(review.memId));
     return(
         <Container>
-            <div>{"닉네임"}</div>
+            <div>{data?.email}</div>
             <div>{review.content}</div>
             <div>{date}</div>
         </Container>

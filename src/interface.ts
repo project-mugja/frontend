@@ -249,3 +249,7 @@ export type SearchPageProps = {
     search:string;
     token:string;
 }
+
+export interface IGetEmail{
+    email:string;
+}

@@ -1,7 +1,9 @@
 import styled from "styled-components"
-import { IReview } from "../interface"
+import { IGetEmail, IReview } from "../interface"
 import { useEffect, useState } from "react"
 import { formatDateString } from "../util"
+import { getEmail } from "../api"
+import { useQuery } from "react-query"
 
 const ReviewBox = styled.div`
     height: 200px;
@@ -54,8 +56,10 @@ const Star = ({color}:IStar) => {
         </svg>
     )
 }
+
 function Review(review:IReview){
-    const date = formatDateString(review.writeDate)
+    const {data} = useQuery<IGetEmail>(["email",review.memId],()=>getEmail(review.memId));
+    const date = formatDateString(review.writeDate);
     const [score,setScore] = useState(0);
     useEffect(()=>{
         setScore(review.score)
@@ -63,7 +67,7 @@ function Review(review:IReview){
     return (
         <>
         <ReviewBox>
-            <NickName>{"닉네임"}</NickName>
+            <NickName>{data?.email}</NickName>
             <StarBox>
                 {new Array(score).fill(true).map((i,index) =>
                     <Star 

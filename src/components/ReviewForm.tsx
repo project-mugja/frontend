@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { IReviewForm, IReviewFormProps } from "../interface";
 import { useMutation } from "react-query";
 import { writeReview } from "../api";
+import { formDate } from "../util";
 // import { useRecoilValue } from "recoil";
 
 const ModalBackground = styled.div`
@@ -202,6 +203,8 @@ function ReviewForm({hostName, hostId, memId, showModal,closeModal,token}:IRevie
     const onValid = (data:IReviewForm) => {
         mutate(data);
     }
+    const today = new Date();
+    const date = formDate(today);
     if(!showModal) return null;
     return(
         <ModalBackground>
@@ -213,8 +216,8 @@ function ReviewForm({hostName, hostId, memId, showModal,closeModal,token}:IRevie
             <FormContainer method="post" onSubmit={handleSubmit(onValid)}>
                 <div>
                     <TitleLine>
-                        <span>{"호텔이름1"}</span>
-                        <span>{"2022년 07월 22일"}</span>
+                        <span>{hostName}</span>
+                        <span>{date}</span>
                         <ScoreLine>
                             {new Array(score).fill(true).map((i,index) =>
                                 <Star 

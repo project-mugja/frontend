@@ -178,3 +178,8 @@ export async function fetchImage(folderName:string, fileName:string) {
         throw new Error("fail to fetch image");
     }
 }
+
+export async function getEmail(memId:number) {
+    return fetch(`${BASE_URL}/member/email/${memId}`)
+    .then(res => res.json()).catch(error => console.log(error));
+}
