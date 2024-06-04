@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DetailPage from "./routes/detail-page";
 import MyPage from "./routes/my-page";
 import SearchPage from "./routes/search-page";
+import Test from "./routes/Test";
 function Router() {
     return(
         <BrowserRouter>
@@ -20,6 +21,8 @@ function Router() {
 
                 <Route path="/mypage/booklist" element={<MyPage selector="booklist"/>}/>
                 <Route path="/mypage/booklist/:jwt" element={<MyPage selector="booklist"/>}/>
+            
+                <Route path="/test" element={<Test/>}/>
             </Routes>
         </BrowserRouter>
     )

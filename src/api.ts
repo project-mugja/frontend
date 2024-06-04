@@ -1,5 +1,6 @@
 
 import { IBook, IReviewForm } from "./interface";
+import axios from 'axios';
 
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}/api`;
 
@@ -164,4 +165,16 @@ export async function reserveRoom(token:string, book:IBook){
         cache: 'no-store'
     })
     .then(res => res.json()).catch(error => console.log(error));
+}
+
+export async function fetchImage(folderName:string, fileName:string) {
+    try{
+        const response = await axios.get(`${BASE_URL}/image/${folderName}/images/${fileName}`, {
+            responseType: 'blob', // 이미지 파일을 가져올 때는 blob 타입으로 설정
+        });
+        console.log(URL.createObjectURL(response.data));
+        return URL.createObjectURL(response.data);
+    } catch (error) {
+        throw new Error("fail to fetch image");
+    }
 }
