@@ -39,7 +39,7 @@ function SmallReview(review:IReview){
     const {data} = useQuery<IGetEmail>(["email",review.memId],()=>getEmail(review.memId));
     return(
         <Container>
-            <div>{data?.email}</div>
+            <div>{data?.memEmail}</div>
             <div>{review.content}</div>
             <div>{date}</div>
         </Container>

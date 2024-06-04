@@ -64,12 +64,12 @@ function Review(review:IReview){
     useEffect(()=>{
         setScore(review.score)
     },[review.score])
-    console.log("email : ",data?.email);
+    console.log("email : ",data?.memEmail);
     console.log(data);
     return (
         <>
         <ReviewBox>
-            <NickName>{data?.email}</NickName>
+            <NickName>{data?.memEmail}</NickName>
             <StarBox>
                 {new Array(score).fill(true).map((i,index) =>
                     <Star 

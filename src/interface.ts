@@ -251,5 +251,5 @@ export type SearchPageProps = {
 }
 
 export interface IGetEmail{
-    email:string;
+    memEmail:string;
 }
