@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Btn } from "./components";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IReviewForm, IReviewFormProps } from "../interface";
 import { useMutation } from "react-query";
@@ -164,16 +164,17 @@ const CloseModalBtn = styled.button`
         width: 20px;
     }
 `
-function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
+function ReviewForm({hostName, hostId, memId, showModal,closeModal,token}:IReviewFormProps){
     const {
         mutate
     } = useMutation((data:IReviewForm) => writeReview(hostId,data,token),{
         onSuccess:(event) => {
             //네비게이트
             closeModal(event);
+            alert("리뷰 작성 완료");
         }
     })
-    const imgRef:any = useRef(null);
+    // const imgRef:any = useRef(null);
     // const [imgPath, setImgPath] = useState("");
     // const [isUploaded, setIsUploaded] = useState(false);
     const { register,handleSubmit,setValue } = useForm<IReviewForm>();

@@ -101,8 +101,6 @@ function Room(room:IRoomProps, token:string|undefined){
                     <InfoBox>
                         <div>
                             <div>{room?.room.capacity} 인</div>
-                            <div>입실시간 : {}</div>
-                            <div>퇴실시간 : {}</div>
                         </div>
                         <div>
                             <div>{room?.room.price} 원</div>

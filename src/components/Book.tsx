@@ -17,6 +17,8 @@ const InfoBox =styled.div`
     width: 70%;
     margin-right: 40px;
     position: relative;
+    align-items: center;
+    justify-content: space-around;
     &>div{
       margin: 5px;
       span{
@@ -49,7 +51,10 @@ const InfoBox =styled.div`
         flex-direction: column;
         margin-left: 5%;
         span{
-            font-size: 15px;
+            font-size: 14px;
+        }
+        &>span:last-child{
+            font-weight: bold;
         }
     }
 `
@@ -111,8 +116,8 @@ function Book({token,book}:BookProp){
                     <span>체크인 : {book.formattedCheckInDate? book.formattedCheckInDate : ""}</span>
                     <span>체크아웃 : {book.formattedCheckOutDate? book.formattedCheckOutDate : ""}</span>
                     <span>예약자명 : {book.guestName}</span>
-                    <span>{book.payPrice}원</span>
                     <span>결제일자 : {book.payDate}</span>
+                    <span>{book.payPrice}원</span>
                 </div>
             </InfoBox>
             <MoreBox onMouseEnter={()=>setOnMouse(true)}>
@@ -132,7 +137,7 @@ function Book({token,book}:BookProp){
             :
             null
             }
-            <ReviewForm memId={book.memberId} hostId={book.hostId} showModal={showModal} closeModal={closeModal} token={token}/>
+            <ReviewForm memId={book.memberId} hostId={book.hostId} hostName={book.hostName} showModal={showModal} closeModal={closeModal} token={token}/>
         </Container>
     )
 }
