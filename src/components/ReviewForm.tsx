@@ -168,8 +168,9 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
     const {
         mutate
     } = useMutation((data:IReviewForm) => writeReview(hostId,data,token),{
-        onSuccess:() => {
+        onSuccess:(event) => {
             //네비게이트
+            closeModal(event);
         }
     })
     const imgRef:any = useRef(null);
@@ -208,7 +209,7 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
                     <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
                 </svg>
             </CloseModalBtn>
-            <FormContainer action={`http://localhost:8090/host/${hostId}/`} method="post" onSubmit={handleSubmit(onValid)}>
+            <FormContainer method="post" onSubmit={handleSubmit(onValid)}>
                 <div>
                     <TitleLine>
                         <span>{"호텔이름1"}</span>
@@ -232,7 +233,7 @@ function ReviewForm({memId,hostId,showModal,closeModal,token}:IReviewFormProps){
                     </TitleLine>
                     <SubmitBtn onClick={(event) => {
                         setValue("score",score);
-                        closeModal(event)
+                        // closeModal(event)
                     }}>
                         글쓰기
                     </SubmitBtn>

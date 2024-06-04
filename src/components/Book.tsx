@@ -30,14 +30,15 @@ const InfoBox =styled.div`
         align-items: center;
         flex-direction: column;
         &>span:first-child{
-            font-size: 20px;
+            font-size: 18px;
             color: gray;
         }
         &>span:nth-child(2){
-            font-size: 23px;
+            font-size: 21px;
+            font-weight: bold;
         }
         &>span:last-child{
-            font-size: 20px;
+            font-size: 18px;
             color: gray;
         }
     }
@@ -45,9 +46,10 @@ const InfoBox =styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
         margin-left: 5%;
         span{
-            font-size: 18px;
+            font-size: 15px;
         }
     }
 `
