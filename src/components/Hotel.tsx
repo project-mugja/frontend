@@ -20,7 +20,7 @@ const MapCard = styled.div`
         justify-content: center;
         align-items: center;
         span{
-            font-size: 22px;
+            font-size: 18px;
             color: white;
         }
     }
