@@ -12,6 +12,26 @@ const MapCard = styled.div`
     width: 100px;
     height: 50px;
     border-radius: 10px;
+    &>div:first-child{
+        width: 100%;
+        height: 25px;
+        background-color: ${props => props.theme.innerBlue};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span{
+            font-size: 22px;
+            color: white;
+        }
+    }
+    &>div:last-child{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span{
+            text-overflow: ellipsis;
+        }
+    }
 `
 const HotelContainer = styled.div`
     width: 100%;
@@ -105,7 +125,12 @@ function Hotel({data, reviews, token}:IHostProp){
             },
             MarkerComponent: 
             <MapCard>
-                임시데이터
+                <div>
+                    <span>{data.hostName}</span>
+                </div>
+                <div>
+                    <span>{data.hostAdress}</span>
+                </div>
             </MapCard>
     }]
     const [isMap, setIsMap] = useState(false);
