@@ -65,6 +65,7 @@ function Review(review:IReview){
         setScore(review.score)
     },[review.score])
     console.log("email : ",data?.email);
+    console.log(data);
     return (
         <>
         <ReviewBox>

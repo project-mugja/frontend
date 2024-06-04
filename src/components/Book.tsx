@@ -46,8 +46,9 @@ const InfoBox =styled.div`
     }
     &>div:last-child{
         display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        justify-content: center;
+        align-items: flex-end;
+        flex-direction: column;
         margin-left: 5%;
         span{
             font-size: 14px;
