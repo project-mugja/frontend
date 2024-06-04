@@ -18,7 +18,7 @@ const InfoBox =styled.div`
     margin-right: 40px;
     position: relative;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     &>div{
       margin: 5px;
       span{
@@ -46,15 +46,15 @@ const InfoBox =styled.div`
     }
     &>div:last-child{
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
-        flex-direction: column;
         margin-left: 5%;
         span{
             font-size: 14px;
         }
         &>span:last-child{
             font-weight: bold;
+            font-size: 15px;
         }
     }
 `
