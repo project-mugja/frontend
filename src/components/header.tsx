@@ -49,8 +49,8 @@ function Header(){
                     {isLogin? 
                     <div onClick={onClick}>마이페이지</div> 
                     : 
-                    <Link to={`/mypage/info`}>
-                        <div>로그인</div>
+                    <Link style={{color:"black"}} to={`/mypage/info`}>
+                        <div >로그인</div>
                     </Link>
                     }
                 </Login>

@@ -3,9 +3,11 @@ import DetailPage from "./routes/detail-page";
 import MyPage from "./routes/my-page";
 import SearchPage from "./routes/search-page";
 import Test from "./routes/Test";
+import Header from "./components/header";
 function Router() {
     return(
         <BrowserRouter>
+            <Header/>
             <Routes>
                 <Route path="/host/:hostId/:jwt" element={<DetailPage/>} />
                 <Route path="/host/:hostId" element={<DetailPage/>} />
