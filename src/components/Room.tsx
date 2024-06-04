@@ -84,7 +84,8 @@ function Room(room:IRoomProps, token:string|undefined){
             })
         }
         */
-        window.location.href = `${process.env.REACT_APP_SERVER_API}/mugja/booking/${room.room.roomId}/${room.room.host.hostId}/${room.room.price}`
+       if(!token){window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/login`)}
+        window.location.href = `${process.env.REACT_APP_SERVER_API}/booking/${room.room.roomId}/${room.room.host.hostId}/${room.room.price}/${token}`
     }
     const [imageUrl, setImageUrl] = useState("");
     fetchImage("room",room.room.roomImgList[0].roomImgPath).then(url => setImageUrl(url))

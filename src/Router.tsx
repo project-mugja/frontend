@@ -13,7 +13,7 @@ function Router() {
                 <Route path="/host/:hostId" element={<DetailPage/>} />
 
                 <Route path="/search/:category/:search/:jwt" element={<SearchPage/>}/>
-                <Route path="/search/:category/:search" element={<SearchPage/>}/>
+                <Route path="/search/:category/:search/" element={<SearchPage/>}/>
                 
                 <Route path="/mypage/wishlist" element={<MyPage selector="wishlist"/>}/>
                 <Route path="/mypage/wishlist/:jwt" element={<MyPage selector="wishlist"/>}/>
