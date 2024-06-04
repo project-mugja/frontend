@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IHostProp, IMapProps} from "../interface";
 import MapBox from "./MapBox";
 import SmallReview from "./SmallReview";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { addFav, delFav, isFavFn } from "../api";
 
 const MapCard = styled.div`
@@ -93,6 +93,7 @@ const Star = () => {
     )
 }
 function Hotel({data, reviews, token}:IHostProp){
+    const queryCLient = useQueryClient();
     const locationData:IMapProps["locationData"] = { 
         lat:data.lat, 
         lng: data.lng, 
@@ -110,7 +111,10 @@ function Hotel({data, reviews, token}:IHostProp){
     const [isMap, setIsMap] = useState(false);
     const [isLiked, setIsLiked] = useState(false)
     const {data:isFav} = useQuery(["fav",data.hostId],() => isFavFn(data.hostId,token),{
-        onSuccess:(data:boolean) => {setIsLiked(data); console.log("isLiked ",data)},
+        onSuccess:(data:boolean) => {
+            setIsLiked(data); console.log("isLiked ",data);
+            queryCLient.invalidateQueries(["fav"]);
+        },
     })
     useEffect(()=>{
         const script = document.createElement('script');
