@@ -57,7 +57,7 @@ function Header(){
     const setMyPageOption = useSetRecoilState(myPageSelector);
     const onClick = () => {
         //로그인 페이지로 이동
-        window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/login`);
+        window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/logout`);
     }
     const onClickLogo = () => {
         window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/main`);
