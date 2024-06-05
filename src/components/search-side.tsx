@@ -59,17 +59,21 @@ function SearchPageSideBar(){
                 {"motel" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
                 <span> 모텔 </span>
             </div>
-            <div onClick={()=>catToggleHandler("hotel")}>
-                {"hotel" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+            <div onClick={()=>catToggleHandler("hotel_resort")}>
+                {"hotel_resort" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
                 <span> 호텔·리조트 </span>
             </div>
-            <div onClick={()=>catToggleHandler("camp")}>
-                {"camp" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                <span> 캠프 </span>
+            <div onClick={()=>catToggleHandler("pension")}>
+                {"pension" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+                <span> 펜션 </span>
             </div>
-            <div onClick={()=>catToggleHandler("home")}>
-                {"home" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                <span> 홈&빌라 </span>
+            <div onClick={()=>catToggleHandler("gesthouse_hanok")}>
+                {"gesthouse_hanok" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+                <span> 게스트하우스&한옥 </span>
+            </div>
+            <div onClick={()=>catToggleHandler("camping")}>
+                {"camping" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
+                <span> 게스트하우스&한옥 </span>
             </div>
         </SearchSideOptions>
     </>
