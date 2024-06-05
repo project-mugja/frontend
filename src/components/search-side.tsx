@@ -73,7 +73,7 @@ function SearchPageSideBar(){
             </div>
             <div onClick={()=>catToggleHandler("camping")}>
                 {"camping" === category? <Circle color="#1565FF" className="clickable"/> : <Circle className="clickable" color="white"/>}
-                <span> 게스트하우스&한옥 </span>
+                <span> 캠핑 </span>
             </div>
         </SearchSideOptions>
     </>
