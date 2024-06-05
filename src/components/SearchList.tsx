@@ -112,7 +112,7 @@ function SearchList({category, search, token}:SearchPageProps){
                     </button>
                 </SearchBox>
                 {Array.isArray(data?.content) ? (
-                    data.content.map(search => 
+                    data?.content.map(search => 
                         <SearchResult 
                             key={search.hostId} 
                             search={search} 
