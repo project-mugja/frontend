@@ -113,7 +113,6 @@ const Star = () => {
     )
 }
 function Hotel({data, reviews, token}:IHostProp){
-    const queryCLient = useQueryClient();
     const locationData:IMapProps["locationData"] = { 
         lat:data.lat, 
         lng: data.lng, 
@@ -138,7 +137,6 @@ function Hotel({data, reviews, token}:IHostProp){
     const {data:isFav} = useQuery(["fav",data.hostId],() => isFavFn(data.hostId,token),{
         onSuccess:(data:boolean) => {
             setIsLiked(data);
-            queryCLient.invalidateQueries(["fav"]);
         },
     })
     useEffect(()=>{

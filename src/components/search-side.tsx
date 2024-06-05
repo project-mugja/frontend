@@ -40,51 +40,15 @@ const Circle = styled.span`
     border-radius: 10px;
     background-color: ${props => props.color};
 `
-const CheckBox = styled.span`
-    display: inline-block;
-    border: 1px solid gainsboro;
-    width: 15px;
-    height: 15px;
-    border-radius: 5px;
-    overflow: visible;
-    position: relative;
-`
-const Check = styled.svg`
-    position: absolute;
-    top: -5px;
-    width: 18px;
-    fill: ${props => props.color};
-`
-const Box = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    border-bottom: 1px solid gainsboro;
-    margin-bottom: 15px;
 
-`
 function SearchPageSideBar(){
     const [category, setCategory] = useRecoilState(favCategory);
     const catToggleHandler = (cat:string) => {
         setCategory(cat);
     }
-    const validToggleHandler = () => {
-
-    }
     return(
         <>
         <SearchSideTitle><span>필터</span></SearchSideTitle>
-        <Box>
-            <div onClick={()=>validToggleHandler()} style={{margin:"16px"}}>
-                <CheckBox>
-                    <Check color="#1565FF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
-                    </Check>
-                </CheckBox>
-                <span> 매진 숙소 제외 </span>
-            </div>
-        </Box>
         <SearchSideTitle><span>숙소 유형</span></SearchSideTitle>
         <SearchSideOptions>
             <div onClick={()=>catToggleHandler("all")}>
