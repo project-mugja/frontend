@@ -137,7 +137,7 @@ function Hotel({data, reviews, token}:IHostProp){
     const [isLiked, setIsLiked] = useState(false)
     const {data:isFav} = useQuery(["fav",data.hostId],() => isFavFn(data.hostId,token),{
         onSuccess:(data:boolean) => {
-            setIsLiked(data); console.log("isLiked ",data);
+            setIsLiked(data);
             queryCLient.invalidateQueries(["fav"]);
         },
     })

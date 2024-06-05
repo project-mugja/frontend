@@ -4,7 +4,7 @@ import Review from "../components/Review";
 import { Container, Loader } from "../components/components";
 import Room from "../components/Room";
 import { useQuery } from "react-query";
-import { getHost, getReviews, getRooms } from "../api";
+import { fetchImage, getHost, getReviews, getRooms } from "../api";
 import { useParams } from "react-router-dom";
 import { IHost, IReviewPage, IRoom } from "../interface";
 import { useEffect, useState } from "react";
@@ -109,10 +109,13 @@ function DetailPage(){
         () => getReviews(hostId,thisPage),
         {keepPreviousData:true}
     );
+    const imag = host?.hostImgList[0].ImgPath;
+    const [imageUrl, setImageUrl] = useState("");
+    fetchImage("host",imag? imag : "").then(url => setImageUrl(url))
     return(
         <>
             <Container>
-                <HoteImg src={host?.hostImgList[0].ImgPath} alt=""/>
+                <HoteImg src={imageUrl} alt=""/>
                     {loadingHost? <Loader/> : !host? <Loader/> : <Hotel data={host} reviews={reviews?.content} token={jwt? jwt : token}/>}
                 <RoomWrapper>
                     {loadingHost? <Loader/> : !host? <Loader/> : 
