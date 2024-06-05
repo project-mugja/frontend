@@ -2,6 +2,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import ReviewForm from "./ReviewForm";
 import { BookProp } from "../interface";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -105,9 +106,13 @@ function Book({token,book}:BookProp){
     const closeModal = () => {
         setShowModal(false);
     };
+    const navigate = useNavigate();
+    const goToHost = (hostId:number) => {
+        navigate(`/host/${hostId}`)
+    }
     return(
         <Container>
-            <InfoBox onClick={()=>{}} className="clickable">
+            <InfoBox onClick={()=>goToHost(book.hostId)} className="clickable">
                 <div>
                     <span>{book.formattedBookStatus}</span>
                     <span>{book.hostName}</span>
