@@ -173,7 +173,6 @@ export async function fetchImage(folderName:string, fileName:string) {
         const response = await axios.get(`${BASE_URL}/image/${folderName}/images/${fileName}`, {
             responseType: 'blob', // 이미지 파일을 가져올 때는 blob 타입으로 설정
         });
-        console.log(URL.createObjectURL(response.data));
         return URL.createObjectURL(response.data);
     } catch (error) {
         throw new Error("fail to fetch image");
