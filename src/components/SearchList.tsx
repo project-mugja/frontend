@@ -78,7 +78,7 @@ function SearchList({category, search, token}:SearchPageProps){
         ["searchList", thisPage, cat, word],
         () => doSearch(cat,thisPage,keyword,token),
         {onSuccess:()=>{
-            queryCLient.invalidateQueries(["searchList"])
+
         }}
     )
     const onSearch = () => {
