@@ -96,7 +96,8 @@ export async function delFav(hostId:number, token:string) {
 
 export async function doSearch(cat:string, pageNo:number,search:string,token:string) {
     console.log("do search")
-    const response = fetch(`${BASE_URL}/host/category/${cat}/${pageNo}/${search}`,{
+    const encodedSearch = encodeURIComponent(search);
+    const response = fetch(`${BASE_URL}/host/category/${cat}/${pageNo}/${encodedSearch}`,{
         headers:{'Authorization': `Bearer ${token}`},
         credentials:"include"
     })
