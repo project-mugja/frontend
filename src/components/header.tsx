@@ -63,7 +63,7 @@ function Header(){
         window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/main`);
     }
     const handleLogout = () => {
-        localStorage.setItem("token","");
+        localStorage.removeItem("token");
         setIsLogin(false);
     }
     const handleGoMyPage = ()=>{
