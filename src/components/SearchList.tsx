@@ -93,6 +93,7 @@ function SearchList({category, search, token}:SearchPageProps){
     useEffect(()=>{
         setCat(category);
     },[category, setCat])
+    console.log(data);
     return(
         <>
             <Title>
