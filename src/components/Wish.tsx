@@ -76,7 +76,7 @@ function Wish({wish, onClick}:IWishProps){
         navigate(`/host/${hostId} `)
     }
     const [imageUrl, setImageUrl] = useState("");
-    fetchImage("room",Image[0].imgPath).then(url => setImageUrl(url))
+    fetchImage("host",Image[0].imgPath).then(url => setImageUrl(url))
     return(
         <Container>
             <Img src={imageUrl} onClick={()=>goToHost(wish.host.hostId)} className="clickable"/>
