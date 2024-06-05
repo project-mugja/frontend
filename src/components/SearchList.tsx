@@ -110,12 +110,16 @@ function SearchList({category, search, token}:SearchPageProps){
                         </svg>
                     </button>
                 </SearchBox>
-                {data?.content.map(search => 
-                    <SearchResult 
-                        key={search.hostId} 
-                        search={search} 
-                        token={token}
-                    />
+                {Array.isArray(data?.content) ? (
+                    data.content.map(search => 
+                        <SearchResult 
+                            key={search.hostId} 
+                            search={search} 
+                            token={token}
+                        />
+                    )
+                ) : (
+                    <div><h3>검색 결과가 없습니다</h3></div>
                 )}
                 <PagingBox>
                     <Paging className="clickable" onClick={pages !== 0?
