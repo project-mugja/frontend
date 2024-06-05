@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ISearchProps } from "../interface";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addFav, delFav, fetchImage } from "../api";
 
 const Container = styled.div`
@@ -85,7 +85,9 @@ function SearchResult({search, token }:ISearchProps){
         setIsLiked(true);
     }
     const [imageUrl, setImageUrl] = useState("");
-    fetchImage("host",Image[0].imgPath).then(url => setImageUrl(url))
+    useEffect(()=>{
+        fetchImage("host",Image[0].imgPath).then(url => setImageUrl(url))
+    },[])
     return(
         <Container>
             <Img src={imageUrl} alt="" onClick={()=>goToHost(search.hostId)} className="clickable"/>

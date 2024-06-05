@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IWishProps } from "../interface";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchImage } from "../api";
 
 const Container = styled.div`
@@ -76,7 +76,9 @@ function Wish({wish, onClick}:IWishProps){
         navigate(`/host/${hostId} `)
     }
     const [imageUrl, setImageUrl] = useState("");
-    fetchImage("host",Image[0].imgPath).then(url => setImageUrl(url))
+    useEffect(()=>{
+        fetchImage("host",Image[0].imgPath).then(url => setImageUrl(url));
+    },[])
     return(
         <Container>
             <Img src={imageUrl} onClick={()=>goToHost(wish.host.hostId)} className="clickable"/>
