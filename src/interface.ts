@@ -15,8 +15,8 @@ export interface IHost {
 }
 export interface IHostImg {
     hostImgId:number;
-    ImgPath:string;
-    ImgDir?:string;
+    imgPath:string;
+    imgDir?:string;
 }
 
 export interface IMapProps {

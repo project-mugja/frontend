@@ -69,7 +69,7 @@ const LikeBox = styled.div`
 //     )
 // }
 function Wish({wish, onClick}:IWishProps){
-    const avgScore = wish.host.avgScore;
+    // const avgScore = wish.host.avgScore;
     const Image = wish.host.hostImgList
     const navigate = useNavigate();
     const goToHost = (hostId:number) => {
