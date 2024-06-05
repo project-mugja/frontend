@@ -85,7 +85,7 @@ function SearchResult({search, token }:ISearchProps){
         setIsLiked(true);
     }
     const [imageUrl, setImageUrl] = useState("");
-    fetchImage("room",Image[0].ImgPath).then(url => setImageUrl(url))
+    fetchImage("room",Image[0].imgPath).then(url => setImageUrl(url))
     return(
         <Container>
             <Img src={imageUrl} alt="" onClick={()=>goToHost(search.hostId)} className="clickable"/>

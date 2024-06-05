@@ -109,7 +109,7 @@ function DetailPage(){
         () => getReviews(hostId,thisPage),
         {keepPreviousData:true}
     );
-    const imag = host?.hostImgList[0].ImgPath;
+    const imag = host?.hostImgList[0].imgPath;
     const [imageUrl, setImageUrl] = useState("");
     fetchImage("host",imag? imag : "").then(url => setImageUrl(url))
     return(
