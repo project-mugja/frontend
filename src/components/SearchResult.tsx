@@ -70,7 +70,6 @@ const LikeBox = styled.div`
 // }
 function SearchResult({search, token }:ISearchProps){
     const [isLiked, setIsLiked] = useState(search.fav)
-    const avgScore = search.avgScore;
     const Image = search.hostImgList;
     const navigate = useNavigate();
     const goToHost = (hostId:number) => {
