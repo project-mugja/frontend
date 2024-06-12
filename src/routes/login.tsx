@@ -66,6 +66,9 @@ function Login(){
     const onValid = (data:ILoginForm) => {
         console.log(data);
         //로그인
+
+        setValue("id","");
+        setValue("password","")
     }
     return(
         <Container>
