@@ -24,6 +24,7 @@ function Router() {
                 <Route path="/mypage/booklist" element={<MyPage selector="booklist"/>}/>
                 <Route path="/mypage/booklist/:jwt" element={<MyPage selector="booklist"/>}/>
             
+                <Route path="/main"/>
                 <Route path="/test" element={<Test/>}/>
             </Routes>
         </BrowserRouter>
