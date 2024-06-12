@@ -4,6 +4,7 @@ import MyPage from "./routes/my-page";
 import SearchPage from "./routes/search-page";
 import Test from "./routes/Test";
 import Header from "./components/header";
+import Home from "./routes/main";
 function Router() {
     return(
         <BrowserRouter>
@@ -24,7 +25,7 @@ function Router() {
                 <Route path="/mypage/booklist" element={<MyPage selector="booklist"/>}/>
                 <Route path="/mypage/booklist/:jwt" element={<MyPage selector="booklist"/>}/>
             
-                <Route path="/main"/>
+                <Route path="/main" element={<Home/>}/>
                 <Route path="/test" element={<Test/>}/>
             </Routes>
         </BrowserRouter>

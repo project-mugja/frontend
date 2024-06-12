@@ -6,6 +6,7 @@ export const Container = styled.div`
     max-width: 1200px;
     display: flex;
     flex-direction: column;
+    overflow: visible;
 `;
 export const ListPage = styled.div`
     min-height: 100vh;
