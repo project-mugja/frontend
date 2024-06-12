@@ -5,11 +5,14 @@ import SearchPage from "./routes/search-page";
 import Test from "./routes/Test";
 import Header from "./components/header";
 import Home from "./routes/main";
+import Login from "./routes/login";
 function Router() {
     return(
         <BrowserRouter>
             <Header/>
             <Routes>
+                <Route path="/login" element={<Login/>}/>
+
                 <Route path="/host/:hostId/:jwt" element={<DetailPage/>} />
                 <Route path="/host/:hostId" element={<DetailPage/>} />
 
