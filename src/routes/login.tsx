@@ -65,7 +65,13 @@ interface ILoginForm{
     password:string;
 }
 function Login(){
-    const { handleSubmit, register, setValue } = useForm<ILoginForm>();
+    const { 
+        handleSubmit, 
+        register, 
+        setValue, 
+        formState:{errors}, 
+        setError 
+    } = useForm<ILoginForm>();
     const onValid = (data:ILoginForm) => {
         console.log(data);
         //로그인

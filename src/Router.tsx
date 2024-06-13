@@ -7,12 +7,14 @@ import Header from "./components/header";
 import Home from "./routes/main";
 import Login from "./routes/login";
 import Booking from "./routes/booking-page";
+import Join from "./routes/join";
 function Router() {
     return(
         <BrowserRouter>
             <Header/>
             <Routes>
                 <Route path="/login" element={<Login/>}/>
+                <Route path="/join" element={<Join/>}/>
 
                 <Route path="/host/:hostId/:jwt" element={<DetailPage/>} />
                 <Route path="/host/:hostId" element={<DetailPage/>} />
