@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../image/logo_square.jpg"
 import { Btn } from "../components/components";
 import { useForm } from "react-hook-form";
 import { ILoginForm } from "../interface";
+import { doLogin } from "../api";
 
 const Container = styled.div`
     display: flex;
@@ -21,6 +22,7 @@ const Logo = styled.div`
     background-size: 100%;
 `
 const LoginForm = styled.form`
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,19 +63,32 @@ const LoginForm = styled.form`
         }
     }
 `
-
+const ErrorMsg = styled.span`
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    color: red;
+    font-size: 11px !important;
+    bottom: -25px;
+`
 function Login(){
     const { 
         handleSubmit, 
         register, 
-        setValue
+        setValue,
+        setError,
+        formState:{errors}
     } = useForm<ILoginForm>();
+    const navigate = useNavigate();
     const onValid = (data:ILoginForm) => {
-        console.log(data);
+        console.log(doLogin(data));
         //로그인
-        
-        setValue("id","");
-        setValue("password","")
+        if(true/**로그인 성공시 */){
+            navigate("/main")
+        }else{
+            setError("root",{message:"아이디 또는 비밀번호를 확인해주세요"})
+            setValue("password","")
+        }
     }
     return(
         <Container>
@@ -94,6 +109,7 @@ function Login(){
                     <Link to={""}>비밀번호 찾기</Link>
                     <Link to={"/join"}>회원가입</Link>
                 </div>
+                <ErrorMsg>{errors?.root?.message}</ErrorMsg>
             </LoginForm>
         </Container>
     )
