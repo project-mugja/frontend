@@ -42,6 +42,9 @@ const LoginForm = styled.form`
         border: none;
         border-radius: 5px;
         margin: 5px 0 15px 0;
+        &:hover{
+            cursor: pointer;
+        }
     }
     div{
         width: 100%;
