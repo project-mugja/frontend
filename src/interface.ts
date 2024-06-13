@@ -254,3 +254,14 @@ export type SearchPageProps = {
 export interface IGetEmail{
     memEmail:string;
 }
+
+export interface ILoginForm{
+    id:string;
+    password:string;
+}
+
+export interface IJoinForm{
+    email:string;
+    password:string;
+    password2:string;
+}

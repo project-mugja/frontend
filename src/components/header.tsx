@@ -2,8 +2,9 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { login, myPageSelector } from "../atom";
 import logo from '../image/logo_square.jpg';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { doLogout } from "../api";
 
 const Logo = styled.img`
     height: 60px;
@@ -55,16 +56,21 @@ function Header(){
     const [isLogin, setIsLogin] = useRecoilState(login);
     const [onMouse, setOnMouse] = useState(false);
     const setMyPageOption = useSetRecoilState(myPageSelector);
-    const onClick = () => {
-        //로그인 페이지로 이동
-        window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/logout`);
+    const navigate = useNavigate();
+    const onClickLogin = () => {
+        navigate("/login")
     }
     const onClickLogo = () => {
-        window.location.assign(`${process.env.REACT_APP_SERVER_API}/mugja/main`);
+        navigate("/main")
     }
     const handleLogout = () => {
         localStorage.removeItem("token");
-        setIsLogin(false);
+        
+        //로그아웃 요청
+        console.log(doLogout());
+        if(true/**로그아웃 요청이 참이면 */){
+            setIsLogin(false);
+        }
     }
     const handleGoMyPage = ()=>{
         setMyPageOption(3)
@@ -86,7 +92,7 @@ function Header(){
                             </div>
                         </Link>
                     : 
-                        <div onClick={onClick}>
+                        <div onClick={onClickLogin}>
                             로그인
                         </div> 
                     }

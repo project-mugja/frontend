@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logo from "../image/logo_square.jpg"
 import { Btn } from "../components/components";
 import { useForm } from "react-hook-form";
+import { ILoginForm } from "../interface";
 
 const Container = styled.div`
     display: flex;
@@ -60,22 +61,17 @@ const LoginForm = styled.form`
         }
     }
 `
-interface ILoginForm{
-    id:string;
-    password:string;
-}
+
 function Login(){
     const { 
         handleSubmit, 
         register, 
-        setValue, 
-        formState:{errors}, 
-        setError 
+        setValue
     } = useForm<ILoginForm>();
     const onValid = (data:ILoginForm) => {
         console.log(data);
         //로그인
-
+        
         setValue("id","");
         setValue("password","")
     }
@@ -96,7 +92,7 @@ function Login(){
                 <Btn>로그인</Btn>
                 <div>
                     <Link to={""}>비밀번호 찾기</Link>
-                    <Link to={""}>회원가입</Link>
+                    <Link to={"/join"}>회원가입</Link>
                 </div>
             </LoginForm>
         </Container>

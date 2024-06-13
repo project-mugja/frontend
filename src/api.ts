@@ -1,5 +1,5 @@
 
-import { IBookingParams, IReviewForm } from "./interface";
+import { IBookingParams, IJoinForm, ILoginForm, IReviewForm } from "./interface";
 import axios from 'axios';
 
 const BASE_URL = `${process.env.REACT_APP_SERVER_API}/api`;
@@ -182,4 +182,43 @@ export async function fetchImage(folderName:string, fileName:string) {
 export async function getEmail(memId:number) {
     return fetch(`${BASE_URL}/member/email/${memId}`)
     .then(res => res.json()).catch(error => console.log(error));
+}
+
+
+//로그인 요청
+export async function doLogin(login:ILoginForm) {
+    const formData = new FormData();
+    formData.append("id",login.id);
+    formData.append("password",login.password);
+    return fetch(`${BASE_URL}/`,{
+        method: "POST",
+        cache: 'no-store',
+        body: formData,
+    }).then(res => res.json());
+}
+
+//로그아웃 요청
+export async function doLogout() {
+    return fetch(`${BASE_URL}/`,{
+        cache: 'no-store',
+        credentials: "include"
+    }).then(res => res.json());
+}
+
+//회원 가입 요청
+export async function doJoin(join:IJoinForm) {
+    const formData = new FormData();
+    formData.append("email",join.email);
+    formData.append("password",join.password);
+    formData.append("password2",join.password2);
+    return fetch(`${BASE_URL}/`,{
+        method: "POST",
+        cache: 'no-store',
+        body: formData,
+    }).then(res => res.json());
+}
+
+//이메일 인증
+export async function validateEmail(email:string) {
+    return null;
 }
