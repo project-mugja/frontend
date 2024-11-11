@@ -73,6 +73,7 @@ const ReserveBtn = styled(Btn)`
     border: none;
     font-size: 20px;
 `
+// 
 function Room(room:IRoomProps){
     const handleReserve = () => {
         /*
